@@ -20,7 +20,7 @@ These clips demonstrate that authentication is used for identification and valid
 
 ## Time for code
 To begin with let's startup Visual Studio 2019.
-![Image 1](https://blognet.blob.core.windows.net/images/article1/background.jpg "background image with purple gradient")
+![Image 1](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/background.jpg "background image with purple gradient")
 
 Once Visual Studio 2019 loads, click `create new project` and we're going to be creating an ASP.NET Core web application. Give it a name of `Authn` as the name of the solution and application.  I put it in a folder called `delete me` so i can remember to get rid of this when i'm done, but you can put it wherever you like.
 
