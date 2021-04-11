@@ -24,9 +24,13 @@ To begin with let's startup Visual Studio 2019.
 
 Once Visual Studio 2019 loads, click `create new project` and we're going to be creating an ASP.NET Core web application. Give it a name of `Authn` as the name of the solution and application.  I put it in a folder called `delete me` so i can remember to get rid of this when i'm done, but you can put it wherever you like.
 
+[!NOTE] Blob index tags also provide the ability to store arbitrary user-defined key/value attributes alongside an Azure Blob storage resource. While similar to metadata, only blob index tags are automatically indexed and made searchable by the native blob service. Metadata cannot be indexed and queried unless you utilize a separate service such as Azure Search.
+
+To learn more about this feature, see Manage and find data on Azure Blob storage with blob index (preview).
+
 Select ASP.NET Core 5.0 and create an ASP.NET Core web application MVC (model view controller). Enable Razor runtime compilation by checking the box.
 
-We now have a blank MVC application in ASP.NET Core. To run this application I like to switch from `IIS Express` to use the built-in kestrel web server. To do that switch to the name of the project `AuthN` and then hit play (F5 shortcut key).
+We now have a blank MVC application in ASP.NET Core. To run this application I prefer to switch from `IIS Express` to use the built-in kestrel web server. To do that switch to the name of the project `Authn` and then hit play (F5 shortcut key).
 
 Now that the application is launched we can see that it has a a basic page with a couple of links in the navigation bar menu. If you click on privacy it will take you to a page that has the privacy policy on it.
  okay the next thing we want to do is take a look at our project and see what was built if we look inside the project here we have a few folders and some some files let's take a look inside the controllers folder in the controllers folder we have a home controller if we open that up we'll see there's some code and the code that is in here is pretty simple we have an action for the index which returns the home view because the name is home controller and then we have a privacy view as well and these are the various routes that get clicked on when you click on the menu it navigates to these routes and it returns the appropriate view for these so let's create another route and we will call this route um secured route
