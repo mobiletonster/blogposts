@@ -1,5 +1,6 @@
 PART 3
 
+
 Welcome back to part 3 of our series on Authentication and Authorization in ASP.NET Core. In today's post we will learn about IDaaS (Identity as a service) and why you might want to use one. 
 
 We will also demonstrate how to connecte multiple auth challenge or login providers so your users can choose which identity provider they want to use to login to your site. 
