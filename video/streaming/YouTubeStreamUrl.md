@@ -3,11 +3,11 @@ There has been some question about how to convert the stream url format from You
 
 TLDR; The format for the URL is:
 
-rtmp://a.rtmp.youtube.com/live2/{StreamKey}
+`rtmp://a.rtmp.youtube.com/live2/{StreamKey}`
 
 So a complete sample might look like this:
 
-rtmp://a.rtmp.youtube.com/live2/stzz-7q1s-8tr9-1geb-92wp
+`rtmp://a.rtmp.youtube.com/live2/stzz-7q1s-8tr9-1geb-92wp`
 
 ### Video Walkthrough
 If you prefer, you can watch the video walkthrough:
@@ -32,6 +32,7 @@ If you prefer, you can watch the video walkthrough:
 4. Click the GoLive Button to navigate to Streaming Panel.
 
 ![Image 4](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image4.jpg#screenshot "youtube streaming panel")
+
 In the lower left corner, locate the Stream URL and the Stream Key
 
 
