@@ -29,11 +29,11 @@ If you prefer, you can watch the video walkthrough:
 ![Image 3](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image3.jpg#screenshot "youtube dashboard")
 
 
-4. Click the GoLive Button to navigate to Streaming Panel.
+4. Click the GoLive Button to navigate to Streaming Panel. In the lower left corner, locate the Stream URL and the Stream Key.
 
 ![Image 4](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image4.jpg#screenshot "youtube streaming panel")
 
-In the lower left corner, locate the Stream URL and the Stream Key
+
 
 
 5. Paste the Stream URL portion into notepad
