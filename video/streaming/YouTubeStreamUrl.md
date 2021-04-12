@@ -3,11 +3,11 @@ There has been some question about how to convert the stream url format from You
 
 TLDR; The format for the URL is:
 
-`rtmp://a.rtmp.youtube.com/live2/{StreamKey}`
+    rtmp://a.rtmp.youtube.com/live2/{StreamKey}
 
 So a complete sample might look like this:
 
-`rtmp://a.rtmp.youtube.com/live2/stzz-7q1s-8tr9-1geb-92wp`
+    rtmp://a.rtmp.youtube.com/live2/stzz-7q1s-8tr9-1geb-92wp
 
 ### Video Walkthrough
 If you prefer, you can watch the video walkthrough:
@@ -55,6 +55,6 @@ Then export to an SD Card and follow the steps to import from card to the camera
 
 And those are the steps and the format for the stream url + key.
 
-Thanks for ready!
+Thanks for reading!
 
 .
