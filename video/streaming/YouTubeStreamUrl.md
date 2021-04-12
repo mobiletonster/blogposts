@@ -15,26 +15,26 @@ If you prefer, you can watch the video walkthrough:
 
 ### Steps
 1. First navigate to the YouTube and login.
-![Image 1](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image1.jpg "youtube main screen")
+![Image 1](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image1.jpg#screenshot "youtube main screen")
 
 2. Launch YouTube Studio from the menu.
-![Image 2](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image2.jpg "youtube main screen + menu")
+![Image 2](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image2.jpg#screenshot "youtube main screen + menu")
 
 3. YouTube Studio Dashboard will load.
-![Image 3](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image3.jpg "youtube dashboard")
+![Image 3](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image3.jpg#screenshot "youtube dashboard")
 
 4. Click the GoLive Button to navigate to Streaming Panel.
-![Image 4](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image4.jpg "youtube streaming panel")
+![Image 4](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image4.jpg#screenshot "youtube streaming panel")
 In the lower left corner, locate the Stream URL and the Stream Key
 
 5. Paste the Stream URL portion into notepad
-![Image 5](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image5.jpg "url in notepad")
+![Image 5](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image5.jpg#screenshot "url in notepad")
 
 6. add a `/` slash and then paste the stream key after
-![Image 6](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image6.jpg "url + key in notepad")
+![Image 6](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image6.jpg#screenshot "url + key in notepad")
 
 7. Copy combined url + key into P2NetGen software RTMP tab
-![Image 7](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image7.jpg "url + key in notepad")
+![Image 7](https://raw.githubusercontent.com/mobiletonster/blogposts/main/video/streaming/images/Image7.jpg#screenshot "url + key in notepad")
 Then export to an SD Card and follow the steps to import from card to the camera.
 
 And those are the steps and the format for the stream url + key.
