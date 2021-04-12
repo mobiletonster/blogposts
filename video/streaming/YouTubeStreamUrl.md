@@ -55,3 +55,6 @@ Then export to an SD Card and follow the steps to import from card to the camera
 
 And those are the steps and the format for the stream url + key.
 
+Thanks for ready!
+
+.
