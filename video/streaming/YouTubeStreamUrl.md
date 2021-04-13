@@ -3,12 +3,14 @@ There has been some question about how to convert the stream url format from You
 
 TLDR; The format for the URL is:
 
-    rtmp://a.rtmp.youtube.com/live2/{StreamKey}
-
+```url
+rtmp://a.rtmp.youtube.com/live2/{StreamKey}
+```
 So a complete sample might look like this:
 
-    rtmp://a.rtmp.youtube.com/live2/stzz-7q1s-8tr9-1geb-92wp
-
+```url
+rtmp://a.rtmp.youtube.com/live2/stzz-7q1s-8tr9-1geb-92wp
+```
 ### Video Walkthrough
 If you prefer, you can watch the video walkthrough:
 <iframe width="560" height="315" class="video-frame" src="https://www.youtube.com/embed/Yfs0FzpPDBc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
