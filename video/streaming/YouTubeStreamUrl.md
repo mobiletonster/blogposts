@@ -1,4 +1,4 @@
-# YouTube Stream Url Format
+## YouTube Stream Url Format
 There has been some question about how to convert the stream url format from YouTube to work with the Panasonic AG-CX10. We will step through the process to clear up any confusion. 
 
 TLDR; The format for the URL is:
