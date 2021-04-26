@@ -1,14 +1,43 @@
 In this post we will learn how to add a sqlite database to an ASP.NET core project using entity framework core, code first.
 
-to get going we're going to add a sqlite database as a local file i'm going to start by going to manage nuget packages and add a couple of important packages i'm going to need the entity framework core design
+First, let's add some nuget packages. Start by launching "manage nuget packages" window and add `Microsoft.EntityFrameworkCore.Design`.
+![Image 1](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/1-efcoredesign-cropped.jpg "manage nuget - add ef core design")
 
-as well as the entity framework core dot sqlite
+Next, add `Microsoft.EntityFrameworkCore.Sqlite`.
+![Image 2](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/2-efcoresqlite-cropped.jpg "manage nuget - add ef core sqlite")
 
-okay and we'll just check and make sure that we have actually added those dependencies and it looks like we've got core design and core sequel light looks like we're in good shape
+Check to be sure that we have actually added those dependencies:
+![Image 3](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/3-dependenciesadded-cropped.jpg "dependencies appear in solution explorer")
 
-next thing i want to do is add a new folder to put all my data in then i want to add a new class
+We have .Design and .Sqlite packages added.
 
-this is going to be our app user dot cs file
+Add a new folder to contain all the data items, then add a new class `AppUser.cs`
+![Image 4](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/4-datafolder-appuserclass-cropped.jpg)
+
+Here is the code for the class:
+
+```csharp
+public class AppUser
+{
+    public int UserId { get; set; }
+    public string Provider { get; set; }
+    public string NameIdentifier { get; set; }
+    public string Username { get; set; }
+    public string Password { get; set; }
+    public string Email { get; set; }
+    public string Firstname { get; set; }
+    public string Lastname { get; set; }
+    public string Mobile { get; set; }
+    public string Roles { get; set; }
+    public List<string> RoleList
+    {
+        get
+        {
+            return Roles?.Split(',').ToList()??new List<string>();
+        }
+    }
+}
+```
 
 okay i pasted this class in it has a few fields in it user id provider name identifier username password email first name last name mobile and a string for roles then i want to add one more property for roll list and all this will do is take the comma delimited list of roles that we could add to a user and split them out into a list of strings that define the role list and we'll use that later let's add another class
 
