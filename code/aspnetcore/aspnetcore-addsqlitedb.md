@@ -1,4 +1,4 @@
-today on code hack moment we will learn how to add a sqlite database to an asp.net core project using entity framework core code first
+In this post we will learn how to add a sqlite database to an ASP.NET core project using entity framework core, code first.
 
 to get going we're going to add a sqlite database as a local file i'm going to start by going to manage nuget packages and add a couple of important packages i'm going to need the entity framework core design
 
