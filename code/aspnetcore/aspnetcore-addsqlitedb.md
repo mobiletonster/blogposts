@@ -12,6 +12,7 @@ Check to be sure that we have actually added those dependencies:
 We have .Design and .Sqlite packages added.
 
 Add a new folder to contain all the data items, then add a new class `AppUser.cs`
+
 ![Image 4](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/4-datafolder-appuserclass-cropped.jpg)
 
 Here is the code for the class:
