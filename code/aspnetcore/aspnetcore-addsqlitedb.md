@@ -18,7 +18,7 @@ We have .Design and .Sqlite packages added.
 
 Add a new folder to contain all the data items, then add a new class `AppUser.cs`
 
-![Image 4](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/4-datafolder-appuserclass-cropped.jpg#screenshot)
+![Image 4](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/4-datafolder-appuserclass-cropped.jpg#screenshot "screenshot of solution explorer showing data folder and AppUser class")
 
 Here is the code for the class:
 
@@ -109,7 +109,7 @@ We need to go to the `appsettings.json` and add a connection string for our data
 ``` 
  Constructed this way, Entity Framework will add an `app.db` (sqlite) file in the Database folder when we execute the migration code later.
  
-![Image 5](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/5-app.db-cropped.jpg#screenshot)
+![Image 5](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/5-app.db-cropped.jpg#screenshot "screenshot of solution explorer showing app.db file")
 
 Returning to the `Startup.cs` file in the `ConfigureServices` method, let's add a services.AddDbContext like this:
 
@@ -121,10 +121,10 @@ Although order doesn't typically matter when registering dependency services, I 
 
 Now it is time to use the nuget package manager console. To load the console, go to the menu View -> Other Windows -> Package Manager Console:
 
-![Image 6](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/6-findpackagemanager-cropped.jpg#screenshot)
+![Image 6](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/6-findpackagemanger-cropped.jpg#screenshot "Visual Studio Menu showing how to load Package Manager Console")
 
 
-![Image 7](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/7-nugetpackagemanager-cropped.jpg#screenshot)
+![Image 7](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/7-nugetpackagemanger-cropped.jpg#screenshot "Package Manager Console")
 
 First, we want to install a tool by typing the following command:
 
@@ -142,17 +142,78 @@ We are ready to run some EF commands. Ensure that you are targeting the correct 
 
 Now lets create an initial migration entry by running this command:
 
+```console
+dotnet ef migrations add Initial -o Data
+```
 
-okay cool so now we have we've made sure we have the latest now we want to what i want to do is run a net ef migrations add initial and i want that to be put into the data folder
+When it completes it will have added a migration file to the Data directory.
 
-it said no project was found so let's look in this directory we're in the solutions directory so let's go down a directory
+```csharp
+public partial class Intitial : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.CreateTable(
+            name: "AppUsers",
+            columns: table => new
+            {
+                UserId = table.Column<int>(type: "INTEGER", nullable: false)
+                    .Annotation("Sqlite:Autoincrement", true),
+                Provider = table.Column<string>(type: "TEXT", maxLength: 250, nullable: true),
+                NameIdentifier = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                Username = table.Column<string>(type: "TEXT", maxLength: 250, nullable: true),
+                Password = table.Column<string>(type: "TEXT", maxLength: 250, nullable: true),
+                Email = table.Column<string>(type: "TEXT", maxLength: 250, nullable: true),
+                Firstname = table.Column<string>(type: "TEXT", maxLength: 250, nullable: true),
+                Lastname = table.Column<string>(type: "TEXT", maxLength: 250, nullable: true),
+                Mobile = table.Column<string>(type: "TEXT", maxLength: 250, nullable: true),
+                Roles = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true)
+            },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_AppUsers", x => x.UserId);
+            });
 
-now let's run that command again it's done and you'll see that we have a migration file that's been added here and we can look at this migration file and there's two methods there's an up method and then a down method so creation and a destruction and during the creation what it's going to do is create an app users table in the database because this is the primary key and it's going to insert this data so that's all based on the the off db context that we created on the on model creating this tool the migration tool looked at that and realized it needed to make sure that that table existed and to do the insert data as part of that so the last thing to do here is to run.net ef database update
+        migrationBuilder.InsertData(
+            table: "AppUsers",
+            columns: new[] { "UserId", "Email", "Firstname", "Lastname", "Mobile", "NameIdentifier", "Password", "Provider", "Roles", "Username" },
+            values: new object[] { 1, "bob@admonex.com", "Bob", "Tester", "800-555-1212", null, "pizza", "Cookies", "Admin", "bob" });
+    }
 
-we now have an app.db table here so if we want to take a look at this and see what's in it we can open this with a tool that i haven't registered yet so i should add that tool
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropTable(
+            name: "AppUsers");
+    }
+}
 
-okay and it's called db browser for sql lite and i'm just going to go ahead and select that
+```
 
-now we'll just click open and now you can see here that there's a couple of different tables that it created one for app users one for ef migrations history and then the sqlite sequence if we look in our app users table you'll see that we already have a record in here and that was from our seed data bob tester for our bob tester user well that looks pretty good and that is all it takes to add and connect sqlite database to an asp.net core project with ef core code first click the card at the end of this video to see the rest of this project in action thanks for watching
+You will see there are two methods; `Up` and `Down` for creation and a destruction of our database. During the creation an `AppUsers` table will be added to the database with a primary key of `UserId` using an `Autoincrement` value from Sqlite. Notice also that the `migrationBuilder.InserData()` command will insert our `seed` data into our newly created table.
 
-you
+Finally, we want to apply this migration to our database by running the following command in the package manager console:
+
+```console
+dotnet ef database update
+```
+
+The first time we run this command, it will create the `app.db` file and add it to our `Database` folder. If you want to inspect the contents of this database, you can download a tool called [DB Browser for SQLIte](https://sqlitebrowser.org/)
+
+To use it from Visual Studio, right click the `app.db` file in Solution Explorer and select `Open With`. 
+
+![Image 8](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/8-sqlitedbbrowser-cropped.jpg#screenshot "Use Open With to define tool to open our app.db file")
+
+It will give you a dialog to let you select which program you want to use to open this file. Click the `Add` button then click the `...` button to browser to the location of your `DB Browser for SQLite.exe` file. Mine installed into this location:
+
+    "C:\Program Files\DB Browser for SQLite\DB Browser for SQLite.exe"
+
+Click OK to complete and I would `Set as Default`. Now go ahead and open it with our new tool.
+
+![Image 9](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/9-dbbrowser-cropped.jpg#screenshot "DB Browser for SQLite app showing rows of data in app.db")
+
+You will see a couple of different tables that it created, one for `AppUser` and one for `__EFMigrationsHistory`. In our `AppUsers` table you'll see that we already have a record in there from our seed data `bob tester` for our `bob tester user`.
+
+That is all it takes to add and connect a sqlite database to an ASP.NET Core project with EF Core code-first!
+
+
+
