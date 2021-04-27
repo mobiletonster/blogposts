@@ -1,12 +1,17 @@
 In this post we will learn how to add a sqlite database to an ASP.NET core project using entity framework core, code first.
 
 First, let's add some nuget packages. Start by launching "manage nuget packages" window and add `Microsoft.EntityFrameworkCore.Design`.
+
 ![Image 1](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/1-efcoredesign-cropped.jpg "manage nuget - add ef core design")
 
+
 Next, add `Microsoft.EntityFrameworkCore.Sqlite`.
+
 ![Image 2](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/2-efcoresqlite-cropped.jpg "manage nuget - add ef core sqlite")
 
+
 Check to be sure that we have actually added those dependencies:
+
 ![Image 3](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/3-dependenciesadded-cropped.jpg "dependencies appear in solution explorer")
 
 We have .Design and .Sqlite packages added.
