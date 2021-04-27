@@ -2,23 +2,23 @@ In this post we will learn how to add a sqlite database to an ASP.NET core proje
 
 First, let's add some nuget packages. Start by launching "manage nuget packages" window and add `Microsoft.EntityFrameworkCore.Design`.
 
-![Image 1](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/1-efcoredesign-cropped.jpg "manage nuget - add ef core design")
+![Image 1](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/1-efcoredesign-cropped.jpg#screenshot "manage nuget - add ef core design")
 
 
 Next, add `Microsoft.EntityFrameworkCore.Sqlite`.
 
-![Image 2](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/2-efcoresqlite-cropped.jpg "manage nuget - add ef core sqlite")
+![Image 2](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/2-efcoresqlite-cropped.jpg#screenshot "manage nuget - add ef core sqlite")
 
 
 Check to be sure that we have actually added those dependencies:
 
-![Image 3](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/3-dependenciesadded-cropped.jpg "dependencies appear in solution explorer")
+![Image 3](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/3-dependenciesadded-cropped.jpg#screenshot "dependencies appear in solution explorer")
 
 We have .Design and .Sqlite packages added.
 
 Add a new folder to contain all the data items, then add a new class `AppUser.cs`
 
-![Image 4](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/4-datafolder-appuserclass-cropped.jpg)
+![Image 4](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/4-datafolder-appuserclass-cropped.jpg#screenshot)
 
 Here is the code for the class:
 
