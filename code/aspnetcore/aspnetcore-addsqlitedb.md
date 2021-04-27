@@ -197,7 +197,7 @@ Finally, we want to apply this migration to our database by running the followin
 dotnet ef database update
 ```
 
-The first time we run this command, it will create the `app.db` file and add it to our `Database` folder. If you want to inspect the contents of this database, you can download a tool called [DB Browser for SQLIte](https://sqlitebrowser.org/)
+The first time we run this command, it will create the `app.db` file and add it to our `Database` folder. If you want to inspect the contents of this database, you can download a tool called <a href="https://sqlitebrowser.org" target="_blank" rel="noopener">DB Browser for SQLite</a> 
 
 To use it from Visual Studio, right click the `app.db` file in Solution Explorer and select `Open With`. 
 
@@ -205,8 +205,9 @@ To use it from Visual Studio, right click the `app.db` file in Solution Explorer
 
 It will give you a dialog to let you select which program you want to use to open this file. Click the `Add` button then click the `...` button to browser to the location of your `DB Browser for SQLite.exe` file. Mine installed into this location:
 
+```windows explorer
     "C:\Program Files\DB Browser for SQLite\DB Browser for SQLite.exe"
-
+```
 Click OK to complete and I would `Set as Default`. Now go ahead and open it with our new tool.
 
 ![Image 9](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/9-dbbrowser-cropped.jpg#screenshot "DB Browser for SQLite app showing rows of data in app.db")
