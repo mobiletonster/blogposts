@@ -45,13 +45,72 @@ public class AppUser
 }
 ```
 
-okay i pasted this class in it has a few fields in it user id provider name identifier username password email first name last name mobile and a string for roles then i want to add one more property for roll list and all this will do is take the comma delimited list of roles that we could add to a user and split them out into a list of strings that define the role list and we'll use that later let's add another class
+This class has some basic fields in it:
+UserId, Provider, NameIdentifier, Username, etc. It also contains a string for roles which will hold a comma-delimited list of strings.
 
-i'm going to add an auth db context
+There is one more property for RoleList. It will convert a comma-delimited list of `roles` for a user and split them into a list of strings.
 
-and this will inherit from db context in entity framework
+Let's add another class. We need to add an AuthDbContext which will inherit from the DbContext in Entity Framework.
 
-in the interest of time i've just copy and pasted this we have one db set of type app user we have our constructor off db context and we have our on model creating where we have the model builder dot entity of app user where we defined all all of the properties that matter and we can set things like which is the key and what the max length is and finally we have this entity.has data which is seed information we can precede our data with a bob tester user and we've included the roles of admin next we want to go to the app settings json and we want to add a connection string for our database the connection string i've put in here for the default connection is data source data slash app.db we'll see that this should put an app.db file in the data folder when we're all done next we want to go to our startup
+```csharp
+public class AuthDbContext:DbContext
+{
+    public DbSet<AppUser> AppUsers { get; set; }
+    public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
+    {
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<AppUser>(entity =>
+        {
+            entity.HasKey(e => e.UserId);
+            entity.Property(e => e.UserId);
+            entity.Property(e => e.Provider).HasMaxLength(250);
+            entity.Property(e => e.NameIdentifier).HasMaxLength(500);
+            entity.Property(e => e.Username).HasMaxLength(250);
+            entity.Property(e => e.Password).HasMaxLength(250);
+            entity.Property(e => e.Email).HasMaxLength(250);
+            entity.Property(e => e.Firstname).HasMaxLength(250);
+            entity.Property(e => e.Lastname).HasMaxLength(250);
+            entity.Property(e => e.Mobile).HasMaxLength(250);
+            entity.Property(e => e.Roles).HasMaxLength(1000);
+
+            entity.HasData(new AppUser
+            {
+                Provider = "Cookies",
+                UserId = 1,
+                Email = "bob@admonex.com",
+                Username = "bob",
+                Password = "pizza",
+                Firstname = "Bob",
+                Lastname = "Tester",
+                Mobile = "800-555-1212",
+                Roles = "Admin"
+            });
+
+        });
+    }
+}
+```
+
+This simple class contains one `DbSet<AppUser>`,  a constructor for`AuthDbContext` and an `OnModelCreating` where the `modelBuilder.Entity` for `AppUser` defines all of the properties and sets attributes such as the primary key, max length and others.  
+Finally, with `Entity.HasData` seed information for our data is inserted.
+
+In the seed data, we define "bob tester" user and include the roles of `Admin`.
+
+We need to go to the `appsettings.json` and add a connection string for our database. The connection string definition in our case is the `DefaultConnection` entry as listed below:
+
+```json
+"ConnectionStrings": {
+    "DefaultConnection": "DataSource=Database\\app.db"
+},
+``` 
+ Constructed this way, Entity Framework will add an `app.db` (sqlite) file in the data folder.
+ 
+![Image 5](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/5-app.db-cropped.jpg#screenshot)
+
+Returning to the `Startup.cs` file
 
 and it appear above authentication order doesn't really matter but this is where i want to put it let's add a services dot add db context or auth db context
 
