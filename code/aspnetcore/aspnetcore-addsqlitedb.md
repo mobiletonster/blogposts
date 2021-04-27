@@ -95,9 +95,10 @@ public class AuthDbContext:DbContext
 ```
 
 This simple class contains one `DbSet<AppUser>`,  a constructor for`AuthDbContext` and an `OnModelCreating` where the `modelBuilder.Entity` for `AppUser` defines all of the properties and sets attributes such as the primary key, max length and others.  
-Finally, with `Entity.HasData` seed information for our data is inserted.
 
-In the seed data, we define "bob tester" user and include the roles of `Admin`.
+Finally, `Entity.HasData` provides 'seed' data, or an initial record in our database.
+
+In the seed data, we define "bob tester" user and assign the role of `Admin`.
 
 We need to go to the `appsettings.json` and add a connection string for our database. The connection string definition in our case is the `DefaultConnection` entry as listed below:
 
@@ -106,23 +107,41 @@ We need to go to the `appsettings.json` and add a connection string for our data
     "DefaultConnection": "DataSource=Database\\app.db"
 },
 ``` 
- Constructed this way, Entity Framework will add an `app.db` (sqlite) file in the data folder.
+ Constructed this way, Entity Framework will add an `app.db` (sqlite) file in the Database folder when we execute the migration code later.
  
 ![Image 5](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/5-app.db-cropped.jpg#screenshot)
 
-Returning to the `Startup.cs` file
+Returning to the `Startup.cs` file in the `ConfigureServices` method, let's add a services.AddDbContext like this:
 
-and it appear above authentication order doesn't really matter but this is where i want to put it let's add a services dot add db context or auth db context
+```csharp
+services.AddDbContext<AuthDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+```
 
-and we'll need to solve that
+Although order doesn't typically matter when registering dependency services, I have placed this line just below `services.AddControllersWithViews()`. Be sure to resolve all references with their appropriate using statements. I like to use the `CTRL + .` shortcut while the cursor is positioned on the unresolved item to invoke the menu. 
 
-some options here and we'll use options.use sqlite solve that as well
+Now it is time to use the nuget package manager console. To load the console, go to the menu View -> Other Windows -> Package Manager Console:
 
-all right too i guess then we'll do configuration dot get connection string and we want the default connection
+![Image 6](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/6-findpackagemanager-cropped.jpg#screenshot)
 
-semicolon there and i think that will be all we need in the startup now it's time to go to the package manager console and in the package manager console we want to run a few different commands so the first one is dotnet tool install i like to install this globally you don't have to but i think you'll use it enough that it makes sense to do it it says i already have it installed so that's great if you need to you can update the latest by running dotnet tool update dash dash global
 
-dot net dash ef
+![Image 7](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/7-nugetpackagemanager-cropped.jpg#screenshot)
+
+First, we want to install a tool by typing the following command:
+
+```console
+dotnet too instal --global dotnet ef
+```
+
+You may already have it installed, but just want to update the tool. If so, run this command:
+
+```console
+dotnet tool update --global dotnet-ef
+```
+
+We are ready to run some EF commands. Ensure that you are targeting the correct "Default project" in the Package Manager Console and make sure we are in the directory of the project. In this case, I am in the `Authn` project and I need to make sure I'm in the directory containing the `Authn` project itself. I can run a `dir` command to see the working directory of the console, and in my case I need to run `cd Authn` to change my working directory to the project. 
+
+Now lets create an initial migration entry by running this command:
+
 
 okay cool so now we have we've made sure we have the latest now we want to what i want to do is run a net ef migrations add initial and i want that to be put into the data folder
 
