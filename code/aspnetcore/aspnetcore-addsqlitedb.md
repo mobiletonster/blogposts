@@ -108,7 +108,7 @@ We need to go to the `appsettings.json` and add a connection string for our data
 ``` 
  Constructed this way, Entity Framework will add an `app.db` (sqlite) file in the data folder.
  
-![Image 5](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/5-app.db-cropped.jpg#screenshot)
+![Image 5](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/5-app.db-cropped.jpg#screenshot "displaying the app.db file in solution explorer")
 
 Returning to the `Startup.cs` file
 
