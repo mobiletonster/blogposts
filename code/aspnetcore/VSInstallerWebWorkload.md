@@ -3,7 +3,7 @@
 Some people have asked for a guide on how to ensure that the ASP.NET Core `Web Workloads` are installed in Visual Studio 2019.
 
 ### Installation of Web Workload in VS2019
-You can download VS 2019 Community Edition (free) from <a href="https://visualstudiolmicrosoft.com" target="_blank" rel="noopener">visualstudio.microsoft.com</a>
+You can download VS 2019 Community Edition (free) from <a href="https://visualstudio.microsoft.com" target="_blank" rel="noopener">visualstudio.microsoft.com</a>
 
 ![Image 1](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/VS2019Community.png#screenshot "download vs2019 community edition")
 
