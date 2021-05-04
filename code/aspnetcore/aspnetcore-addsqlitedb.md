@@ -9,6 +9,8 @@ If you would like, you can watch the walkthrough on YouTube:
 
 Sometimes it is helpful to use a local database while developing and while you could load up a local Sql Server database, SQLite is a very lightweight option and makes it easy for other developers to clone your repository and get up and running right away.
 
+## Walkthrough
+
 First, let's add some nuget packages. Start by launching "manage nuget packages" window and add `Microsoft.EntityFrameworkCore.Design`.
 
 ![Image 1](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/addsqlitedb/1-efcoredesign-cropped.jpg#screenshot "manage nuget - add ef core design")
