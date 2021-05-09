@@ -50,3 +50,33 @@ Microsoft's Blazor is a Web Assembly framework using C# and Razor syntax to buil
 
 The biggest limitation of Web Assembly is that it is such a new feature that many older browsers, particularly mobile browser, may not be able to run them. Additionally, some corporate networks block Web Assembly downloads which can prevent users from getting the payloads needed to run the application.
 
+### Hosting models for SPA 
+Securing traditional applications is usually pretty straightforward and I have covered that in parts 1-3 of this series, but SPA applications have a variety of hosting options that can require special attention.
+
+#### Separate UI server & backend server
+In this model, the UI layer or SPA application can be served up from its own server, such as a Nodejs server or even as static assets from a CDN or other location. The backend services are served from a separate server and depending upon architecture could be served using Nodejs, ASP.NET Core API, Java Spring Boot, PHP, or other technology.
+
+This model is popular for large teams of dedicated developers working separately on the FE (front end) and the BFF (back end for front end). This way teams can iterate somewhat independantly and use different stacks to do their work.
+
+##### CORS
+
+This model can introduce some complexities that need to be understood. If the UI will make direct calls into the API servers and they are on slightly different domains (for example fe.domain.com  and bff.domain.com) then you will need to deal with CORS (cross origin resource sharing). Cookies may or may not be sharable with the BFF depending on the the domain, so most often Bearer tokens in the Authorization Header are used to authenticate the request.
+
+##### Proxy
+
+You could also proxy all requests through the Nodejs server responsible for serving the front end. Again, passing cookies gets complicated in this model as the headers would need to be duplicated when constructing the outbound call to the actual API. Typically, it is more common to use a bearer token instead.
+
+#### Combined UI & Backend Server
+In this particular model, development can still occur separately or together. For instance, a web developer can build the entire FE while using Nodejs to serve the pages during development. Then a production build can be made and merged with (placed into the wwwroot folder) the ASP.NET Core backend prior to deployment or after deployment as well.
+
+Additionally, you can create a project that combines the UI & the ASP.NET Core project and develop together and deploy together as well. There is even special middleware to support SPA applications during development and even support SSR (server side rendering) using nodejs as a middleware service.
+
+This model avoids issues with CORS and doesn't require a proxy. Additionally, traditional Auth approaches such as cookies can easily be used. Usually those cookies would be unreadable by the FE code, however. To help the front end know about authorization and context there are approaches that can be used to provide and cache that information in the FE layer.
+
+
+
+
+
+
+
+
