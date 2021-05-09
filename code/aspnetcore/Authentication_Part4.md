@@ -74,7 +74,7 @@ Additionally, you can create a project that combines the UI & the ASP.NET Core p
 This model avoids issues with CORS and doesn't require a proxy. Additionally, traditional Auth approaches such as cookies can easily be used. Usually those cookies would be unreadable by the FE code, however (http only). To help the front end know about authorization and context there are approaches that can be used to provide and cache that information in the FE layer.
 
 #### Blazor Client Web Assembly
-Blazor Client is technically a SPA model, but since it uses C#/Razor as its view layer differs slightly from traditional JS SPA frameworks. When talking to the backend, if served seperately from the backend, it may still need to deal with CORS and cookie limitations.
+Blazor Client is technically a SPA model, but since it uses C#/Razor as its view layer differs slightly from traditional JS SPA frameworks. When talking to the backend, if served seperately, it may still need to deal with CORS and cookie limitations.
 
 
 
