@@ -67,12 +67,16 @@ This model can introduce some complexities that need to be understood. If the UI
 You could also proxy all requests through the Nodejs server responsible for serving the front end. Again, passing cookies gets complicated in this model as the headers would need to be duplicated when constructing the outbound call to the actual API. Typically, it is more common to use a bearer token instead.
 
 #### Combined UI & Backend Server
-In this particular model, development can still occur separately or together. For instance, a web developer can build the entire FE while using Nodejs to serve the pages during development. Then a production build can be made and merged with (placed into the wwwroot folder) the ASP.NET Core backend prior to deployment or after deployment as well.
+In this particular model, development can  occur separately or together. For instance, a web developer can build the entire FE while using Nodejs to serve the pages during development. Then a production build can be made and merged with (placed into the wwwroot folder, for example) the ASP.NET Core backend prior to deployment or after deployment.
 
-Additionally, you can create a project that combines the UI & the ASP.NET Core project and develop together and deploy together as well. There is even special middleware to support SPA applications during development and even support SSR (server side rendering) using nodejs as a middleware service.
+Additionally, you can create a project that combines the UI & the ASP.NET Core project and develop together and deploy together. There is special middleware to support SPA applications during development and even support SSR (server side rendering) using nodejs as a middleware service.
 
-This model avoids issues with CORS and doesn't require a proxy. Additionally, traditional Auth approaches such as cookies can easily be used. Usually those cookies would be unreadable by the FE code, however. To help the front end know about authorization and context there are approaches that can be used to provide and cache that information in the FE layer.
+This model avoids issues with CORS and doesn't require a proxy. Additionally, traditional Auth approaches such as cookies can easily be used. Usually those cookies would be unreadable by the FE code, however (http only). To help the front end know about authorization and context there are approaches that can be used to provide and cache that information in the FE layer.
 
+#### Blazor Client Web Assembly
+Blazor Client is technically a SPA model, but since it uses C#/Razor as its view layer differs slightly from traditional JS SPA frameworks.
+
+When talking to the backend, if served seperately from the backend, it may still need to deal with CORS and cookie limitations.
 
 
 
