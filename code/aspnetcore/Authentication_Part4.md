@@ -60,7 +60,7 @@ This model is popular for large teams of dedicated developers working separately
 
 ##### CORS
 
-This model can introduce some complexities that need to be understood. If the UI will make direct calls into the API servers and they are on slightly different domains (for example fe.domain.com  and bff.domain.com) then you will need to deal with CORS (cross origin resource sharing). Cookies may or may not be sharable with the BFF depending on the the domain, so most often Bearer tokens in the Authorization Header are used to authenticate the request.
+This model can introduce some complexities that need to be understood. If the UI will make direct calls into the API servers and they are on slightly different domains (for example fe.domain.com  and bff.domain.com or bff.apidomain.com) then you will need to deal with CORS (cross origin resource sharing). Cookies may or may not be sharable with the BFF depending on the the domain, so most often Bearer tokens in the Authorization Header are used to authenticate the request.
 
 ##### Proxy
 
