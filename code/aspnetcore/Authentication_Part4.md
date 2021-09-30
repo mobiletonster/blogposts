@@ -76,7 +76,8 @@ This model avoids issues with CORS and doesn't require a proxy. Additionally, tr
 #### Blazor Client Web Assembly
 Blazor Client is technically a SPA model, but since it uses C#/Razor as its view layer differs slightly from traditional JS SPA frameworks. When talking to the backend, if served seperately, it may still need to deal with CORS and cookie limitations.
 
-
+### Create a Reactjs app
+We will start by creating a simple Reactjs app using create react app. 
 
 
 
