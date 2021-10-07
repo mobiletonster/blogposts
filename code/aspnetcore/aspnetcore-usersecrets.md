@@ -1,7 +1,7 @@
 ## Safely store app secrets in ASP.NET Core
 Applications often need to store secrets, such as client_id and client_secret for OAuth connections or database connection strings. In the old days, it was not uncommon to store these secrets in the code and compile them as hard coded values. Today, this practice is less desirable and external configuration settings that can be changed without requiring a recompile of an application is much preferred. However, this new capability comes with a new set of responsibilities. 
 
-In this article, we will learn about a few different ways to secure our secrets and make them configurable by environment for our applications. It is a best practice to avoid checking our secrets to source control where they may be inadvertantly leaked.
+In this article, we will learn about a few different ways to secure our secrets and make them configurable by environment for our applications. It is a best practice to avoid checking in our secrets to source control where they may be inadvertantly (or intentionally) leaked.
 
 ### Create a sample web application
 We will use Visual Studio to create a sample web application to demonstrate how to store application secrets. 
@@ -11,7 +11,7 @@ We will use Visual Studio to create a sample web application to demonstrate how 
 2) Click "Create a new project"
 ![create new project](images/user-secrets/2-createnewproject.jpg)
 3) Select C# ASP.NET Core Web App (Model-View-Controller) project type
-4) Select a location to create the project and give it a name. I named mine "MyWebApp"
+4) Select a location to create the project and give it a name. I named mine "MyWebApp".
 ![my web app](images/user-secrets/3-mywebapp.jpg)
 5) Leave the defaults in the additional info dialog as shown below with.>NET5.0 (current), Authentication type:none, checkbox selected for Configure for HTTPS and everything else unchecked.
 ![additional info dialog](images/user-secrets/4-additionalinfo.jpg)
@@ -54,7 +54,8 @@ For our sample app, let's create a variable to store a passkey that we could use
 I have added two lines of code inside the Configure Services method just below the `AddControllersWithViews()` line.
 
 In this example, I have hard coded the actual key into the variable `Passkey`. If you run the application, 
-![run from debug](images/user-secrets/5-run-debug.jpg)you will see this passkey value displayed on the console.
+![run from debug](images/user-secrets/5-run-debug.jpg)
+you will see this passkey value displayed on the console.
 ![console passkey](images/user-secrets/6-console-passkey.jpg)
 
 There are several problems with this example. First, hard coding the value makes it difficult to change or rotate the key without re-compiling the application and re-deploying. Second, this value **will** get checked into source control where anyone with access to the source can see it. Not much of a secret.
