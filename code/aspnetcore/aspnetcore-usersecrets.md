@@ -54,6 +54,7 @@ For our sample app, let's create a variable to store a passkey that we could use
 I have added two lines of code inside the Configure Services method just below the `AddControllersWithViews()` line.
 
 In this example, I have hard coded the actual key into the variable `Passkey`. If you run the application, 
+
 ![run from debug](images/user-secrets/5-run-debug.jpg)
 
 you will see this passkey value displayed on the console.
