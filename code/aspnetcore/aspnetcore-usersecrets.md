@@ -55,6 +55,7 @@ I have added two lines of code inside the Configure Services method just below t
 
 In this example, I have hard coded the actual key into the variable `Passkey`. If you run the application, 
 ![run from debug](images/user-secrets/5-run-debug.jpg)
+
 you will see this passkey value displayed on the console.
 
 ![console passkey](images/user-secrets/6-console-passkey.jpg)
