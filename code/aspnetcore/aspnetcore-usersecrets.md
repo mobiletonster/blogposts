@@ -122,6 +122,7 @@ So, it is good that we have moved the value into an external json configuration 
 
 To solve this problem, ASP.NET Core provides a way to store the secrets in a file that lives on your development machine but outside of your solution folder so it isn't managed by source control.
 
+#### Add from Visual Studio
 In Visual Studio, the easiest way to set this up is to right click on the project and find the menu item: **Manage User Secrets**.
 
 ![manage user secrets menu](images/user-secrets/8-manage-user-secrets.jpg)
@@ -136,6 +137,26 @@ Let's move our key value pair secret from appsettings.json into our secrets.json
 
 Then run the program again and see that it still works.
 
+#### Add from command line
+If you are on Linux or on a Mac or even if you are using VS Code on a PC, the "manage user secrets" menu item doesn't exist. You can add and manage user secrets from the command line.
+
+Make sure you are in your project path in a terminal window or command prompt.
+
+```cmd
+// to setup a project and attach it to a secrets.json file
+dotnet user-secrets init
+
+// to get a list of user-secrets for your project
+dotnet user-secrets list
+
+// to add a user-secret
+dotnet user-secrets set "Passkey" "Sup3rS3cr3t"
+
+// to remove a secret
+dotnet user-secrets remove "Passkey"
+```
+
+#### Where is the file located?
 So the question you may be asking yourself is where is this file actually located? 
 
 To find out, hover over the secrets.json tab and you will see the full path to the file.
@@ -211,6 +232,10 @@ Enter a variable name and value in the dialog and click ok.
 You will find a new value in the System variables list.
 
 Again, to make it visible in Visual Studio, you will need to restart the IDE.
+
+### Examining key precedence with multiple configuration files
+So what if our "Passkey" variable was defined in "Environment Variables", "secrets.json" and "appsettings.json". Which would "win"?
+
 
 
 
