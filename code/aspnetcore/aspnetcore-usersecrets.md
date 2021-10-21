@@ -7,14 +7,14 @@ In this article, we will learn about a few different ways to secure our secrets 
 We will use Visual Studio to create a sample web application to demonstrate how to store application secrets. 
 
 1) Open Visual Studio
-![visual studio](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/1-visualstudio.jpg)
+![visual studio](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/1-visualstudio.jpg#screenshot)
 2) Click "Create a new project"
-![create new project](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/2-createnewproject.jpg)
+![create new project](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/2-createnewproject.jpg#screenshot)
 3) Select C# ASP.NET Core Web App (Model-View-Controller) project type
 4) Select a location to create the project and give it a name. I named mine "MyWebApp".
-![my web app](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/3-mywebapp.jpg)
+![my web app](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/3-mywebapp.jpg#screenshot)
 5) Leave the defaults in the additional info dialog as shown below with > .NET 5.0 (current), Authentication Type:none, checkbox selected for Configure for HTTPS and everything else unchecked.
-![additional info dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/4-additionalinfo.jpg)
+![additional info dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/4-additionalinfo.jpg#screenshot)
 
 ### Explore Startup.cs
 Once the solution loads, find the `Startup.cs` file and open it. Inside you will find a number of items already configured. An important one for our use case is the `IConfiguration Configuration` property.
@@ -55,11 +55,11 @@ I have added two lines of code inside the Configure Services method just below t
 
 In this example, I have hard coded the actual key into the variable `Passkey`. If you run the application, 
 
-![run from debug](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/5-run-debug.jpg)
+![run from debug](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/5-run-debug.jpg#screenshot)
 
 you will see this passkey value displayed on the console.
 
-![console passkey](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/6-console-passkey.jpg)
+![console passkey](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/6-console-passkey.jpg#screenshot)
 
 There are several problems with this example. First, hard coding the value makes it difficult to change or rotate the key without re-compiling the application and re-deploying. Second, this value **will** get checked into source control where anyone with access to the source can see it. Not much of a secret.
 
@@ -68,7 +68,7 @@ In the next section, we will solve the first problem of moving the value from ha
 ### App settings in external config file
 In ASP.NET Core projects, a developer can choose to store configuration values in an external file such as the appsettings.json file.
 
-![solution explorer](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/7-solution-explorer.jpg)
+![solution explorer](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/7-solution-explorer.jpg#screenshot)
 
 In our project, using the solution explorer view, locate the existing appsettings.json file and open it.
 
@@ -152,15 +152,15 @@ To solve this problem, ASP.NET Core provides a way to store the secrets in a fil
 #### Add from Visual Studio
 In Visual Studio, the easiest way to set this up is to right click on the project and find the menu item: **Manage User Secrets**.
 
-![manage user secrets menu](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/8-manage-user-secrets.jpg)
+![manage user secrets menu](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/8-manage-user-secrets.jpg#screenshot)
 
 This will create a new empty configuration file called secrets.json that is external to the solution but attached to the project for development purposes. 
 
-![usersecrets.json file](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/9-secrets-json.jpg)
+![usersecrets.json file](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/9-secrets-json.jpg#screenshot)
 
 Let's move our key value pair secret from appsettings.json into our secrets.json file instead. Remove `"Passkey": "Pard0nMyDu5t"` from appsettings.json and into secrets.json.
 
-![move passkey to secrets.json file](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/10-passkey-to-secrets.jpg)
+![move passkey to secrets.json file](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/10-passkey-to-secrets.jpg#screenshot)
 
 Then run the program again and see that it still works.
 
@@ -188,7 +188,7 @@ So the question you may be asking yourself is where is this file actually locate
 
 To find out, hover over the secrets.json tab and you will see the full path to the file.
 
-![hover secrets.json tab](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/11-hover-tab.jpg)
+![hover secrets.json tab](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/11-hover-tab.jpg#screenshot)
 
 From theimage you will see that it is located in `C:\Users\{user}\AppData\Roaming\Microsoft\UserSecrets\7ad9d3cc-65f2-49cf-b672-fcb3dd7930b5\secrets.json`
 
@@ -198,7 +198,7 @@ So the next question you might ask is "how does our project know to look in that
 
 To discover how this gets connected, right click on your project and select the **Edit Project File** menu option.
 
-![Edit Project File](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/12-edit-project-file.jpg)
+![Edit Project File](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/12-edit-project-file.jpg#screenshot)
 
 This will open a new tab with a name `MyWebApp.csproj` with the following information inside:
 
@@ -238,23 +238,23 @@ After setting the environment variable, you will need to restart the application
 
 To set Environment Variables from a UI, search for Environment Variables in Windows search:
 
-![search env vars](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/13-edit-environment.jpg)
+![search env vars](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/13-edit-environment.jpg#screenshot)
 
 Click on the Control Panel item in the search results to launch.
 
-![system properties dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/14-system-properties.jpg)
+![system properties dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/14-system-properties.jpg#screenshot)
 
 Next, click the **Environment Variables** button.
 
-![environment variables dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/15-new-env.jpg)
+![environment variables dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/15-new-env.jpg#screenshot)
 
  On the Environment Variables dialog screen, click the **New** button to add a new variable.
 
- ![new system variable dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/16-new-sys-var.jpg)
+ ![new system variable dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/16-new-sys-var.jpg#screenshot)
 
 Enter a variable name and value in the dialog and click ok.
 
-![newly added system variable](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/17-added-passkey.jpg)
+![newly added system variable](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/17-added-passkey.jpg#screenshot)
 
 You will find a new value in the System variables list.
 
@@ -295,7 +295,7 @@ Then in the user secrets `secrets.json` file add this:
 
 Finally, make an entry in environment variables using the steps in a previous section so it looks like this:
 
-![environment variable screen test](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/18-environment-variables.jpg)
+![environment variable screen test](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/18-environment-variables.jpg#screenshot)
 
   >**Important!** You may need to restart visual studio in order to pickup the newly added or edited environment variable.
 
@@ -307,11 +307,11 @@ When the application starts up and hits the break point, hover over the `var Pas
 
 Now add a quickwatch for the `Configuration` property by selecting the keyword and right clicking to get the context menu (or Ctrl+D, Q for the keyboard shortcut) and selecting QuickWatch...
 
-![add quick watch](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/20-add-quickwatch.jpg)
+![add quick watch](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/20-add-quickwatch.jpg#screenshot)
 
 And then expand to show a list of "Providers"
 
-![quickwatch on configuration property](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/21-quickwatch-dialog.jpg)
+![quickwatch on configuration property](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/21-quickwatch-dialog.jpg#screenshot)
 
 In this list I have 6 different providers. They have been added starting at 0 and ending at index of 5. The last in the chain "wins" when there are multiple values for a key entry. In our case, EnvironmentVariablesConfigurationProvider is the last, so it is the key that "wins".
 
