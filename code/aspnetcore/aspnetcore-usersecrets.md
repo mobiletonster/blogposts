@@ -1,4 +1,4 @@
-## Safely store app secrets in ASP.NET Core
+## Safely store app secrets in ASP.NET core
 Applications often need to store secrets, such as client_id and client_secret for OAuth connections or database connection strings. In the old days, it was not uncommon to store these secrets in the code and compile them as hard coded values. Today, this practice is less desirable and external configuration settings that can be changed without requiring a recompile of an application is much preferred. However, this new capability comes with a new set of responsibilities. 
 
 In this article, we will learn about a few different ways to secure our secrets and make them configurable by environment for our applications. It is a best practice to avoid checking in our secrets to source control where they may be inadvertantly (or intentionally) leaked.
@@ -13,7 +13,7 @@ We will use Visual Studio to create a sample web application to demonstrate how 
 3) Select C# ASP.NET Core Web App (Model-View-Controller) project type
 4) Select a location to create the project and give it a name. I named mine "MyWebApp".
 ![my web app](images/user-secrets/3-mywebapp.jpg)
-5) Leave the defaults in the additional info dialog as shown below with.>NET5.0 (current), Authentication type:none, checkbox selected for Configure for HTTPS and everything else unchecked.
+5) Leave the defaults in the additional info dialog as shown below with > .NET 5.0 (current), Authentication Type:none, checkbox selected for Configure for HTTPS and everything else unchecked.
 ![additional info dialog](images/user-secrets/4-additionalinfo.jpg)
 
 ### Explore Startup.cs
@@ -116,6 +116,33 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 Now if we run the project again, we will see the same result as before, but the value is no longer hard coded in our application code and lives in an external file.
+
+### Nested Settings
+In the previous section, we placed a simple setting key in our json file. You can group or nest settings under a common section use json object structure like this:
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "MySettingsGroup": {
+    "Passkey": "Pard0nMyDu5t",
+    "OtherSetting":"RandomValue"
+  }
+}
+```
+Notice how "Passkey" is nested under "MySettingsGroup". To access this in your configuration, separate the key nesting with a colon like this:
+```c#
+...
+string Passkey = Configuration["MySettingsGroup:Passkey"];
+...
+```
+For the remainder of this post, we will continue to use a simple key structure and not a nested structure.
 
 ### User Secrets file
 So, it is good that we have moved the value into an external json configuration file, but this file lives within our solution folder and will get checked in with our code. It is a good idea to avoid checking in secrets into your repository.
@@ -233,12 +260,94 @@ You will find a new value in the System variables list.
 
 Again, to make it visible in Visual Studio, you will need to restart the IDE.
 
+#### Azure Configuration Variables
+Configuration values can be stored in variables in the Azure portal. For the sake of this article, we won't go into detail but leave it for another post.
+
+#### Azure Key Vault
+Azure Key Vault is a great way to store configuration values in a secure way in the Azure environment. We will have a seperate article to cover Azure Key Vault.
+
 ### Examining key precedence with multiple configuration files
 So what if our "Passkey" variable was defined in "Environment Variables", "secrets.json" and "appsettings.json". Which would "win"?
 
+To find out, let's do a little experiment. First, add this entry to appsettings.json `"Passkey":"appsettings.json"` so it looks like this:
 
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "Passkey": "appsettings.json"
+}
+```
 
+Then in the user secrets `secrets.json` file add this:
 
+```json
+{
+  "Passkey": "secrets.json"
+}
+```
 
+Finally, make an entry in environment variables using the steps in a previous section so it looks like this:
 
+![environment variable screen test](images/user-secrets/18-environment-variables.jpg)
+
+  >**Important!** You may need to restart visual studio in order to pickup the newly added or edited environment variable.
+
+Set a breakpoint in `Startup.cs` just after this line: `string Passkey = Configuration["Passkey"];`. For me, it is line 29.
+
+Then run the application in debug mode by pressing F5 or by clicking the run button.
+
+When the application starts up and hits the break point, hover over the `var Passkey` variable and inspect the value. The value reads **"EnvironmentVariables"** for me.
+
+Now add a quickwatch for the `Configuration` property by selecting the keyword and right clicking to get the context menu (or Ctrl+D, Q for the keyboard shortcut) and selecting QuickWatch...
+
+![add quick watch](images/user-secrets/20-add-quickwatch.jpg)
+
+And then expand to show a list of "Providers"
+
+![quickwatch on configuration property](images/user-secrets/21-quickwatch-dialog.jpg)
+
+In this list I have 6 different providers. They have been added starting at 0 and ending at index of 5. The last in the chain "wins" when there are multiple values for a key entry. In our case, EnvironmentVariablesConfigurationProvider is the last, so it is the key that "wins".
+
+To understand how this order was decided, we need to look in the `Program.cs` file in our project. There you will find the following code:
+
+```c#
+public static void Main(string[] args)
+{
+    CreateHostBuilder(args).Build().Run();
+}
+
+public static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.UseStartup<Startup>();
+        });
+```
+In particular, we are intereseted in the "CreateDefaultBuilder(args)". Somewhere in this code, all the default providers have been added automatically (including usersecrets, IF in Development mode) and in the order of specificity shown in the QuickWatch window. 
+
+This can be overriden by registering the providers yourself manually, such as in this instance where __only__ the usersecrets provider is added:
+
+```c#
+.ConfigureAppConfiguration((hostContext, builder) =>
+{
+    // Add other providers for JSON, etc.
+
+    if (hostContext.HostingEnvironment.IsDevelopment())
+    {
+        builder.AddUserSecrets<Program>();
+    }
+})
+```
+
+### Summary
+So in this post, we have discovered how to keep secrets out of our application code, and out of our settings/configuration files that may get checked into source control and learned how to place them in a secrets.json file outside of the project structure.
+
+In our next post, we will look at Azure Configuration and Azure Key Vault and how to store and retrieve our values from those offerings.
 
