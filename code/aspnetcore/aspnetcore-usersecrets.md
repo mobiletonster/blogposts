@@ -7,7 +7,7 @@ In this article, we will learn about a few different ways to secure our secrets 
 We will use Visual Studio to create a sample web application to demonstrate how to store application secrets. 
 
 1) Open Visual Studio
-![visual studio](images/user-secrets/1-visualstudio.jpg)
+![visual studio](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/1-visualstudio.jpg)
 2) Click "Create a new project"
 ![create new project](images/user-secrets/2-createnewproject.jpg)
 3) Select C# ASP.NET Core Web App (Model-View-Controller) project type
