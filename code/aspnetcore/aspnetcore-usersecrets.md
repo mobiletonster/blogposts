@@ -260,6 +260,30 @@ You will find a new value in the System variables list.
 
 Again, to make it visible in Visual Studio, you will need to restart the IDE.
 
+> Development only environment variables can be simulated by using the launchsettings.json file. Using these "environment variables" does not require you to restart the IDE and does not live on your machine but will be checked in with code, so use this feature cautiously.
+> This can be accessed directly in the launchsettings.json file or via the properties window for the .csproj file. Right click the project in solution explorer and select properties to open the dialog box, then select the `debug` option in the left-side menu.
+
+![launchsettings dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/user-secrets/18_1-launchsettings.jpg#screenshot)
+
+The launchsettings.json version of "environment variables" we take precedence over actual environment variables on your local dev machine, so be aware.
+
+You can find the launchsettings.json file buried in your properties folder of the solution explorer. When you open it, there will be a section for your current run configuration. Here is mine:
+
+```json
+"MyWebApp": {
+  "commandName": "Project",
+  "launchBrowser": true,
+  "environmentVariables": {
+    "Passkey": "launchsettings.json",
+    "ASPNETCORE_ENVIRONMENT": "Development"
+  },
+  "dotnetRunMessages": "true",
+  "applicationUrl": "https://localhost:5001;http://localhost:5000"
+}
+```
+
+If you notice, the "environmentVariables" section now contains my "Passkey" configuration value.
+
 #### Azure Configuration Variables
 Configuration values can be stored in variables in the Azure portal. For the sake of this article, we won't go into detail but leave it for another post.
 
