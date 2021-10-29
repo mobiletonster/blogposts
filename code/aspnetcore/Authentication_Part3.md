@@ -6,6 +6,8 @@ Welcome back to part 3 of our series on Authentication and Authorization in ASP.
 
 We will also demonstrate how to connecte multiple auth challenge or login providers so your users can choose which identity provider they want to use to login to your site. 
 
+<!--
+
 There are many IDaaS providers such as Okta, Auth0 and Azure Active Directory as well as self hosted options such as Identity Server or Forgerock. 
 
 We will be connecting to Okta and briefly look at some benefits of doing so.
@@ -36,3 +38,5 @@ Be sure to check out the sample code in Github and visit my website at Mobileton
 Once again, thanks for watching!
 
 <iframe width="100%" height="450px"  class="video-frame" src="https://linkto.run/p/SO9LHOAP" title="Part 4 Interest Poll" frameborder="0"></iframe>
+
+-->
