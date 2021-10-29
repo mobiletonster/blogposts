@@ -66,40 +66,40 @@ Finally choose the size. I chose "Free" because I don't need performance and sca
 
 Once this dialog is completed as in the screenshot below, click the next button to continue on.
 
-![publish new web app dialog completed](images\azure-ezdeploy\9-publish-new-webapp.jpg#screenshot)
+![publish new web app dialog completed](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/9-publish-new-webapp.jpg#screenshot)
 
 You will see a new "Public" page in your Visual Studio project. This is the page you will see when you publish from now on. 
 
-![publish page in visual studio](images\azure-ezdeploy\10-publish-dialog.jpg#screenshot)
+![publish page in visual studio](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/10-publish-dialog.jpg#screenshot)
 
 This is saved in your solution as an XML file:
-![pubxml file for web deploy settings](images\azure-ezdeploy\11-webdeploy-xml.jpg#screenshot)
+![pubxml file for web deploy settings](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/11-webdeploy-xml.jpg#screenshot)
 
 Back to the new publish page, when we are ready to deploy, simply click the "Publish" button on this page and your app will begin to deploy.
 
-![publish page in visual studio](images\azure-ezdeploy\10-publish-dialog.jpg#screenshot)
+![publish page in visual studio](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/10-publish-dialog.jpg#screenshot)
 
 On the first attempt, it will check to make sure that the deployment will be successful and is looking for things like .net 5.0 version support among other things.
 
-![publishing checks](images\azure-ezdeploy\12-publishing-checks.jpg#screenshot)
+![publishing checks](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/12-publishing-checks.jpg#screenshot)
 
 After the checks complete, it will begin deployment (assuming the checks were successful). On success you should see a screen like this:
 
-![publish suceeded screen](images\azure-ezdeploy\13-publish-suceeded.jpg#screenshot)
+![publish suceeded screen](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/13-publish-suceeded.jpg#screenshot)
 
 The publish step will even launch your default browser and load the page so you can test it.
 
-![running app in microsoft edge](images\azure-ezdeploy\14-app-running.jpg#screenshot)
+![running app in microsoft edge](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/14-app-running.jpg#screenshot)
 
 
 ### Editing publish settings
 You may want to adjust some of the settings later. To do this, click the "Show all settings" link as circled in the image below:
 
-![publish page in visual studio with all settings link circled](images\azure-ezdeploy\15-show-all-settings.jpg#screenshot)
+![publish page in visual studio with all settings link circled](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/15-show-all-settings.jpg#screenshot)
 
 This will load a new dialog box with two tab sections "Connection" and "Settings".
 
-![connections tab of edit settings dialog](images\azure-ezdeploy\16-connection.jpg#screenshot)
+![connections tab of edit settings dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/16-connection.jpg#screenshot)
  
  In the "Connection" tab, you will see the publish method, server, site name, user name, password and the destination URL. All of this will get checked into source control EXCEPT the saved password which is only on your local machine. Keep this in mind if you are working with another person or on another machine.
 
