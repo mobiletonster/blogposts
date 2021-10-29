@@ -1,4 +1,4 @@
-## Deploy to Azure App Service - Easy
+<!--## Deploy to Azure App Service - Easy -->
 So you have created your ASP.NET Core app and you want to deploy it somewhere. You decide you want to deploy it to Azure App Service because you have heard good things about it. 
 
 If you are going to be deploying a production grade application, you should really use CI/CD (Continuous Integration/Continuous Delivery), however, if you are just experimenting and needing to deploy very quickly, you can do so directly from Visual Studio if you have a subscription to Azure.
