@@ -6,20 +6,20 @@ If you are going to be deploying a production grade application, you should real
 ### Signup for Azure Account
 Make sure you have signed up for an Azure account. Head over to https://azure.microsoft.com and signup for a free account trial.
 
-![azure free signup](images/azure-ezdeploy/1-azure-free-signup.jpg#screenshot)
+![azure free signup](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/1-azure-free-signup.jpg#screenshot)
 
 ### Load Your App in Visual Studio
 Open Visual Studio and load your project that contains your previously created web application.
 
 In my case, I have a sample application called "MyWebApp". Right click the project in the solution explorer window and select the "Publish" menu item.
 
-![publish menu item in solution explorer](images/azure-ezdeploy/2-publish-menu.jpg#screenshot)
+![publish menu item in solution explorer](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/2-publish-menu.jpg#screenshot)
 
 
 ### Publishing your app to Azure
 In the publish (target) dialog window, select "Azure" and then click "Next".
 
-![publish dialog window](images/azure-ezdeploy/3-publish-dialog.jpg)
+![publish dialog window](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/3-publish-dialog.jpg)
 
 In the next frame  (specific target) of the dialog window, you have options for:
 1) Azure App Service (Windows)
@@ -28,7 +28,7 @@ In the next frame  (specific target) of the dialog window, you have options for:
 4) Azure Container Registry
 5) Azure Virtual Machine
 
-![publish dialog continued](images/azure-ezdeploy/4-publish-dialog2.jpg)
+![publish dialog continued](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/4-publish-dialog2.jpg)
 
 For the purpose of this post, we will choose to deploy to either option 1 or 2, Azure App Service for Windows or Linux. I am going to select option 1 and click the "Next" button.
 
@@ -40,7 +40,7 @@ First, lets create a new app service instance since this is the first time we ar
 
 Click the green '+' symbol just above the list of "App Service Instances" to create a new app service.
 
-![app service azure deploy dialog](images/azure-ezdeploy/5-app-service-dialog.jpg)
+![app service azure deploy dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/5-app-service-dialog.jpg)
 
 A new dialog for the "App Service - Create New" should appear.
 
@@ -48,11 +48,11 @@ We will give it a "Name" for our application. The name you choose will become pa
 
 I will assume that we need to create a new resource group for the purpose of this deployment as this is the first time we are deploying it. Click "New..." next to the Resource group field.
 
-![create new appservice](images/azure-ezdeploy/6-create-new-appservice.jpg)
+![create new appservice](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/6-create-new-appservice.jpg)
 
 In the new resource group dialog, give it a name. This needs only be unique within your subscription and is not global like the app service name, so you won't be competing with others for a cool name here. I named mine "SecretSampleGroup".
 
-![Create new resource group](images/azure-ezdeploy/7-new-resource-group.jpg)
+![Create new resource group](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/7-new-resource-group.jpg)
 
 Next, click the "New..." next to the Hosting Plan field. This will let us choose a plan for hosting and a data center location. It ranges anywhere from free to rather large computing resources (and can get expensive. Definitely for those who need such power). 
 
@@ -62,7 +62,7 @@ Next select a location. I chose West US, but you can choose any data center loca
 
 Finally choose the size. I chose "Free" because I don't need performance and scalability for this sample, test application.
 
-![create new hosting plan](images/azure-ezdeploy/8-new-hosting-plan.jpg)
+![create new hosting plan](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/8-new-hosting-plan.jpg)
 
 Once this dialog is completed as in the screenshot below, click the next button to continue on.
 
@@ -103,7 +103,7 @@ This will load a new dialog box with two tab sections "Connection" and "Settings
  
  In the "Connection" tab, you will see the publish method, server, site name, user name, password and the destination URL. All of this will get checked into source control EXCEPT the saved password which is only on your local machine. Keep this in mind if you are working with another person or on another machine.
 
- ![settings tab of edit settings dialog](images/azure-ezdeploy/17-settings.jpg)
+ ![settings tab of edit settings dialog](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/17-settings.jpg)
 
  The settings page include configuration, target framework, deployment mode, target runtime. Usually, I leave these alone as the defaults are fine in most cases.
 
@@ -124,7 +124,7 @@ In the publish dialog, under Database you will see that the dialog discovered tw
 * PassKey
 * AzureDeployDatabase (under ConnectionStrings)
 
-![checkbox for AzureDeployDatabase key](images/azure-ezdeploy/18-connection-string.jpg)
+![checkbox for AzureDeployDatabase key](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/18-connection-string.jpg)
 
 If you place a checkbox next to "Use this connection string at runtime" and choose "secret connection string", this value will be deployed with your application although it isn't checked into source control.
 
@@ -132,15 +132,15 @@ This is a nice way to keep your secrets secret, but still deployed.
 
 Let's see what happens when we deploy this.
 
-![output window for publish](images/azure-ezdeploy/19-publish-output.jpg)
+![output window for publish](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/19-publish-output.jpg)
 
 If you look in the output window for the build/publish, you will se that it creates or updates an `appsettings.production.json` file even though one doesn't exist in our solution explorer. This file is dynamically created and published to azure.
 
-![appsettings in kudu console](images/azure-ezdeploy/20-appsettings-prod.jpg)
+![appsettings in kudu console](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/20-appsettings-prod.jpg)
 
 This screenshot is from the Azure portal in the Kudu tools which allow you to explore the file structure of your deployed app in Azure. Here we see that the new appsettings.production.json file exists on the server!
 
-![appsettings prod content](images/azure-ezdeploy/21-appsetting-contents.jpg)
+![appsettings prod content](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/21-appsetting-contents.jpg)
 
 In the deployemnt, you will see our ConnectionStrings key with the AzureDeployDatabase specified.
 
