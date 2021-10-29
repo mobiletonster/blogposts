@@ -73,6 +73,7 @@ You will see a new "Public" page in your Visual Studio project. This is the page
 ![publish page in visual studio](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/10-publish-dialog.jpg#screenshot)
 
 This is saved in your solution as an XML file:
+
 ![pubxml file for web deploy settings](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/11-webdeploy-xml.jpg#screenshot)
 
 Back to the new publish page, when we are ready to deploy, simply click the "Publish" button on this page and your app will begin to deploy.
@@ -142,7 +143,7 @@ This screenshot is from the Azure portal in the Kudu tools which allow you to ex
 
 ![appsettings prod content](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-ezdeploy/21-appsetting-contents.jpg#screenshot)
 
-In the deployemnt, you will see our ConnectionStrings key with the AzureDeployDatabase specified.
+In the deployment, you will see our ConnectionStrings key with the AzureDeployDatabase specified.
 
 ### Summary
 In this post, we have examined the power of the **"Publish"** button in Visual Studio and how easy it is to deploy an application directly to Azure. This is great for quickly deploying sample applications or test apps, however, if you are deploying a production class application, you should really setup CI/CD (Continuous Integration/build and Continuous Deployment). 
