@@ -148,5 +148,5 @@ In the deployment, you will see our ConnectionStrings key with the AzureDeployDa
 ### Summary
 In this post, we have examined the power of the **"Publish"** button in Visual Studio and how easy it is to deploy an application directly to Azure. This is great for quickly deploying sample applications or test apps, however, if you are deploying a production class application, you should really setup CI/CD (Continuous Integration/build and Continuous Deployment). 
 
-In a future post, we will examing other ways to  configure secrets for Azure deployed applications.
+In a future post, we will examing other ways to configure secrets for Azure deployed applications.
 
