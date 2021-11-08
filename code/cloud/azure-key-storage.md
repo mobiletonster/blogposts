@@ -79,6 +79,12 @@ string Passkey = Configuration["Nested:Secret"];
 ### Azure Key Vault
 
 
+![](images/azure-key-storage/8-create-key-vault.jpg)
 
+![](images/azure-key-storage/9-key-vault-setup.jpg)
+![](images/azure-key-storage/10-access-policy.jpg)
+![](images/azure-key-storage/11-networking.jpg)
+![](images/azure-key-storage/12-tags.jpg)
+![](images/azure-key-storage/13-review-screen.jpg)
 
 
