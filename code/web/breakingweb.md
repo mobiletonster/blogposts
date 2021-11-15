@@ -9,9 +9,16 @@ The Internet is a network of computers and systems that connect everyone togethe
 <figure>
 
 ![Neon_#2 BBS running opensource Tornado BBS software](images/neon2.png)
-
 <caption>BBS screen , src: wikimedia https://commons.wikimedia.org/wiki/File:Neon2.png#screenshot</caption>
 </figure>
+
+
+<figure>
+
+![An acoustic coupler modem](images/acoustic-coupler.jpg)
+<caption>Acoustic coupler modem, src: wikimedia https://commons.wikimedia.org/wiki/File:Acoustic_coupler_20041015_175456_1.jpg</caption>
+</figure>
+
 
 Local area networks (LANs) would connect computers together in a room, or a building. The Internet became a way to keep everyone connected together via a massive wide area network (WANs) that extend outside of a building to other buildings and cities.
 
@@ -25,6 +32,7 @@ If you are a Computer Science major, you may have learned about the OSI network 
 ![OSI networking model image source: wikipedia](images/1-osi-model.jpg#screenshot)
 <caption>wikipedia: https://en.wikipedia.org/wiki/OSI_model</caption>
 </figure>
+
 
 I don't want to go into great detail about this topic, but there are several layers to a network. For instance, the physical layer could use a network cable, fiber optic line, or a wireless signal. 
 
@@ -60,7 +68,56 @@ IPv6 is much longer an uses a combintation of letters and numbers, specifically,
 ## TCP sample app
 There is a lot of detail behind TCP that we won't get into, but we will use TCP in our app to build the next layer we care about, the application layer. There are many protocols that exist on the application layer, such as SMTP (Simple Mail Transfer Protocol), FTP (File Transfer Protocol), NTP (Network Time Protocol) and HTTP (Hypertext Transfer Protocol) to a name just a few. We eventually want to dig into HTTP more, but first let's build a simple TCP Client/Server application to understand how TCP works and how it sits under our application layer.
 
+### Launch Visual Studio 2022
+If you want to follow along, we will be using Visual Studio 2022. The free community version will work great for this.
 
+![](images/vs2022-start-screen.jpg#screenshot)
+
+![](images/create-new-project.jpg#screenshot)
+
+![](images/tcp-project.jpg#screenshot)
+
+![](images/net6.0-lts.jpg)
+
+
+
+```c#
+using var listenSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
+listenSocket.Bind(new IPEndPoint(IPAddress.Loopback, 8000));
+
+Console.WriteLine($"Listening on {listenSocket.LocalEndPoint}");
+
+listenSocket.Listen();
+
+while (true)
+{
+    // Wait for a new connection to arrive
+    var connection = await listenSocket.AcceptAsync();
+    Console.WriteLine($"Connection accepted");
+    // We got a new connection spawn a task to so that we can echo the contents of the connection
+    _ = Task.Run(async () =>
+    {
+        var buffer = new byte[4096];
+        try
+        {
+            while (true)
+            {
+                int read = await connection.ReceiveAsync(buffer, SocketFlags.None);
+                if (read == 0)
+                {
+                    break;
+                }
+                var incomingMessage = Encoding.ASCII.GetString(buffer, 0, read);
+                Console.WriteLine(incomingMessage);
+            }
+        }
+        finally
+        {
+            connection.Dispose();
+        }
+    });
+}
+```
 
 
 
