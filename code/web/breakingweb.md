@@ -46,19 +46,23 @@ If you have a long message to post on twitter, you must divide your message into
 
 Below is an example of a block of text from Wikipedia converted into 6 smaller blocks of text for twitter.
 
-```text
-> 6/6 sorted, so they would be ready for reuse. Errors in sorting would produce later misprints.
 
-> 5/6 lower case 'd' looks like a 'q'. This is reputed to be the origin of the expression "mind your p's and q's". It might just as easily have been "mind your b's and d's".[3]A forgotten but important part of the process took place after the printing: the expensive sorts had to be
+<pre lang="text">
+<code style="white-space : pre-wrap !important;">
+6/6 sorted, so they would be ready for reuse. Errors in sorting would produce later misprints.
 
-> 4/6 hand, and set into a composing stick held in the left hand from left to right, and as viewed by the setter upside down. As seen in the photo of the composing stick, a lower case 'q' looks like a 'd', a lower case 'b' looks like a 'p', a lower case 'p' looks like a 'b' and a
+5/6 lower case 'd' looks like a 'q'. This is reputed to be the origin of the expression "mind your p's and q's". It might just as easily have been "mind your b's and d's".[3]A forgotten but important part of the process took place after the printing: the expensive sorts had to be
 
-> 3/6 press and inked, and then printed (an impression made) on paper.[3] Metal type read backwards, from right to left, and a key skill of the compositor was their ability to read this backwards text.During typesetting, individual sorts are picked from a type case with the right
+4/6 hand, and set into a composing stick held in the left hand from left to right, and as viewed by the setter upside down. As seen in the photo of the composing stick, a lower case 'q' looks like a 'd', a lower case 'b' looks like a 'p', a lower case 'p' looks like a 'b' and a
 
-> 2/6 compositor assembled these sorts into words, then lines, then pages of text, which were then bound tightly together by a frame, making up a form or page. If done correctly, all letters were of the same height, and a flat surface of type was created. The form was placed in a
+3/6 press and inked, and then printed (an impression made) on paper.[3] Metal type read backwards, from right to left, and a key skill of the compositor was their ability to read this backwards text.During typesetting, individual sorts are picked from a type case with the right
 
-> 1/6 During much of the letterpress era, movable type was composed by hand for each page by workers called compositors. A tray with many dividers, called a case, contained cast metal sorts, each with a single letter or symbol, but backwards (so they would print correctly). The
-```
+2/6 compositor assembled these sorts into words, then lines, then pages of text, which were then bound tightly together by a frame, making up a form or page. If done correctly, all letters were of the same height, and a flat surface of type was created. The form was placed in a
+
+1/6 During much of the letterpress era, movable type was composed by hand for each page by workers called compositors. A tray with many dividers, called a case, contained cast metal sorts, each with a single letter or symbol, but backwards (so they would print correctly). The
+</code>
+</pre>
+
 
 TCP performs similar functions on your data and breaks it into packets for transport. Additionally, it marks those packets with a 'sender' and 'recipient' address and a timestamp, much like you would address a letter with a 'to' and 'from' address. 
 
