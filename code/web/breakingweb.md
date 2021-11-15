@@ -4,14 +4,27 @@ Today I wanted to break the web and put it back together again. It is very helpf
 ## Internet and World Wide Web are 2 different things
 First, we need to understand the difference between the Internet and the World Wide Web. The World Wide Web sits on top of the Internet, but is not the Internet itself.
 
-The Internet is a network of computers and systems that connect everyone together. Before the Internet, people would call into "bulletin boards" over their physical land line phone connections using modems. Local area networks (LANs) would connect computers together in a room, or a building. The Internet became a way to keep everyone connected together via a massive wide area network (WANs) that extend outside of a building to other buildings and cities.
+The Internet is a network of computers and systems that connect everyone together. Before the Internet, people would call into "bulletin boards systems (BBS)" over their physical land line phone connections using modems. 
+
+<figure>
+
+![Neon_#2 BBS running opensource Tornado BBS software](images/neon2.png)
+
+<caption>BBS screen , src: wikimedia https://commons.wikimedia.org/wiki/File:Neon2.png#screenshot</caption>
+</figure>
+
+Local area networks (LANs) would connect computers together in a room, or a building. The Internet became a way to keep everyone connected together via a massive wide area network (WANs) that extend outside of a building to other buildings and cities.
 
 The World Wide Web was a proposal made in 1991 by Tim Berners-Lee and is an "application layer" protocol known as HTTP or Hyper Text Transfer Protocol. While it exists on and uses the Internet, it is a set of standards that browsers rely on to communicate with servers in order to access "resources" on those servers.
 
 ## TCP - Transport Layer
 If you are a Computer Science major, you may have learned about the OSI network layer model. 
 
-![OSI networking model image source: wikipedia](images/1-osi-model.jpg)
+<figure> 
+
+![OSI networking model image source: wikipedia](images/1-osi-model.jpg#screenshot)
+<caption>wikipedia: https://en.wikipedia.org/wiki/OSI_model</caption>
+</figure>
 
 I don't want to go into great detail about this topic, but there are several layers to a network. For instance, the physical layer could use a network cable, fiber optic line, or a wireless signal. 
 
