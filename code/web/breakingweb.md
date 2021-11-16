@@ -87,7 +87,7 @@ If you want to follow along, we will be using Visual Studio 2022. The free commu
 
 ```c#
 using var listenSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
-listenSocket.Bind(new IPEndPoint(IPAddress.Loopback, 8000));
+listenSocket.Bind(new IPEndPoint(IPAddress.Loopback, 8800));
 
 Console.WriteLine($"Listening on {listenSocket.LocalEndPoint}");
 
@@ -97,7 +97,7 @@ while (true)
 {
     // Wait for a new connection to arrive
     var connection = await listenSocket.AcceptAsync();
-    Console.WriteLine($"Connection accepted");
+
     // We got a new connection spawn a task to so that we can echo the contents of the connection
     _ = Task.Run(async () =>
     {
@@ -113,6 +113,7 @@ while (true)
                 }
                 var incomingMessage = Encoding.ASCII.GetString(buffer, 0, read);
                 Console.WriteLine(incomingMessage);
+                await connection.SendAsync(buffer[..read], SocketFlags.None);
             }
         }
         finally
