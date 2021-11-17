@@ -75,13 +75,13 @@ There is a lot of detail behind TCP that we won't get into, but we will use TCP 
 ### Launch Visual Studio 2022
 If you want to follow along, we will be using Visual Studio 2022. The free community version will work great for this.
 
-![](images/vs2022-start-screen.jpg#screenshot)
+![Visual Studio 2022 start screen](images/vs2022-start-screen.jpg#screenshot)
 
-![](images/create-new-project.jpg#screenshot)
+![VS2022 create new project screen](images/create-new-project.jpg#screenshot)
 
-![](images/tcp-project.jpg#screenshot)
+![Creating new tcp project/console project setup](images/tcp-project.jpg#screenshot)
 
-![](images/net6.0-lts.jpg)
+![select a .net version, currently 6.0 lts is latest](images/net6.0-lts.jpg)
 
 
 
