@@ -73,16 +73,31 @@ IPv6 is much longer an uses a combintation of letters and numbers, specifically,
 There is a lot of detail behind TCP that we won't get into, but we will use TCP in our app to build the next layer we care about, the application layer. There are many protocols that exist on the application layer, such as SMTP (Simple Mail Transfer Protocol), FTP (File Transfer Protocol), NTP (Network Time Protocol) and HTTP (Hypertext Transfer Protocol) to a name just a few. We eventually want to dig into HTTP more, but first let's build a simple TCP Client/Server application to understand how TCP works and how it sits under our application layer.
 
 ### Launch Visual Studio 2022
-If you want to follow along, we will be using Visual Studio 2022. The free community version will work great for this.
+If you want to follow along, we will be using Visual Studio 2022. The free community version will work fine for this.
 
-![](images/vs2022-start-screen.jpg#screenshot)
+First, create a new project by clicking on the "Create a new project" button on the VS2022 start screen.
 
-![](images/create-new-project.jpg#screenshot)
+![VS2022 start screen](images/vs2022-start-screen.jpg#screenshot)
 
-![](images/tcp-project.jpg#screenshot)
+Next, select the type of project to create from the "Create a new project" screen. I filtered using C# as the language and Console as the project type. Then I clicked the "Console App" option for C# and click Next.
 
-![](images/net6.0-lts.jpg)
+![Create a new project dialog/screen in vs2022](images/create-new-project.jpg#screenshot)
 
+On the "Configure your new project" screen, enter the project name (in my case TcpServer), select a location, or leave the default and change the solution name to be "TcpClientServer" and click Next.
+
+![Configure your new project screen for vs2022](images/tcp-project.jpg#screenshot)
+
+One additional dialog will appear inviting you to select a "Framework" version. AS of this writing, .NET 6.0 LTS is the newest version and I selected it.
+
+![Additional Information screen in vs2002 - select .NET version](images/net6.0-lts.jpg)
+
+After the project loads, paste the following code into the program.cs file. This new .NET 6.0 
+
+
+Top-level statements
+async Main
+Global and implicit using directives
+File-scoped namespaces
 
 
 ```c#
