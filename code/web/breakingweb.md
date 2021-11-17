@@ -83,6 +83,10 @@ Next, select the type of project to create from the "Create a new project" scree
 
 ![Create a new project dialog/screen in vs2022](images/create-new-project.jpg#screenshot)
 
+![Creating new tcp project/console project setup](images/tcp-project.jpg#screenshot)
+
+![select a .net version, currently 6.0 lts is latest](images/net6.0-lts.jpg)
+
 On the "Configure your new project" screen, enter the project name (in my case TcpServer), select a location, or leave the default and change the solution name to be "TcpClientServer" and click Next.
 
 ![Configure your new project screen for vs2022](images/tcp-project.jpg#screenshot)
