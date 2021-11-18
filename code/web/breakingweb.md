@@ -146,7 +146,7 @@ while (true)
 
 ```c#
 using var socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
-await socket.ConnectAsync(new IPEndPoint(IPAddress.Loopback, 8080));
+await socket.ConnectAsync(new IPEndPoint(IPAddress.Loopback, 8800));
 
 Console.WriteLine("Type into the console to echo the contents");
 
