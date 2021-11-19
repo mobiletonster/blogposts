@@ -95,14 +95,14 @@ One additional dialog will appear inviting you to select a "Framework" version. 
 
 ![Additional Information screen in vs2002 - select .NET version](images/net6.0-lts.jpg)
 
-After the project loads, paste the following code into the program.cs file. This new .NET 6.0 
+> You may notice a number of new changes in the .NET 6.0 templates:
+> * Top-level statements - you will see less boiler plate code like namespaces, usings, and main class, etc.
+> * Async Main - the main method in a console application is now Async by default
+> * Global and implicit using directives - you don't need to have all the default usings in a file as they will be inferred in most cases.
+> * File-scope namespace - the Filenames scope the code, rather than explicit namespaces in the code.
 
 
-Top-level statements
-async Main
-Global and implicit using directives
-File-scoped namespaces
-
+After the project loads, paste the following code into the program.cs file. 
 
 ```c#
 using var listenSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
@@ -143,6 +143,15 @@ while (true)
 }
 ```
 
+This code is the server. We have created a basic TCP server which listens on the localhost port 8800 for an incoming request. 
+
+We need to create a client application to call our server. 
+
+1) Right click the solution and select "add new project"
+2) Select another console project.
+3) Name it TcpClient.
+
+When the project loads, add the following client code to the program.cs file:
 
 ```c#
 using var socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
@@ -158,5 +167,8 @@ var writeTask = ns.CopyToAsync(Console.OpenStandardOutput());
 await Task.WhenAny(readTask, writeTask);
 
 ```
+
+
+
 
 ## HTTP - Application Layer
