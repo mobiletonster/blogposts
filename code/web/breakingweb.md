@@ -165,8 +165,15 @@ var writeTask = ns.CopyToAsync(Console.OpenStandardOutput());
 
 // Quit if any of the tasks complete
 await Task.WhenAny(readTask, writeTask);
-
 ```
+
+To test our new client/server application, launch the server first by navigating to the binary found in the sub folder below the application folder: /bin/Debug/net6.0/
+
+You will find a `TcpServer` executable in the folder that you can run.
+
+Do the same for the client and run `TcpClient` located in the same sub-folder structure.
+
+When the client launches, it will prompt you to type a message to be sent to the server. The server will receive that message and echo it back to the client.
 
 
 
