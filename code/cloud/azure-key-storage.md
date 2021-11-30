@@ -129,6 +129,13 @@ On the add access policy screen, choose `Get` and `List` from the drop down box 
 
 Now, click the `None selected` link next to `Select principal` to open the Principal dialog. Then search for the name of your app service (in this case mysecretwebapp), then select it and click the `select` button.
 
+> If you don't see your principal in the dialog, you may need to 
+> check the `Identity` of the app service.
+
+> ![Identity tab of app service screen](images/azure-key-storage/20-appservice-identity.jpg#screenshot)
+
+> Click on the `Identity` tab for your app service and ensure that the System assigned identity is turned on. 
+
 ![Add access policy screen continued](images/azure-key-storage/17-select-member.jpg#screenshot)
 
 now click the `Add` button to complete the add policy process.
