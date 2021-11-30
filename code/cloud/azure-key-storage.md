@@ -87,7 +87,7 @@ Next you will be present with the 'create key vault' screen where you select the
 
 ![key vault setup screen](images/azure-key-storage/9-key-vault-setup.jpg#screenshot)
 
-For the next step, setting up access policies, we will just leave the default for now and click `next`.
+For the next step, setting up access policies, we will leave the default as `Vault access policy` and click `next`. Later, we will return to this screen and configure access policies for our application.
 
 ![key vault access policy screen](images/azure-key-storage/10-access-policy.jpg#screenshot)
 
@@ -114,48 +114,27 @@ There are several ways to do this, including setting up (ironically) a username/
 
 A better approach is to use an Azure `managed identity` to access the key vault. This way, Azure can explicitly allow an application (hosted in an app service, for example) to talk to the key vault without needing to pass any secrets, but the application must be approved to communicate with it.
 
-There are several ways to accomplish this, including setting it up through the identity tab in the app service itself, but for the purposes of this tutorial, we will use the Access control (IAM) panel of the Key Vault itself.
+There are several ways to accomplish this, including setting it up through the identity tab in the app service itself, but for the purposes of this tutorial, we will use the Access policies panel of the Key Vault itself.
 
 
-![Access control (IAM) tab](images/azure-key-storage/14-access-management.jpg#screenshot)
+![Access policies tab](images/azure-key-storage/14-access-management.jpg#screenshot)
 
-From the Access control panel, click the `Add role assignment` button.
+From the Access policies panel, click the `Add Access Policy` button.
 
-![Add role assignment screnn](images/azure-key-storage/15-add-role-assignment.jpg#screenshot)
+![Add access policy screen](images/azure-key-storage/15-add-role-assignment.jpg#screenshot)
 
-On the add role assignment screen, select `Reader` as the role. You can select a different role if you choose, but this should work for our sample.
+On the add access policy screen, choose `Get` and `List` from the drop down box next to `Secret permissions`.
 
-![select members for add role assignment](images/azure-key-storage/16-members.jpg#screenshot)
+![select principal for add access policy screen](images/azure-key-storage/16-members.jpg#screenshot)
 
-On the `Members` tab of the add role assignment screen, select `Managed identity` and click the `+ Select members` link.
+Now, click the `None selected` link next to `Select principal` to open the Principal dialog. Then search for the name of your app service (in this case mysecretwebapp), then select it and click the `select` button.
 
-![select managed identity dialog screen](images/azure-key-storage/17-select-member.jpg#screenshot)
+![Add access policy screen continued](images/azure-key-storage/17-select-member.jpg#screenshot)
 
-Now select a manged identity. In this case, I have 3 hosted app services to choose from. I selected `App Service (3)`.
+now click the `Add` button to complete the add policy process.
 
-![select app service from list](images/azure-key-storage/18-select-app-service.jpg#screenshot)
+![Access policy screen, save changes](images/azure-key-storage/18-select-app-service.jpg#screenshot)
 
-The dialog panel now returned my 3 app services and I selected the `mysecretwebapp` option for assignment.
-
-![added role assignment](images/azure-key-storage/19-added-role-assignment.jpg#screenshot)
-
-Now that the app service was selected it will appear on the Add role assignment screen as a new member. Select next to continue.
-
-![review and assign screen](images/azure-key-storage/20-review-and-assign.jpg#screenshot)
-
-The review and assign screen will provide confirmation of what we are trying to do. When ready, click the `Review + assign` button.
-
-![check access option of IAM panel](images/azure-key-storage/21-check-access.jpg#screenshot)
-
-You can check to see which resources have access to the key vault at anytime from the `Access control (IAM)` panel.
-
-![check access search option](images/azure-key-storage/22-check-access-myapp.jpg#screenshot)
-
-I typed a few characters to find the app service I care about in the search box, then clicked `mysecretwebapp` option.
-
-![check access role assignment](images/azure-key-storage/23-check-access-confirm.jpg#screenshot)
-
-This will popup the dialog showing the assigned role for the application, in this case `Reader`.
 
 ### Add a Secret
 Now that we have our access rights assigned to the app service, it is time to populate our key vault with a secret. To do this, go to the `Secrets` tab in the vertical navigation panel for the key vault and select it.
@@ -194,7 +173,7 @@ using Azure.Security.KeyVault.Secrets;
 using Azure.Core;
 ```
 
-Add the following lines before the `app.UseEndpoints` call, updating the URI to reflect the `vaultUri` of your key vault. This code uses  [DefaultAzureCredential()](/dotnet/api/azure.identity.defaultazurecredential) to authenticate to Key Vault, which uses a token from managed identity to authenticate. For more information about authenticating to Key Vault, see the [Developer's Guide](./developers-guide.md#authenticate-to-key-vault-in-code). The code also uses exponential backoff for retries in case Key Vault is being throttled. For more information about Key Vault transaction limits, see [Azure Key Vault throttling guidance](./overview-throttling.md).
+
 
 ```csharp
 SecretClientOptions options = new SecretClientOptions()
