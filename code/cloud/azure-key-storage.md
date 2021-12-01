@@ -165,12 +165,12 @@ dotnet add package Azure.Identity
 dotnet add package Azure.Security.KeyVault.Secrets
 ```
 
-Additionally, you can use the `Manage nuget packages` GUI if you prefer by right clicking the project and choose `Manage nuget packages`
+Additionally, you can use the `Manage nuget packages` GUI, if you prefer, by right clicking the project and choose `Manage nuget packages`
 
 
 ### Update The Code
 
-Find and open the Startup.cs file in your webapp project. 
+Find and open the HomeController.cs file in your MyWebApp project. (The MyWebApp project was created in a previous article about [AspNetCore UserSecrets]("")). 
 
 Add these lines to the header:
 
@@ -180,22 +180,99 @@ using Azure.Security.KeyVault.Secrets;
 using Azure.Core;
 ```
 
-
+Next, add this following private method to the bottom of the HomeController class. This code just wraps the essential elements needed to call the KeyVault instance.
 
 ```csharp
-SecretClientOptions options = new SecretClientOptions()
+private string GetSecret(string vaultName, string secretKey)
+{
+    try
     {
-        Retry =
+        SecretClientOptions options = new SecretClientOptions()
         {
-            Delay= TimeSpan.FromSeconds(2),
-            MaxDelay = TimeSpan.FromSeconds(16),
-            MaxRetries = 5,
-            Mode = RetryMode.Exponential
-         }
-    };
-var client = new SecretClient(new Uri("https://<your-unique-key-vault-name>.vault.azure.net/"), new DefaultAzureCredential(),options);
+            Retry =
+            {
+                Delay= TimeSpan.FromSeconds(2),
+                MaxDelay = TimeSpan.FromSeconds(16),
+                MaxRetries = 5,
+                Mode = RetryMode.Exponential
+            }
+        };
 
-KeyVaultSecret secret = client.GetSecret("<mySecret>");
-
-string secretValue = secret.Value;
+        var client = new SecretClient(
+            new Uri($"https://{vaultName}.vault.azure.net/"), 
+            new DefaultAzureCredential(), 
+            options);
+        KeyVaultSecret secret = client.GetSecret(secretKey);
+        string secretValue = secret.Value;
+        return secretValue;
+    }catch(Exception ex)
+    {
+        // you may want to log the exception message, or handle the error in a different way
+        return string.Empty;
+    }
+}
 ```
+
+Then add the following line into the `Index` action: 
+    
+    ViewData["Secret"]= GetSecret("kvsample11", "MyApp-Secret");
+
+so that it looks like this:
+
+```csharp
+public IActionResult Index()
+{
+    ViewData["Secret"]=GetSecret("kvsample11", "MyApp-Secret");
+    return View();
+}
+```
+
+We are stuffing the secret into a ViewData collection so we can access it in the view and display it. 
+
+Now find the associated view for the `Index` action (Index.cshtml) in the solution explorer as depicted in the screenshot below and edit it:
+
+![solution explorer highlighting the Index.cshtml view](images/azure-key-storage/26-solution-explorer.jpg#screenshot)
+
+At the top of the screen just below the ViewData["Title"] line, add the following line of code:
+
+```csharp
+var secret = ViewData["Secret"];
+```
+
+Then in the body add this code:
+
+```html
+<h2>Secret: @secret</h2>
+```
+
+So the entire view looks like this:
+
+```html
+@inject Microsoft.Extensions.Configuration.IConfiguration configuration
+@{
+    ViewData["Title"] = "Home Page";
+    var secret = ViewData["Secret"];
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h2>Passkey: @configuration["Passkey"]</h2>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <h2>Secret: @secret</h2>
+</div>
+```
+
+When you deploy your application to the app service and hit the site, you will see the secret from keyvault displayed on the screen like this:
+
+![running app in azure app service](images/azure-key-storage/27-running-app.jpg#screenshot)
+
+### Running local in dev
+Because we are using Managed Identity in Azure, our application can use Azure Key Vault without needing to store or pass credentials to it. This is a safe way to operate, however, it makes it difficult to run your application and debug locally in your development environment.
+
+To address this issue, you can setup another managed identity with a client_id and client_secret (basically a form of username/password) in Azure Active Directory and assign it access to the KeyVault. Then you need only add the client_id and client_secret into your environment variables on your local dev box and it will work just as it does in the app service.  The magic is in the `DefaultCredential()` method. To learn more about `DefaultCredential` see this Microsoft document:
+
+[Troubleshooting default azure credential authentication issues](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/troubleshooting.md#troubleshooting-default-azure-credential-authentication-issues)
+
+
+
