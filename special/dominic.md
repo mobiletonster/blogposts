@@ -1,4 +1,4 @@
-If you have ever wanted to truly help another human in need, in a desperate situation but 1) never really found a worthy cause where 2) even a small contribution of a just a couple of dollars could truly make an impact and change a life or lives for good, I hear you. 
+If you have ever wanted to truly help another human in need, in a desperate situation but 1) never really found a worthy cause where 2) even a small contribution of just a couple of dollars could truly make an impact and change a life or lives for good, I hear you. 
 
 As nice as “Sub for Santa” is at bringing joy to a family, or kids at Christmas time, it often feels a little less impactful than the situation that Dominic Wilson finds herself in. If you have even a couple of dollars, your collective contributions could change her life and her children’s lives for good so please consider helping if you can.
 
@@ -32,6 +32,8 @@ There are lots of people like Dominic in this world, more than we individually h
 One day a man was walking along the beach when he noticed a boy picking something up and gently throwing it into the ocean. Approaching the boy, he asked, “What are you doing?” The youth replied, “Throwing starfish back into the ocean. The surf is up and the tide is going out. If I don’t throw them back, they’ll die.” “Son,” the man said, “don’t you realize there are miles and miles of beach and hundreds of starfish? You can’t make a difference!”
 
 After listening politely, the boy bent down, picked up another starfish, and threw it back into the surf. Then, smiling at the man, he said…” I made a difference for that one.”
+
+Tony Spencer
 
 [Fundraiser by Dominic Wilson : Single mother need help (gofundme.com)](https://www.gofundme.com/f/single-mother-need-help-with-electricity-billfood)
 
