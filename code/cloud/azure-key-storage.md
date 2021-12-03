@@ -274,5 +274,53 @@ To address this issue, you can setup another managed identity with a client_id a
 
 [Troubleshooting default azure credential authentication issues](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/troubleshooting.md#troubleshooting-default-azure-credential-authentication-issues)
 
+### Setup Azure AD App Registration
+Let's walk through how to setup an app registration and assign that identity to the azure key vault access policy.
+
+First, go to Azure Active Directory section in the portal and click on `App registrations` in the left navigation pane. Then click the `+ New registration` link on the top bar.
+
+![](images/azure-key-storage/28-azure-app-registrations.jpg#screenshot)
+
+Now add a name to your application. In this case, an application is a bit of a misnomer as we are really only using it to create credentials to access the key vault. I chose the name "access-key-vault", then left all the other defaults as is and clicked `Register`. 
+
+![](images/azure-key-storage/29-register-new-app.jpg#screenshot)
+
+This will add a new app registration to the list. Click the newly added app registration to get details such as the Application (client) ID and copy it. You will also need the Directory (tenant) ID. Save this somewhere for later use.
+
+![](images/azure-key-storage/30-get-client-id.jpg#screenshot)
+
+Next, we need to add a secret for the app registrations. Click the `Certificates & secrets` link in the left nav panel of our app registration. Then click `+ New client secret`.
+
+![](images/azure-key-storage/31-add-client-secret.jpg#screenshot)
+
+When the "Add a client secret" screen appears, give it a description, such as "access-key-vault-secret" or something like that.
+
+![](images/azure-key-storage/32-add-secret.jpg#screenshot)
+
+Once it is added you will see a new list for the azure-key-vault-secret. 
+> Important! You will only have one chance to get the Value of the generated secret, so copy it now and put it with your client_id, and tenant_id from early.
+
+
+![](images/azure-key-storage/33-copy-secret.jpg#screenshot)
+
+Now return to the Key Vault instance ( in our case, kvsample11 ) and click on the "Access policies" link on the left. We will then click the `+ Add Access Policy` link in the middle of the page.
+
+![](images/azure-key-storage/35-access-policies.jpg#screenshot)
+
+Like we did earlier, we will select the permissions (Get & List) under the "Secret permissions" drop down list.
+
+![](images/azure-key-storage/36-add-policy.jpg#screenshot)
+
+Then click the "Select principal - None selected" link to launch the "Select a principal" dialog window. Then search for the name of our new app registration (access-key-vault in our case) and select it. 
+
+![](images/azure-key-storage/37-select-principal.jpg#screenshot)
+
+![](images/azure-key-storage/38-add-policy-complete.jpg#screenshot)
+
+
+
+
+
+
 
 
