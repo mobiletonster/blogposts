@@ -33,6 +33,8 @@ One day a man was walking along the beach when he noticed a boy picking somethin
 
 After listening politely, the boy bent down, picked up another starfish, and threw it back into the surf. Then, smiling at the man, he said…” I made a difference for that one.”
 
+Tony Spencer
+
 [Fundraiser by Dominic Wilson : Single mother need help (gofundme.com)](https://www.gofundme.com/f/single-mother-need-help-with-electricity-billfood)
 
 ![children of Dominic Wilson](https://d2g8igdw686xgo.cloudfront.net/60138317_1637436618847832_r.jpeg)
