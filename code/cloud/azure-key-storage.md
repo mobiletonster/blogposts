@@ -12,15 +12,15 @@ First, we are assuming that you have already created an Azure App Service instan
 
 Navigate to the Azure Portal at https://portal.azure.com and login to your subscription.
 
-![](images/azure-key-storage/1-azure-services.jpg#screenshot)
+![azure app service configuration](images/azure-key-storage/1-azure-services.jpg#screenshot)
 
 Locate the app service on the portal. Mine is labeled "mysecretwebapp". Click the name to open the app service portal page.
 
-![](images/azure-key-storage/2-app-service-portal.jpg#screenshot)
+![app service portal](images/azure-key-storage/2-app-service-portal.jpg#screenshot)
 
 Here you will see the left side navigation bar with several options. Under the settings section, locate and click "Configuration".
 
-![](images/azure-key-storage/3-configuration-panel.jpg#screenshot#screenshot)
+![configuration panel](images/azure-key-storage/3-configuration-panel.jpg#screenshot#screenshot)
 
 The configuration panel is divided into 4 tabs:
 * Application settings
@@ -34,17 +34,17 @@ We are interested in the first tab for this exercise, "Application settings".
 
 On this tab, there are two sections "Application settings" and "Connection strings". We will add a custom key/value pair to the first section. To do this, click the "+ New application setting" link.
 
-![](images/azure-key-storage/4-add-app-config.jpg#screenshot)
+![add app config screenshot](images/azure-key-storage/4-add-app-config.jpg#screenshot)
 
 The Add/Edit panel will appear. I added a key of "Passkey" with a value of "From Azure Config!" as depicted above. Then click the 'OK' button. Because we are using a free tier, we don't have access to deployment slots, so you can ignore the "Deployment slot setting" checkbox. If you had a deployment slot, such as a "staging" instance, you could assign the key to a specific slot.
 
-![](images/azure-key-storage/5-save-new-key.jpg#screenshot)
+![save new key](images/azure-key-storage/5-save-new-key.jpg#screenshot)
 
 Once you have added your new key/value pair, it will appear in the configuration panel, HOWEVER, you must click the save button at the top of the panel to apply the key or it will not be saved.
 
 Once you do this, you will receive a warning:
 
-![](images/azure-key-storage/6-save-warning.jpg#screenshot)
+![save warning](images/azure-key-storage/6-save-warning.jpg#screenshot)
 
 The save changes dialog warns that these changes will cause your application to restart. Once your application restarts, it will have access to the new configuration value.
 
@@ -267,7 +267,7 @@ When you deploy your application to the app service and hit the site, you will s
 
 ![running app in azure app service](images/azure-key-storage/27-running-app.jpg#screenshot)
 
-### Running local in dev
+### Access vaults with a user-assigned identity - Running local in dev
 Because we are using Managed Identity in Azure, our application can use Azure Key Vault without needing to store or pass credentials to it. This is a safe way to operate, however, it makes it difficult to run your application and debug locally in your development environment.
 
 To address this issue, you can setup another managed identity with a client_id and client_secret (basically a form of username/password) in Azure Active Directory and assign it access to the KeyVault. Then you need only add the client_id and client_secret into your environment variables on your local dev box and it will work just as it does in the app service.  The magic is in the `DefaultCredential()` method. To learn more about `DefaultCredential` see this Microsoft document:
@@ -277,47 +277,81 @@ To address this issue, you can setup another managed identity with a client_id a
 ### Setup Azure AD App Registration
 Let's walk through how to setup an app registration and assign that identity to the azure key vault access policy.
 
-First, go to Azure Active Directory section in the portal and click on `App registrations` in the left navigation pane. Then click the `+ New registration` link on the top bar.
+First, go to Azure Active Directory section in the portal and click on `App registrations` in the left navigation pane. Then click the ` + New registration` link on the top bar.
 
-![](images/azure-key-storage/28-azure-app-registrations.jpg#screenshot)
+![azure app registrations in Azure AD](images/azure-key-storage/28-azure-app-registrations.jpg#screenshot)
 
 Now add a name to your application. In this case, an application is a bit of a misnomer as we are really only using it to create credentials to access the key vault. I chose the name "access-key-vault", then left all the other defaults as is and clicked `Register`. 
 
-![](images/azure-key-storage/29-register-new-app.jpg#screenshot)
+![register new app](images/azure-key-storage/29-register-new-app.jpg#screenshot)
 
 This will add a new app registration to the list. Click the newly added app registration to get details such as the Application (client) ID and copy it. You will also need the Directory (tenant) ID. Save this somewhere for later use.
 
-![](images/azure-key-storage/30-get-client-id.jpg#screenshot)
+![get client id](images/azure-key-storage/30-get-client-id.jpg#screenshot)
 
 Next, we need to add a secret for the app registrations. Click the `Certificates & secrets` link in the left nav panel of our app registration. Then click `+ New client secret`.
 
-![](images/azure-key-storage/31-add-client-secret.jpg#screenshot)
+![add client secret](images/azure-key-storage/31-add-client-secret.jpg#screenshot)
 
 When the "Add a client secret" screen appears, give it a description, such as "access-key-vault-secret" or something like that.
 
-![](images/azure-key-storage/32-add-secret.jpg#screenshot)
+![add secret](images/azure-key-storage/32-add-secret.jpg#screenshot)
 
 Once it is added you will see a new list for the azure-key-vault-secret. 
 > Important! You will only have one chance to get the Value of the generated secret, so copy it now and put it with your client_id, and tenant_id from early.
 
 
-![](images/azure-key-storage/33-copy-secret.jpg#screenshot)
+![copy secret](images/azure-key-storage/33-copy-secret.jpg#screenshot)
 
 Now return to the Key Vault instance ( in our case, kvsample11 ) and click on the "Access policies" link on the left. We will then click the `+ Add Access Policy` link in the middle of the page.
 
-![](images/azure-key-storage/35-access-policies.jpg#screenshot)
+![access policies](images/azure-key-storage/35-access-policies.jpg#screenshot)
 
 Like we did earlier, we will select the permissions (Get & List) under the "Secret permissions" drop down list.
 
-![](images/azure-key-storage/36-add-policy.jpg#screenshot)
+![add policy](images/azure-key-storage/36-add-policy.jpg#screenshot)
 
-Then click the "Select principal - None selected" link to launch the "Select a principal" dialog window. Then search for the name of our new app registration (access-key-vault in our case) and select it. 
+Then click the "Select principal - None selected" link to launch the "Select a principal" dialog window. Then search for the name of our new app registration (access-key-vault in our case) and select it. Then click the Select button.
 
-![](images/azure-key-storage/37-select-principal.jpg#screenshot)
+![select principal](images/azure-key-storage/37-select-principal.jpg#screenshot)
 
-![](images/azure-key-storage/38-add-policy-complete.jpg#screenshot)
+After returning to the Add access policy screen, click the `Add` button.
 
+![add policy complete](images/azure-key-storage/38-add-policy-complete.jpg#screenshot)
 
+Once the policy has been added, the next step is to add the keys/secrets for this credential into the Environment Variables of the dev computer you are wanting to grant Key Vault access to.
+
+The values you need to store in Environment Variables are the client_id, client_secret and the tenant_id.
+
+```text
+"AZURE_CLIENT_ID": "a3d0b9cd-57a3-47f4-94ad-33423c0f3161"
+
+"AZURE_CLIENT_SECRET": "dDZ7Q~E7cPMrI~i1BRM9PYSHijXu_Xr0jcrZt"
+
+"AZURE_TENANT_ID": "7ac7b30a-30c7-43df-8be7-0bb7521ad761"
+```
+
+From an administrator command prompt you can use the `setx` command to see current Environment Variables. To assign a configuration value such as our passkey, you would run the `setx` command like this:
+
+```cmd
+setx AZURE_CLIENT_ID a3d0b9cd-57a3-47f4-94ad-33423c0f3161 /M
+
+setx AZURE_CLIENT_SECRET dDZ7Q~E7cPMrI~i1BRM9PYSHijXu_Xr0jcrZt /M
+
+setx AZURE_TENANT_ID 7ac7b30a-30c7-43df-8be7-0bb7521ad761 /M
+```
+
+If you need to remove a value, unfortunately the `setx` command doesn't support a delete option. Instead, use the `REG delete` command like this:
+
+```cmd
+REG delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /F /V AZURE_CLIENT_ID
+
+REG delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /F /V AZURE_CLIENT_SECRET
+
+REG delete "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /F /V AZURE_TENANT_ID
+```
+
+Now when you run you application on your dev box, it should be able to access the secure key vault and retrieve the secrets just as it would from azure, allowing you to test your code locally all while maintaining the ability to keep those secrets out of your code repository.
 
 
 
