@@ -12,15 +12,15 @@ First, we are assuming that you have already created an Azure App Service instan
 
 Navigate to the Azure Portal at https://portal.azure.com and login to your subscription.
 
-![azure app service configuration](images/azure-key-storage/1-azure-services.jpg#screenshot)
+![azure app service configuration](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/1-azure-services.jpg#screenshot)
 
 Locate the app service on the portal. Mine is labeled "mysecretwebapp". Click the name to open the app service portal page.
 
-![app service portal](images/azure-key-storage/2-app-service-portal.jpg#screenshot)
+![app service portal](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/2-app-service-portal.jpg#screenshot)
 
 Here you will see the left side navigation bar with several options. Under the settings section, locate and click "Configuration".
 
-![configuration panel](images/azure-key-storage/3-configuration-panel.jpg#screenshot#screenshot)
+![configuration panel](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/3-configuration-panel.jpg#screenshot#screenshot)
 
 The configuration panel is divided into 4 tabs:
 * Application settings
@@ -34,17 +34,17 @@ We are interested in the first tab for this exercise, "Application settings".
 
 On this tab, there are two sections "Application settings" and "Connection strings". We will add a custom key/value pair to the first section. To do this, click the "+ New application setting" link.
 
-![add app config screenshot](images/azure-key-storage/4-add-app-config.jpg#screenshot)
+![add app config screenshot](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/4-add-app-config.jpg#screenshot)
 
 The Add/Edit panel will appear. I added a key of "Passkey" with a value of "From Azure Config!" as depicted above. Then click the 'OK' button. Because we are using a free tier, we don't have access to deployment slots, so you can ignore the "Deployment slot setting" checkbox. If you had a deployment slot, such as a "staging" instance, you could assign the key to a specific slot.
 
-![save new key](images/azure-key-storage/5-save-new-key.jpg#screenshot)
+![save new key](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/5-save-new-key.jpg#screenshot)
 
 Once you have added your new key/value pair, it will appear in the configuration panel, HOWEVER, you must click the save button at the top of the panel to apply the key or it will not be saved.
 
 Once you do this, you will receive a warning:
 
-![save warning](images/azure-key-storage/6-save-warning.jpg#screenshot)
+![save warning](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/6-save-warning.jpg#screenshot)
 
 The save changes dialog warns that these changes will cause your application to restart. Once your application restarts, it will have access to the new configuration value.
 
@@ -68,7 +68,7 @@ The nesting is accessible using the ':' colon character as a delimiter.
 
 In contrast to the `json` configuration nesting, the Azure portal is a bit different. To store the value as a nested value, use two `__` underscore characters to seperate the parent and child.
 
-![nested key using double underscore in azure config panel 'Nested__Secret'](images/azure-key-storage/7-nested-secret.jpg#screenshot)
+![nested key using double underscore in azure config panel 'Nested__Secret'](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/7-nested-secret.jpg#screenshot)
 
 To retrieve the value in code, no changes will need to be made as the code in C# still uses a ':' colon character to delimit the parent and the child.
 
@@ -81,27 +81,27 @@ While using configuration settings in Azure App Service is a convenient way to s
 
 To create a key vault from the Azure portal, search for Key Vault and click the Create button to begin.
 
-![Key Vault creation screen on Azure portal](images/azure-key-storage/8-create-key-vault.jpg#screenshot)
+![Key Vault creation screen on Azure portal](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/8-create-key-vault.jpg#screenshot)
 
 Next you will be present with the 'create key vault' screen where you select the subscription, resource group and assign a name, region and a pricing tier. For this example, I named my keyvault `kvsample11`, selected the `South Central US` region and opted for the `Standard` pricing tier. Additionally I enabled soft-delete and allowed for 7 days to retain soft delete values. I also disabled purge protection so that a key could be purged even before the 7 days elapsed.
 
-![key vault setup screen](images/azure-key-storage/9-key-vault-setup.jpg#screenshot)
+![key vault setup screen](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/9-key-vault-setup.jpg#screenshot)
 
 For the next step, setting up access policies, we will leave the default as `Vault access policy` and click `next`. Later, we will return to this screen and configure access policies for our application.
 
-![key vault access policy screen](images/azure-key-storage/10-access-policy.jpg#screenshot)
+![key vault access policy screen](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/10-access-policy.jpg#screenshot)
 
 On the `Networking` tab or step, you can set the connectivity method to match whatever your application needs. In this case, I just set it to a Public endpoing for now.
 
-![key vault networking tab/screen](images/azure-key-storage/11-networking.jpg#screenshot)
+![key vault networking tab/screen](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/11-networking.jpg#screenshot)
 
 You can add tags to describe the resource or help you find it easier.
 
-![key vault tag screen](images/azure-key-storage/12-tags.jpg#screenshot)
+![key vault tag screen](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/12-tags.jpg#screenshot)
 
 Finally, review your settings and when you are ready, click the blue `Create` button below.
 
-![key vault final review screen](images/azure-key-storage/13-review-screen.jpg#screenshot)
+![key vault final review screen](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/13-review-screen.jpg#screenshot)
 
 In a few minutes, your new azure key vault will be provisioned and ready.
 
@@ -117,40 +117,40 @@ A better approach is to use an Azure `managed identity` to access the key vault.
 There are several ways to accomplish this, including setting it up through the identity tab in the app service itself, but for the purposes of this tutorial, we will use the Access policies panel of the Key Vault itself.
 
 
-![Access policies tab](images/azure-key-storage/14-access-management.jpg#screenshot)
+![Access policies tab](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/14-access-management.jpg#screenshot)
 
 From the Access policies panel, click the `Add Access Policy` button.
 
-![Add access policy screen](images/azure-key-storage/15-add-role-assignment.jpg#screenshot)
+![Add access policy screen](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/15-add-role-assignment.jpg#screenshot)
 
 On the add access policy screen, choose `Get` and `List` from the drop down box next to `Secret permissions`.
 
-![select principal for add access policy screen](images/azure-key-storage/16-members.jpg#screenshot)
+![select principal for add access policy screen](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/16-members.jpg#screenshot)
 
 Now, click the `None selected` link next to `Select principal` to open the Principal dialog. Then search for the name of your app service (in this case mysecretwebapp), then select it and click the `select` button.
 
 > If you don't see your principal in the dialog, you may need to 
 > check the `Identity` of the app service.
 
-> ![Identity tab of app service screen](images/azure-key-storage/20-appservice-identity.jpg#screenshot)
+> ![Identity tab of app service screen](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/20-appservice-identity.jpg#screenshot)
 
 > Click on the `Identity` tab for your app service and ensure that the System assigned identity is turned on. 
 
-![Add access policy screen continued](images/azure-key-storage/17-select-member.jpg#screenshot)
+![Add access policy screen continued](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/17-select-member.jpg#screenshot)
 
 now click the `Add` button to complete the add policy process.
 
-![Access policy screen, save changes](images/azure-key-storage/18-select-app-service.jpg#screenshot)
+![Access policy screen, save changes](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/18-select-app-service.jpg#screenshot)
 
 
 ### Add a Secret
 Now that we have our access rights assigned to the app service, it is time to populate our key vault with a secret. To do this, go to the `Secrets` tab in the vertical navigation panel for the key vault and select it.
 
-![add secret](images/azure-key-storage/24-add-secret.jpg#screenshot)
+![add secret](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/24-add-secret.jpg#screenshot)
 
 Then click the `+ Generate/Import` button at the top.
 
-![create secret manually](images/azure-key-storage/25-create-secret-manually.jpg#screenshot)
+![create secret manually](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/25-create-secret-manually.jpg#screenshot)
 
 On the `Create a secret` screen, select Manual. Then, give the secret a name, in this case `MyAppSecret` and a value, like `fluFFyC@t35!`, or something fun. Then click `Create`.
 
@@ -231,7 +231,7 @@ We are stuffing the secret into a ViewData collection so we can access it in the
 
 Now find the associated view for the `Index` action (Index.cshtml) in the solution explorer as depicted in the screenshot below and edit it:
 
-![solution explorer highlighting the Index.cshtml view](images/azure-key-storage/26-solution-explorer.jpg#screenshot)
+![solution explorer highlighting the Index.cshtml view](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/26-solution-explorer.jpg#screenshot)
 
 At the top of the screen just below the ViewData["Title"] line, add the following line of code:
 
@@ -265,7 +265,7 @@ So the entire view looks like this:
 
 When you deploy your application to the app service and hit the site, you will see the secret from keyvault displayed on the screen like this:
 
-![running app in azure app service](images/azure-key-storage/27-running-app.jpg#screenshot)
+![running app in azure app service](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/27-running-app.jpg#screenshot)
 
 ### Access vaults with a user-assigned identity - Running local in dev
 Because we are using Managed Identity in Azure, our application can use Azure Key Vault without needing to store or pass credentials to it. This is a safe way to operate, however, it makes it difficult to run your application and debug locally in your development environment.
@@ -279,45 +279,45 @@ Let's walk through how to setup an app registration and assign that identity to 
 
 First, go to Azure Active Directory section in the portal and click on `App registrations` in the left navigation pane. Then click the ` + New registration` link on the top bar.
 
-![azure app registrations in Azure AD](images/azure-key-storage/28-azure-app-registrations.jpg#screenshot)
+![azure app registrations in Azure AD](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/28-azure-app-registrations.jpg#screenshot)
 
 Now add a name to your application. In this case, an application is a bit of a misnomer as we are really only using it to create credentials to access the key vault. I chose the name "access-key-vault", then left all the other defaults as is and clicked `Register`. 
 
-![register new app](images/azure-key-storage/29-register-new-app.jpg#screenshot)
+![register new app](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/29-register-new-app.jpg#screenshot)
 
 This will add a new app registration to the list. Click the newly added app registration to get details such as the Application (client) ID and copy it. You will also need the Directory (tenant) ID. Save this somewhere for later use.
 
-![get client id](images/azure-key-storage/30-get-client-id.jpg#screenshot)
+![get client id](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/30-get-client-id.jpg#screenshot)
 
 Next, we need to add a secret for the app registrations. Click the `Certificates & secrets` link in the left nav panel of our app registration. Then click `+ New client secret`.
 
-![add client secret](images/azure-key-storage/31-add-client-secret.jpg#screenshot)
+![add client secret](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/31-add-client-secret.jpg#screenshot)
 
 When the "Add a client secret" screen appears, give it a description, such as "access-key-vault-secret" or something like that.
 
-![add secret](images/azure-key-storage/32-add-secret.jpg#screenshot)
+![add secret](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/32-add-secret.jpg#screenshot)
 
 Once it is added you will see a new list for the azure-key-vault-secret. 
 > Important! You will only have one chance to get the Value of the generated secret, so copy it now and put it with your client_id, and tenant_id from early.
 
 
-![copy secret](images/azure-key-storage/33-copy-secret.jpg#screenshot)
+![copy secret](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/33-copy-secret.jpg#screenshot)
 
 Now return to the Key Vault instance ( in our case, kvsample11 ) and click on the "Access policies" link on the left. We will then click the `+ Add Access Policy` link in the middle of the page.
 
-![access policies](images/azure-key-storage/35-access-policies.jpg#screenshot)
+![access policies](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/35-access-policies.jpg#screenshot)
 
 Like we did earlier, we will select the permissions (Get & List) under the "Secret permissions" drop down list.
 
-![add policy](images/azure-key-storage/36-add-policy.jpg#screenshot)
+![add policy](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/36-add-policy.jpg#screenshot)
 
 Then click the "Select principal - None selected" link to launch the "Select a principal" dialog window. Then search for the name of our new app registration (access-key-vault in our case) and select it. Then click the Select button.
 
-![select principal](images/azure-key-storage/37-select-principal.jpg#screenshot)
+![select principal](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/37-select-principal.jpg#screenshot)
 
 After returning to the Add access policy screen, click the `Add` button.
 
-![add policy complete](images/azure-key-storage/38-add-policy-complete.jpg#screenshot)
+![add policy complete](https://github.com/mobiletonster/blogposts/blob/main/code/cloud/images/azure-key-storage/38-add-policy-complete.jpg#screenshot)
 
 Once the policy has been added, the next step is to add the keys/secrets for this credential into the Environment Variables of the dev computer you are wanting to grant Key Vault access to.
 
