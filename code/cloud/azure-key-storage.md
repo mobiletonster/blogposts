@@ -1,5 +1,5 @@
 ## Storing Config Values in Azure
-In this article, we will demonstrate 2 primary ways of storing secrets data or configuration information for application deployed to Microsoft Azure:
+In this article, we will demonstrate 2 primary ways of storing secrets data or configuration information for applications deployed to Microsoft Azure:
 1) Azure App Service Configuration
 2) Azure Key Vault
 
@@ -10,7 +10,7 @@ In this post, we will learn about alternative ways to store those values in Azur
 ## Azure App Service Configuration
 First, we are assuming that you have already created an Azure App Service instance and likely have deployed an application and are now awaiting a way to set environment variables or other secrets in the deployed configuration. If not, you can check out the blog post on "easy deploy to Azure App Service".
 
-Navigate to the Azure Portal at https://portal.azure.com and login to your subscription.
+Navigate to the Azure Portal at [https://portal.azure.com](https://portal.azure.com) and login to your subscription.
 
 ![azure app service configuration](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-key-storage/1-azure-services.jpg#screenshot)
 
