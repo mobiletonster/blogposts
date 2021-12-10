@@ -60,7 +60,7 @@ In our appsettings.json and secrets.json files, we can have nested settings for 
 ```
 In code, we access this value using the `Configuration` object like this:
 
-```c#
+```csharp
 string Passkey = Configuration["MyConfigValues:Passkey"];
 ```
 
@@ -72,18 +72,18 @@ In contrast to the `json` configuration nesting, the Azure portal is a bit diffe
 
 To retrieve the value in code, no changes will need to be made as the code in C# still uses a ':' colon character to delimit the parent and the child.
 
-```c#
+```csharp
 string Passkey = Configuration["Nested:Secret"];
 ```
 
 ## Azure Key Vault
-While using configuration settings in Azure App Service is a convenient way to store secrets, another way is to use Azure Key Vault. The key vault can be shared across mutliple app service instances, function apps and other services. It is a general purpose, secure way to store secrets.
+While using configuration settings in Azure App Service is a convenient way to store secrets, another way is to use Azure Key Vault. The key vault can be shared across multiple app service instances, function apps and other services. It is a general purpose, secure way to store secrets.
 
 To create a key vault from the Azure portal, search for Key Vault and click the Create button to begin.
 
 ![Key Vault creation screen on Azure portal](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-key-storage/8-create-key-vault.jpg#screenshot)
 
-Next you will be present with the 'create key vault' screen where you select the subscription, resource group and assign a name, region and a pricing tier. For this example, I named my keyvault `kvsample11`, selected the `South Central US` region and opted for the `Standard` pricing tier. Additionally I enabled soft-delete and allowed for 7 days to retain soft delete values. I also disabled purge protection so that a key could be purged even before the 7 days elapsed.
+Next you will be presented with the 'create key vault' screen where you select the subscription, resource group and assign a name, region and a pricing tier. For this example, I named my keyvault `kvsample11`, selected the `South Central US` region and opted for the `Standard` pricing tier. Additionally I enabled soft-delete and allowed for 7 days to retain soft delete values. I also disabled purge protection so that a key could be purged even before the 7 days elapsed.
 
 ![key vault setup screen](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-key-storage/9-key-vault-setup.jpg#screenshot)
 
@@ -91,7 +91,7 @@ For the next step, setting up access policies, we will leave the default as `Vau
 
 ![key vault access policy screen](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-key-storage/10-access-policy.jpg#screenshot)
 
-On the `Networking` tab or step, you can set the connectivity method to match whatever your application needs. In this case, I just set it to a Public endpoing for now.
+On the `Networking` tab or step, you can set the connectivity method to match whatever your application needs. In this case, I just set it to a Public endpoint for now.
 
 ![key vault networking tab/screen](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/cloud/images/azure-key-storage/11-networking.jpg#screenshot)
 
