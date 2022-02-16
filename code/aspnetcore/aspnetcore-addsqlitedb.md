@@ -150,4 +150,11 @@ You will see a couple of different tables that it created, one for `AppUser` and
 That is all it takes to add and connect a sqlite database to an ASP.NET Core project with EF Core code-first!
 
 
+<script src="https://utteranc.es/client.js"
+        repo="mobiletonster/blogposts"
+        issue-term="title"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
 
