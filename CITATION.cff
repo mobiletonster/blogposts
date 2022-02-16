@@ -1,0 +1,15 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: sample work
+message: Please cite this software using these metadata.
+type: software
+authors:
+  - given-names: Tony Spencer
+    name-particle: Mr.
+    family-names: Tony
+    name-suffix: Spencer
+    email: tony@admonex.com
+    affiliation: ESM
+portfolio: ESM
