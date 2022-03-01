@@ -121,7 +121,7 @@ Once you remove all that, you can see the only we have left is our Console.Write
 
 Currently this is just a plain console application but I want to turn it into an ASP.NET Core application. Before doing that let's take a look under the dependencies and frameworks node in the solution explorer.
 
-![dependencies](images/moved-cheese/1-dependencies.jpg#screenshot)
+![dependencies](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/moved-cheese/1-dependencies.jpg#screenshot)
 
 Currently you see Microsoft.NETCore.App that is the SDK that includes all the required packages to create a console application. Let's change the SDK type in the .csproj file to a .Web type project and see what happens. `Microsoft.NET.Sdk` to `Microsoft.NET.Sdk.Web`.
 
@@ -138,7 +138,7 @@ Currently you see Microsoft.NETCore.App that is the SDK that includes all the re
 ```
 Notice what happens under dependencies now:
 
-![dependencies for ASP.NET Core](images/moved-cheese/2-dependencies.jpg#screenshot)
+![dependencies for ASP.NET Core](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/moved-cheese/2-dependencies.jpg#screenshot)
 
 The framework now inclueds `Microsoft.AspNetCore.App` which will bring in all the necessary packages to create an ASP.NET Core application. It will also modify the global using statements to include ASP.NET specific using statements.
 
@@ -161,7 +161,7 @@ app.MapGet("/", () => {
 ```
 Now we have a fully functional minimal API web application in ASP.NET Core. Let's run it and see what happens.
 
-![hello world output from running app](images/moved-cheese/3-hello-world.jpg#screenshot) 
+![hello world output from running app](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/moved-cheese/3-hello-world.jpg#screenshot) 
 Nnow when we launch the default path it returns `hello world` so we have a fully functioning web application. Minimal APIs are a great way to quickly build a Web API project.
 
 The middleware flow is similar to that of the full Web API MVC projects and shares much of the same implementations. In previous ASP.NET Core projects you were given a `Startup.cs` class with two methods in it `ConfigureServices()` and `Configure()`.
