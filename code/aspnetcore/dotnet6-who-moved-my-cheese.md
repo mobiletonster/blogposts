@@ -1,5 +1,8 @@
 <!-- # ASP.NET Core 6.0 - Who Moved My Cheese -->
 
+## Watch companion video on YouTube:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vhNhcuht0J0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Introduction
 
 .NET 6.0 is out and ASP.NET Core has shipped. There have been quite a few changes that have left a lot of people confused. For instance "who moved my cheese" where is `Startup.cs`. In this post, I will delve into that and see where it moved as well as other changes.
