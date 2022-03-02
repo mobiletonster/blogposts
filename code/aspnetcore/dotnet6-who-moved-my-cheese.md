@@ -535,5 +535,3 @@ I think Configuration is covered here and we are in good shape.
 We have examined some different ways to organize Minimal API projects, or any new ASP.NET 6.0 project. I like the opportunities to structure our projects in ways that may be easier to read an maintain.
 
 I think we found our cheese and we might have even better options. if you found this post helpful, let me know in the comments below and share it with someone else too!
-
-<script src="https://utteranc.es/client.js" repo="mobiletonster/blogposts" issue-term="title" theme="preferred-color-scheme" crossorigin="anonymous" async> </script>
