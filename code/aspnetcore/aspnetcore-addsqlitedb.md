@@ -148,13 +148,3 @@ Click OK to complete and I would `Set as Default`. Now go ahead and open it with
 You will see a couple of different tables that it created, one for `AppUser` and one for `__EFMigrationsHistory`. In our `AppUsers` table you'll see that we already have a record in there from our seed data `bob tester` for our `bob tester user`.
 
 That is all it takes to add and connect a sqlite database to an ASP.NET Core project with EF Core code-first!
-
-
-<script src="https://utteranc.es/client.js"
-        repo="mobiletonster/blogposts"
-        issue-term="title"
-        theme="preferred-color-scheme"
-        crossorigin="anonymous"
-        async>
-</script>
-
