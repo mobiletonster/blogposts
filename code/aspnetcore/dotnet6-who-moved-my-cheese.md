@@ -26,7 +26,7 @@ namespace OldToNew
     }
 }
 ```
-In .NET 6.0 the changes are intended to simplify and remove cruft from our application. One of the first features they introduced was something called [Filescoped Namespaces](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10#file-scoped-namespace-declaration). Traditionally namespaces look like this:
+In .NET 6.0 the changes are intended to simplify and remove cruft from our application. One of the first features they introduced was something called [Filescoped Namespaces](https://docs.microsoft.com/en-us/dotnet/C#/whats-new/C#-10#file-scoped-namespace-declaration). Traditionally namespaces look like this:
 
 ```C#
 namespace OldToNew
@@ -82,7 +82,7 @@ Visual Studio is going to complain at me because this is a 3.1 project so before
 ```
 Once we make this change, VS will be happy with the filescoped namespace. 
 
-The next change we want to make is to remove the `using System;` line. In order to do this, we need to edit the project file again and enable [Implicit Usings](https://devblogs.microsoft.com/dotnet/welcome-to-csharp-10/#implicit-usings).
+The next change we want to make is to remove the `using System;` line. In order to do this, we need to edit the project file again and enable [Implicit Usings](https://devblogs.microsoft.com/dotnet/welcome-to-C#-10/#implicit-usings).
 ```XML
 <!-- .NET 6.0 -->
 <Project Sdk="Microsoft.NET.Sdk">
@@ -108,7 +108,7 @@ internal class Program
     }
 }
 ```
-The next feature they introduced was something called [Top Level Statements](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/top-level-statements#:~:text=Top-level%20statements%20%28C%23%20Programming%20Guide%29%201%20Only%20one,point%20method.%20...%207%20C%23%20language%20specification.%20). They idea is to remove the "cruft" that was present in every console application or ASP.NET Core application. 
+The next feature they introduced was something called [Top Level Statements](https://docs.microsoft.com/en-us/dotnet/C#/fundamentals/program-structure/top-level-statements#:~:text=Top-level%20statements%20%28C%23%20Programming%20Guide%29%201%20Only%20one,point%20method.%20...%207%20C%23%20language%20specification.%20). They idea is to remove the "cruft" that was present in every console application or ASP.NET Core application. 
 
 With top level statements, we can remove the `static void Main(string[] args)` method and the curly braces along with the namespace and the `class Program` declaration.
 
@@ -194,7 +194,7 @@ app.Run();
 
 Order matters in the middleware pipeline, so I have added UseAuthentication() and UseAuthorization() above the MapGet() middleware. In order for this to take effect, however, you need to annotate the endpoint that you want protected with the [Authorize] attribute. This will require the using statement of Microsoft.AspNetCore.Authorization. 
 
-```csharp
+```C#
 using Microsoft.AspNetCore.Authorization;
 
 ...
@@ -225,7 +225,7 @@ Let's gfix it. There are a lot of different types of Authentication Schemes we c
 
 Let's go ahead and add JWT bearer to the minimal API. We will need to importat the Microsoft.AspNetCore.Authentication.JwtBearer package via NuGet, then add the following code:
 
-```csharp
+```C#
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 ...
@@ -256,7 +256,7 @@ JWT Bearer has been added to application and we should be able to run it to this
 
 One last change we should make is to change the [Authorize] attribute to use a 'fluent syntax' instead like this:
 
-```csharp
+```C#
 //FROM THIS:
 app.MapGet("/", [Authorize] () => {
     return "Hello World!";
@@ -274,7 +274,7 @@ Next, let's see if we can bring back something like a Startup.cs file.  Minimal 
 
 There must be a way that we can organize this better. I'll begin by adding a new class called `Startup.cs` to the project.
 
-```csharp
+```C#
 public class Startup
 {
     public Startup(IConfiguration configuration)
@@ -297,7 +297,7 @@ public class Startup
 ```
 This should look familiar from the full Web API projects templates of the past. I just pasted it into my new Startup.cs file and removed the namespace. The Startup.cs file requires an IConfiguration object to be passed in. Can we supply that from our Program.cs?
 
-```csharp
+```C#
 //  Program.cs file
 var builder = WebApplication.CreateBuilder(args);
 var startup = new Startup(builder.Configuration);
@@ -305,7 +305,7 @@ var startup = new Startup(builder.Configuration);
 Yes. We can do that. The builder object that is created contains a Configuration property that we can use to pass in to the Startup constructor.
 
 Next, let's try to supply the ConfigureServices() method with an IServiceCollection.
-```csharp
+```C#
 //  Program.cs file
 var builder = WebApplication.CreateBuilder(args);
 var startup = new Startup(builder.Configuration);
@@ -314,7 +314,7 @@ startup.ConfigureServices(builder.Services);
 
 Again, builder contains a Services property that we can use to pass in to the ConfigureServices() method. Now we can remove all the dependency injection code from Program.cs and move it to the ConfigureServices method in Startup.cs.
 
-```csharp
+```C#
 // Startup.cs file
 public void ConfigureServices(IServiceCollection services)
 {
@@ -324,7 +324,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 Next, let's try to supply the Configure() method with an WebApplication.
-```csharp
+```C#
 //  Program.cs file
 var builder = WebApplication.CreateBuilder(args);
 var startup = new Startup(builder.Configuration);
@@ -337,7 +337,7 @@ startup.Configure(app, builder.HostingEnvironment);
 Interestingly, although we are passing `app` which is of type `WebApplication` if you inspect it, and Configure is expecting an `IApplicationBuilder`, it seems ok with it. If you drill into the WebApplication object, you will see that it impelements the IApplicationBuilder interface.
 
 If we copy our middleware pipeline out of `Program.cs` and paste it into the `Configure()` method in `Startup.cs`, we should be able to move that code.
-```csharp
+```C#
 // Startup.cs file
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
@@ -355,7 +355,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 So this won't actually work because the interface `IApplicationBuilder` doesn't have a `MapGet()` method or a `Run()` method. Those live in the `WebApplication` class. If we change the `Configure()` method to accept an `WebApplication` object, it should work.
 
-```csharp
+```C#
 // Startup.cs file
 public void Configure(WebApplication app, IWebHostEnvironment env)
 {
@@ -371,7 +371,7 @@ public void Configure(WebApplication app, IWebHostEnvironment env)
 }
 ```
 Let's look at both complete files and see how they look now.
-```csharp
+```C#
 // Program.cs file
 var builder = WebApplication.CreateBuilder(args);
 var startup = new Startup(builder.Configuration);
@@ -380,7 +380,7 @@ var app = builder.Build();
 startup.Configure(app, builder.Environment);
 ```
 
-```csharp
+```C#
 // Startup.cs file
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -425,7 +425,7 @@ Using `Startup.cs` does help improve organization, however I think we can do bet
 
 Why don't we try to improve this. I don't like `ConfigureServices()`.  What if we renamed it `RegisterDependentServices()` instead and placed it in its own file? This would make it easier to understand what is going on.
 
-```csharp
+```C#
 // RegisterDepenedentServices.cs file
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -446,7 +446,7 @@ I decided to make the class `static` and use an extension method to add it to th
 
 Next, let's create a new file `SetupMiddlewarePipeline.cs`. This file will contain the middleware pipeline.
 
-```csharp
+```C#
 public static class SetupMiddlewarePipeline
 {
     public static WebApplication SetupMiddleware(this WebApplication app)
@@ -465,7 +465,7 @@ public static class SetupMiddlewarePipeline
 
 Now, how does this change our `Program.cs` file?
 
-```csharp
+```C#
 // Program.cs file
 WebApplication app = WebApplication.CreateBuilder(args)
     .RegisterServices()
@@ -477,7 +477,7 @@ app.SetupMiddleware()
 
 This makes for a very clean `Program.cs` file. In fact, you could make it all one line if you wanted.
 
-```chsarp
+```C#
 // Program.cs file
 WebApplication.CreateBuilder(args)
     .RegisterServices()
@@ -491,7 +491,7 @@ I don't hate it. In fact, I think I like it.
 ## What about IConfiguration?
 Before, the `Startup()` constructor expected IConfiguration to be injected into it. However, because `WebApplication` and `WebApplicationBuilder` both have a `.Configuration` property, we no longer need to explicitly inject it.
 
-```csharp
+```C#
 // RegisterDepenedentServices.cs file
 public static class RegisterDependentServices
 {
@@ -509,7 +509,7 @@ public static class RegisterDependentServices
 }
 ```
 
-```csharp
+```C#
 // setupMiddlewarePipeline.cs file
 public static class SetupMiddlewarePipeline
 {
