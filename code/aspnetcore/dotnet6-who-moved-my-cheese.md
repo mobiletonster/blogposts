@@ -5,9 +5,9 @@
 
 ## Introduction
 
-.NET 6.0 is out and ASP.NET Core has shipped. There have been quite a few changes that have left a lot of people confused. For instance "who moved my cheese" where is `Startup.cs`. In this post, I will delve into that and see where it moved as well as other changes.
+.NET 6.0 is out and ASP.NET Core has shipped. There have been quite a few changes that have left a lot of people confused. For instance "who moved my cheese", where is `Startup.cs`. In this post, I will delve into that and see where it moved as well as other changes.
 
-Things haven't fundamentally changed in the middleware for ASP.NET Core but some of the project structure has changed and where you register things has changed a little bit. To understand it better, it is instructive to start with a .NET Core 3.1 project template and upgrade it by hand to see how it compares to the new templates.
+Things haven't fundamentally changed in the middleware for ASP.NET Core but some of the project structure has changed, as well as where you register dependencies. To understand it better, it is instructive to start with a .NET Core 3.1 project template and upgrade it by hand to see how it compares to the new templates.
 
 ## Upgrade an old style Console Project
 
@@ -35,7 +35,7 @@ namespace OldToNew
 }
 ```
 
-If you've been around .NET for a while you have probably never put more than one namespace in a file. You can remove the curly braces and simple add a semicolon instead, marking the entire file as using this namespace.
+If you've been around .NET for a while you have probably never put more than one namespace in a file. You can remove the curly braces and just add a semicolon instead, marking the entire file as using one namespace.
 ```C#
 namespace OldToNew;
 // code goes here.
@@ -55,7 +55,7 @@ internal class Program
 }
 ```
 
-Visual Studio is going to complain at me because this is a 3.1 project so before we go too far we need to edit .NET Core 3.1 ap to a .NET 6.0 app.
+Visual Studio is going to complain at me because this is a 3.1 project so before we go too far we need to edit the .NET Core 3.1 .csproj file and convert it to a .NET 6.0 app.
 
 ```XML
 <!-- .NET Core 3.1 -->
@@ -108,18 +108,18 @@ internal class Program
     }
 }
 ```
-The next feature they introduced was something called [Top Level Statements](https://docs.microsoft.com/en-us/dotnet/C#/fundamentals/program-structure/top-level-statements#:~:text=Top-level%20statements%20%28C%23%20Programming%20Guide%29%201%20Only%20one,point%20method.%20...%207%20C%23%20language%20specification.%20). They idea is to remove the "cruft" that was present in every console application or ASP.NET Core application. 
+The next feature they introduced was something called [Top Level Statements](https://docs.microsoft.com/en-us/dotnet/C#/fundamentals/program-structure/top-level-statements#:~:text=Top-level%20statements%20%28C%23%20Programming%20Guide%29%201%20Only%20one,point%20method.%20...%207%20C%23%20language%20specification.%20). The idea is to remove the "cruft" that was present in every console application or ASP.NET Core application. 
 
 With top level statements, we can remove the `static void Main(string[] args)` method and the curly braces along with the namespace and the `class Program` declaration.
 
 ```C#
 Console.WriteLine("Hello World!");
 ```
-Once you remove all that, you can see the only we have left is our Console.WriteLine() method!
+Once you remove all that, you can see the only code we have left is our Console.WriteLine() method!
 
 ## Change Console app to a Web app (ASP.NET Core)
 
-Currently this is just a plain console application but I want to turn it into an ASP.NET Core application. Before doing that let's take a look under the dependencies and frameworks node in the solution explorer.
+Currently this is just a plain console application but I want to convert it to an ASP.NET Core application. Before doing that let's take a look under the dependencies and frameworks node in the solution explorer.
 
 ![dependencies](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/moved-cheese/1-dependencies.jpg#screenshot)
 
@@ -162,13 +162,14 @@ app.MapGet("/", () => {
 Now we have a fully functional minimal API web application in ASP.NET Core. Let's run it and see what happens.
 
 ![hello world output from running app](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/moved-cheese/3-hello-world.jpg#screenshot) 
-Nnow when we launch the default path it returns `hello world` so we have a fully functioning web application. Minimal APIs are a great way to quickly build a Web API project.
+When we launch the default path it returns `hello world` so we have a fully functioning web application. Minimal APIs are a great way to quickly build a Web API project.
 
+## What about Startup.cs?
 The middleware flow is similar to that of the full Web API MVC projects and shares much of the same implementations. In previous ASP.NET Core projects you were given a `Startup.cs` class with two methods in it `ConfigureServices()` and `Configure()`.
 
 In `ConfigureServices()` you register services for dependency injection. In `Configure()`, you outline your middleware pipeline order and structure.
 
-What does this look like in our new project? Where do you put dependency injection? The answer is between this first and second line and register middleware between the second and third like as noted below. 
+What does this look like in our new project? Where do you put dependency injection? The answer is between this first and second line and register middleware between the second and third as noted below. 
 ```C#
 var builder = WebApplication.CreateBuilder(args);
 // REGISTER SERVICES HERE
@@ -221,7 +222,7 @@ app.Run();
 
 If we were to run this right now, we would get an exception because we never specified the Authentication Scheme.
 
-Let's gfix it. There are a lot of different types of Authentication Schemes we could choose but in a WebAPI it is typical that we protect the application with something like a bearer token or a JWT token.
+Let's fix it. There are a lot of different types of Authentication Schemes we could choose but in a WebAPI it is typical that we protect the application with something like a bearer token or a JWT token.
 
 Let's go ahead and add JWT bearer to the minimal API. We will need to importat the Microsoft.AspNetCore.Authentication.JwtBearer package via NuGet, then add the following code:
 
@@ -252,7 +253,7 @@ app.MapGet("/", [Authorize] () => {
 app.Run();
 ```
 
-JWT Bearer has been added to application and we should be able to run it to this point and see what happens. We now get exactly what we're looking for, a 401 unauthorized because we haven't supplied it with any kind of token. There would be additional steps to setup a way to aquire a token and make sure that we only allow valid tokens to be accepted, but that is out of scope of this post. The point is to demonstrate where to register dependencies and middleware and how to use them.
+JWT Bearer has been added to the application and we should be able to run it to this point and see what happens. We now get exactly what we're looking for, a 401 unauthorized because we haven't supplied it with any kind of token. There would be additional steps to setup a way to aquire a token and make sure that we only allow valid tokens to be accepted, but that is out of scope of this post. The point is to demonstrate where to register dependencies and middleware and how to use them.
 
 One last change we should make is to change the [Authorize] attribute to use a 'fluent syntax' instead like this:
 
@@ -267,9 +268,9 @@ app.MapGet("/", () => {
   return "Hello World!";
 }).RequireAuthorization();
 ```
-They both do the same thing, however the 'fluent sytnax' feels more natural in the minimal API case.
+They both do the same thing, however the 'fluent syntax' feels more natural in the minimal API case.
 
-## The missing Startup.cs file
+## The return of the missing Startup.cs file
 Next, let's see if we can bring back something like a Startup.cs file.  Minimal API structure has the potential to get messy and bloated if you put everything in a single file.
 
 There must be a way that we can organize this better. I'll begin by adding a new class called `Startup.cs` to the project.
@@ -323,7 +324,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Next, let's try to supply the Configure() method with an WebApplication.
+Next, let's try to supply the Configure() method with the WebApplication class.
 ```C#
 //  Program.cs file
 var builder = WebApplication.CreateBuilder(args);
@@ -334,7 +335,7 @@ var app = builder.Build();
 
 startup.Configure(app, builder.HostingEnvironment);
 ```
-Interestingly, although we are passing `app` which is of type `WebApplication` if you inspect it, and Configure is expecting an `IApplicationBuilder`, it seems ok with it. If you drill into the WebApplication object, you will see that it impelements the IApplicationBuilder interface.
+Interestingly, although we are passing `app` which is of type `WebApplication` if you inspect it, although the Configure() method is expecting an `IApplicationBuilder`, it seems ok with it. If you drill into the WebApplication object, you will see that it impelements the IApplicationBuilder interface.
 
 If we copy our middleware pipeline out of `Program.cs` and paste it into the `Configure()` method in `Startup.cs`, we should be able to move that code.
 ```C#
@@ -418,12 +419,12 @@ public class Startup
     }
 }
 ```
-If we run it, we get our 401 Unauthorized which means it is working.  We haven't cahnged too much, other than move our configuration stuff into the older style `Startup.cs`.
+If we run it, we get our 401 Unauthorized which means it is working.  We haven't cahnged too much, other than to move our configuration stuff into the older style `Startup.cs`.
 
 ## Can we do better?
 Using `Startup.cs` does help improve organization, however I think we can do better. I've always hated in the `Startup.cs` file that the words `ConfigureServices()` and `Configure()` are so close to each other plus you're passing in an `IConfiguration` object. It can be confusing about what goes where.
 
-Why don't we try to improve this. I don't like `ConfigureServices()`.  What if we renamed it `RegisterDependentServices()` instead and placed it in its own file? This would make it easier to understand what is going on.
+Why don't we try to improve this. I don't like the name `ConfigureServices()`.  What if we renamed it to `RegisterDependentServices()` instead and placed it in its own file? This would make it easier to understand what is going on.
 
 ```C#
 // RegisterDepenedentServices.cs file
@@ -534,4 +535,4 @@ I think Configuration is covered here and we are in good shape.
 ## Summary
 We have examined some different ways to organize Minimal API projects, or any new ASP.NET 6.0 project. I like the opportunities to structure our projects in ways that may be easier to read an maintain.
 
-I think we found our cheese and we might have even better options. if you found this post helpful, let me know in the comments below and share it with someone else too!
+I think we found our cheese and and maybe even better options. if you found this post helpful, let me know in the comments below and share it with someone else too!
