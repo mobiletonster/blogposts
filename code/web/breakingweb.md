@@ -70,7 +70,7 @@ Addresses in the internet world are IP addresses and represent a machine or a vi
 IPv6 is much longer an uses a combintation of letters and numbers, specifically, IPv6 is represented as eight groups, separated by colons, of four hexadecimal digits (in case you were wondering).
 
 ## TCP sample app
-There is a lot of detail behind TCP that we won't get into, but we will use TCP in our app to build the next layer we care about, the application layer. There are many protocols that exist on the application layer, such as SMTP (Simple Mail Transfer Protocol), FTP (File Transfer Protocol), NTP (Network Time Protocol) and HTTP (Hypertext Transfer Protocol) to a name just a few. We eventually want to dig into HTTP more, but first let's build a simple TCP Client/Server application to understand how TCP works and how it sits under our application layer.
+There is a lot of detail behind TCP that we won't get into, but we will use TCP in our app to build the next layer we care about, the application layer. There are many protocols that exist on the application layer, such as SMTP (Simple Mail Transfer Protocol), FTP (File Transfer Protocol), NTP (Network Time Protocol) and HTTP (Hypertext Transfer Protocol) to name just a few. We eventually want to dig into HTTP more, but first let's build a simple TCP Client/Server application to understand how TCP works and how it sits under our application layer.
 
 ### Launch Visual Studio 2022
 If you want to follow along, we will be using Visual Studio 2022. The free community version will work fine for this.
@@ -99,7 +99,7 @@ One additional dialog will appear inviting you to select a "Framework" version. 
 > * Top-level statements - you will see less boiler plate code like namespaces, usings, and main class, etc.
 > * Async Main - the main method in a console application is now Async by default
 > * Global and implicit using directives - you don't need to have all the default usings in a file as they will be inferred in most cases.
-> * File-scope namespace - the Filenames scope the code, rather than explicit namespaces in the code.
+> * File-scope namespace - Namespaces in the code can be placed at the top and the encompassing '{}' braces can be removed saving a level of indentation.
 
 
 After the project loads, paste the following code into the program.cs file. 
@@ -175,7 +175,14 @@ Do the same for the client and run `TcpClient` located in the same sub-folder st
 
 When the client launches, it will prompt you to type a message to be sent to the server. The server will receive that message and echo it back to the client.
 
+### TCP Client/Server summary
+In our simplistic client/server application, we created a Server that listens for incoming messages from a client. We haven't created any protocols for this project; the server simply accepts all messages and echos them back. 
 
+An example of a protocol we could create might be a set of commands that the server understands, such as 'hello', 'goodbye', 'ping', 'pong', etc. The server would then respond to the client with an appropriate response.
 
+To see a good example of this in action and how to design a custom protocol, check out Stephen Cleary's live coding video on youtube:
+[Asynchronous TCP/IP Part 1](https://www.youtube.com/watch?v=RJOdB5ly7jk&t=10s)
+
+Instead of creating a custom protocol, however, let's take a look at some of the HTTP protocol and how it is structured.
 
 ## HTTP - Application Layer
