@@ -79,7 +79,95 @@ Blazor Client is technically a SPA model, but since it uses C#/Razor as its view
 ### Create a Reactjs app
 We will start by creating a simple Reactjs app using create react app. 
 
-
+```csharp
+using IdentityModel.Client;
+using Microsoft.Extensions.Caching.Memory;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http;
+using System.Threading.Tasks;
+namespace Security.ClientCredentialFlowAuth.Client
+{
+    /// <summary>
+    /// Manages access tokens using an IMemoryCache object.  
+    /// It will check if the access token returned from the memory cache is still valid, if not, 
+    /// it will create a new access token and cache it.
+    /// </summary>
+    public class ClientCredentialAccessTokenService : IClientCredentialAccessTokenService
+    {
+        private static IMemoryCache memoryCache;
+        private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler;
+        /// <summary>
+        /// Constructor that injects an IMemoryCache object.
+        /// </summary>
+        public ClientCredentialAccessTokenService()
+        {
+            memoryCache = this.InitializeMemoryCache();
+            this._jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+        }
+        private IMemoryCache InitializeMemoryCache()
+        {
+            var memoryCacheOptions = new MemoryCacheOptions() {};
+            var memoryCache = new MemoryCache(memoryCacheOptions);
+            return memoryCache;
+        }
+        /// <summary>
+        /// Gets a valid access token from the IDP.
+        /// </summary>
+        /// <param name="clientCredentialFlowClientSettings"></param>
+        /// <returns></returns>
+        public async Task<string> GetClientAccessToken(
+            ClientCredentialFlowClientSettings clientCredentialFlowClientSettings
+        )
+        {
+            string cacheKey = this.GetCacheKey(clientCredentialFlowClientSettings.ClientId);
+            var accessTokenCacheEntry = memoryCache.Get<AccessTokenCacheEntry>(cacheKey);
+            if (accessTokenCacheEntry == null || accessTokenCacheEntry.ExpiresAt < DateTime.Now)
+            {
+                accessTokenCacheEntry = await this.CreateClientCredentialFlowAccessToken(clientCredentialFlowClientSettings);
+                this.SetClientAccessToken(accessTokenCacheEntry);
+            }
+            return accessTokenCacheEntry.AccessToken;
+        }
+        private async Task<AccessTokenCacheEntry> CreateClientCredentialFlowAccessToken(ClientCredentialFlowClientSettings clientCredentialFlowClientSettings)
+        {
+            var httpClient = new HttpClient();
+            var clientCredentialToken = await httpClient.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest()
+            {
+                Address = clientCredentialFlowClientSettings.TokenEndpoint,
+                ClientId = clientCredentialFlowClientSettings.ClientId,
+                ClientSecret = clientCredentialFlowClientSettings.ClientSecret,
+                Scope = clientCredentialFlowClientSettings.Scopes
+            });
+            var accessTokenCacheEntry = this.GetAccessTokenCacheEntryForAccessToken(
+                clientCredentialFlowClientSettings.ClientId, 
+                clientCredentialToken.AccessToken
+            );
+            return accessTokenCacheEntry;
+        }
+        private AccessTokenCacheEntry GetAccessTokenCacheEntryForAccessToken(string clientId ,string accessToken)
+        {
+            var jwt = this._jwtSecurityTokenHandler.ReadJwtToken(accessToken);
+            var accessTokenCacheEntry = new AccessTokenCacheEntry()
+            {
+                ClientId = clientId,
+                AccessToken = accessToken,
+                ExpiresAt = jwt.ValidTo
+            };
+            return accessTokenCacheEntry;
+        }
+        private void SetClientAccessToken(AccessTokenCacheEntry accessTokenCacheEntry)
+        {
+            string cacheKey = this.GetCacheKey(accessTokenCacheEntry.ClientId);
+            memoryCache.Set<AccessTokenCacheEntry>(cacheKey, accessTokenCacheEntry);
+        }
+        private string GetCacheKey(string clientId)
+        {
+            return $"{clientId}-client-credential-flow-access-token";
+        }
+    }
+}
+```
 
 
 
