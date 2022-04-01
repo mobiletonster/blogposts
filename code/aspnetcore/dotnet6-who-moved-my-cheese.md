@@ -5,13 +5,14 @@
 
 ## Introduction
 
-.NET 6.0 is out and ASP.NET Core has shipped. There have been quite a few changes that have left a lot of people confused. For instance "who moved my cheese", where is `Startup.cs`. In this post, I will delve into that and see where it moved as well as other changes.
+.NET 6.0 is out and ASP.NET Core 6.0 has shipped. There have been quite a few changes that have left a lot of people confused. For instance, "who moved my cheese", where is `Startup.cs`? In this post, I will delve into that and see where it moved as well as other changes.
 
-Things haven't fundamentally changed in the middleware for ASP.NET Core but some of the project structure has changed, as well as where you register dependencies. To understand it better, it is instructive to start with a .NET Core 3.1 project template and upgrade it by hand to see how it compares to the new templates.
+Things haven't fundamentally changed in the middleware for ASP.NET Core, but some of the project structure has changed as well as where you register dependencies. To understand it better, it is instructive to start with a .NET Core 3.1 project template and upgrade it by hand to see how it compares to the new templates.
 
 ## Upgrade an old style Console Project
 
-To begin with, let's create a new *Console Project*. I called mine `OldToNew`. I selected a .NET Core 3.1 target and will upgrade it to 6.0 to see the differences. If you have been around .NET for a while, you will recognize this project structure.
+To begin with, let's create a new *Console Project*. I called mine `OldToNew`. I selected a .NET Core 3.1 target and will upgrade it to .NET 6.0 to see the differences. If you have been around .NET for a while, you will recognize this project structure in the `Program.cs` file.
+
 ```C#
 using System;
 
@@ -55,7 +56,7 @@ internal class Program
 }
 ```
 
-Visual Studio is going to complain at me because this is a 3.1 project so before we go too far we need to edit the .NET Core 3.1 .csproj file and convert it to a .NET 6.0 app.
+Visual Studio is going to complain at me because this is a .NET Core 3.1 project so before we go too far we need to edit the .NET Core 3.1 .csproj file and convert it to a .NET 6.0 app.
 
 ```XML
 <!-- .NET Core 3.1 -->
@@ -80,7 +81,7 @@ Visual Studio is going to complain at me because this is a 3.1 project so before
 
 </Project>
 ```
-Once we make this change, VS will be happy with the filescoped namespace. 
+Once we make this change, Visual Studio will be happy with the filescoped namespace. 
 
 The next change we want to make is to remove the `using System;` line. In order to do this, we need to edit the project file again and enable [Implicit Usings](https://devblogs.microsoft.com/dotnet/welcome-to-C#-10/#implicit-usings).
 ```XML
@@ -95,7 +96,7 @@ The next change we want to make is to remove the `using System;` line. In order 
 
 </Project>
 ```
-If we enable implicit using statements most of the common using statements that we normally use will be included from the SDK by default and you no longer need to include them in your files. We remove the `using System;` line and the compiler will automatically add the using statements for us.
+If we enable implicit using statements most of the common using statements that we normally use will be included from the SDK by default and you no longer need to include them in your files. We can remove the `using System;` line because the compiler will automatically add the using statements for us.
 
 ```C#
 namespace OldToNew;
@@ -115,15 +116,15 @@ With top level statements, we can remove the `static void Main(string[] args)` m
 ```C#
 Console.WriteLine("Hello World!");
 ```
-Once you remove all that, you can see the only code we have left is our Console.WriteLine() method!
+Once you remove all that, you can see that the only code we have left is our `Console.WriteLine()` method!
 
 ## Change Console app to a Web app (ASP.NET Core)
 
-Currently this is just a plain console application but I want to convert it to an ASP.NET Core application. Before doing that let's take a look under the dependencies and frameworks node in the solution explorer.
+Currently, this is just a plain console application, but I want to convert it to an ASP.NET Core application. Before doing that let's take a look under the dependencies and frameworks node in the solution explorer.
 
 ![dependencies](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/moved-cheese/1-dependencies.jpg#screenshot)
 
-Currently you see Microsoft.NETCore.App that is the SDK that includes all the required packages to create a console application. Let's change the SDK type in the .csproj file to a .Web type project and see what happens. `Microsoft.NET.Sdk` to `Microsoft.NET.Sdk.Web`.
+You can see above under `Frameworks` that `Microsoft.NETCore.App` is the SDK that includes all the required packages to create a console application. Let's change the SDK type in the .csproj file to a .Web type project and see what happens: `Microsoft.NET.Sdk` to `Microsoft.NET.Sdk.Web`.
 
 ```XML
 <!-- .NET 6.0 -->
@@ -140,7 +141,7 @@ Notice what happens under dependencies now:
 
 ![dependencies for ASP.NET Core](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/moved-cheese/2-dependencies.jpg#screenshot)
 
-The framework now inclueds `Microsoft.AspNetCore.App` which will bring in all the necessary packages to create an ASP.NET Core application. It will also modify the global using statements to include ASP.NET specific using statements.
+The framework now includes `Microsoft.AspNetCore.App` which will bring in all the necessary packages to create an ASP.NET Core application. It will also modify the global using statements to include ASP.NET specific using statements.
 
 Now let's remove the `Console.WriteLine("Hello World!");` line and add the ASP.NET Core specific code.
 
@@ -150,7 +151,7 @@ var app = builder.Build();
 app.Run();
 ```
 
-We are now constructing a web application. Where does `WebApplication` come from? It belongs to `Microsoft.Asp.Net.Core.Builder`.
+We are now constructing a web application. Where does the `WebApplication` object come from? It belongs to the `Microsoft.AspNetCore.Builder` namespace.
 
 We could run this app, but it'll be kind of boring because there are no endpoints. Let's add an endpoint to make this complete:
 
@@ -159,13 +160,13 @@ app.MapGet("/", () => {
     return "Hello World!";
 });    
 ```
-Now we have a fully functional minimal API web application in ASP.NET Core. Let's run it and see what happens.
+We just made a minimal API web application in ASP.NET Core 6.0. Let's run it and see what happens.
 
 ![hello world output from running app](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/moved-cheese/3-hello-world.jpg#screenshot) 
 When we launch the default path it returns `hello world` so we have a fully functioning web application. Minimal APIs are a great way to quickly build a Web API project.
 
 ## What about Startup.cs?
-The middleware flow is similar to that of the full Web API MVC projects and shares much of the same implementations. In previous ASP.NET Core projects you were given a `Startup.cs` class with two methods in it `ConfigureServices()` and `Configure()`.
+The middleware flow in ASP.NET Core 6.0 is similar to that of the full Web API MVC projects and shares much of the same implementations. In previous ASP.NET Core projects you were given a `Startup.cs` class with two methods in it `ConfigureServices()` and `Configure()`.
 
 In `ConfigureServices()` you register services for dependency injection. In `Configure()`, you outline your middleware pipeline order and structure.
 
@@ -177,7 +178,9 @@ var app = builder.Build();
 // REGISTER MIDDLEWARE HERE
 app.Run();
 ```
-For example, if I wanted to add Authentication, I would register it like this:
+
+For example, if I wanted to add Authentication I would register it like this:
+
 ```C#
 var builder = WebApplication.CreateBuilder(args);
 // REGISTER SERVICES HERE
@@ -193,7 +196,7 @@ app.MapGet("/", () => {
 app.Run();
 ```
 
-Order matters in the middleware pipeline, so I have added UseAuthentication() and UseAuthorization() above the MapGet() middleware. In order for this to take effect, however, you need to annotate the endpoint that you want protected with the [Authorize] attribute. This will require the using statement of Microsoft.AspNetCore.Authorization. 
+Order matters in the middleware pipeline, so I have added `UseAuthentication()` and `UseAuthorization()` above the `MapGet()` middleware. In order for this to take effect, however, you need to annotate the endpoint that you want protected with the `[Authorize]` attribute. This will require the using statement of `Microsoft.AspNetCore.Authorization`. 
 
 ```C#
 using Microsoft.AspNetCore.Authorization;
@@ -204,7 +207,9 @@ app.MapGet("/",[Authorize]() => {
     return "Hello World!";
 });
 ```
-Complete code to this point:
+
+The complete code of our `Program.cs` file to this point looks like this:
+
 ```C#
 var builder = WebApplication.CreateBuilder(args);
 // REGISTER SERVICES HERE
@@ -224,7 +229,7 @@ If we were to run this right now, we would get an exception because we never spe
 
 Let's fix it. There are a lot of different types of Authentication Schemes we could choose but in a WebAPI it is typical that we protect the application with something like a bearer token or a JWT token.
 
-Let's go ahead and add JWT bearer to the minimal API. We will need to importat the Microsoft.AspNetCore.Authentication.JwtBearer package via NuGet, then add the following code:
+Let's go ahead and add JWT bearer to the minimal API. We will need to import the `Microsoft.AspNetCore.Authentication.JwtBearer` package via NuGet, then add the following code:
 
 ```C#
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -253,9 +258,9 @@ app.MapGet("/", [Authorize] () => {
 app.Run();
 ```
 
-JWT Bearer has been added to the application and we should be able to run it to this point and see what happens. We now get exactly what we're looking for, a 401 unauthorized because we haven't supplied it with any kind of token. There would be additional steps to setup a way to aquire a token and make sure that we only allow valid tokens to be accepted, but that is out of scope of this post. The point is to demonstrate where to register dependencies and middleware and how to use them.
+JWT Bearer has been added to the application so let's run it and see what happens. We now get exactly what we're looking for, a `401 unauthorized` status because we haven't supplied it with any kind of token. There would be additional steps to setup a way to aquire a token and make sure that we only allow valid tokens to be accepted, but that is beyond the scope of this article. The main point of this article is to demonstrate where to register dependencies and middleware and how to use them.
 
-One last change we should make is to change the [Authorize] attribute to use a 'fluent syntax' instead like this:
+One last modification we should make is to change the [Authorize] attribute to use a 'fluent syntax' instead like this:
 
 ```C#
 //FROM THIS:
@@ -268,10 +273,11 @@ app.MapGet("/", () => {
   return "Hello World!";
 }).RequireAuthorization();
 ```
+
 They both do the same thing, however the 'fluent syntax' feels more natural in the minimal API case.
 
 ## The return of the missing Startup.cs file
-Next, let's see if we can bring back something like a Startup.cs file.  Minimal API structure has the potential to get messy and bloated if you put everything in a single file.
+Next, let's see if we can bring back our old friend the `Startup.cs` file. Minimal API structure has the potential to get messy and bloated if you put everything in a single file.
 
 There must be a way that we can organize this better. I'll begin by adding a new class called `Startup.cs` to the project.
 
@@ -296,16 +302,18 @@ public class Startup
     }
 }
 ```
-This should look familiar from the full Web API projects templates of the past. I just pasted it into my new Startup.cs file and removed the namespace. The Startup.cs file requires an IConfiguration object to be passed in. Can we supply that from our Program.cs?
+This should look familiar from the full Web API projects templates of the past. I just pasted it into my new `Startup.cs` file and removed the namespace. The `Startup.cs` file requires an `IConfiguration` object to be passed in. Can we supply that from our `Program.cs`?
 
 ```C#
 //  Program.cs file
 var builder = WebApplication.CreateBuilder(args);
 var startup = new Startup(builder.Configuration);
 ```
-Yes. We can do that. The builder object that is created contains a Configuration property that we can use to pass in to the Startup constructor.
 
-Next, let's try to supply the ConfigureServices() method with an IServiceCollection.
+Yes. We can do that. The `builder` object that is created contains a `Configuration` property that we can use to pass in to the `Startup` constructor.
+
+Next, let's try to supply the `ConfigureServices()` method with an `IServiceCollection`.
+
 ```C#
 //  Program.cs file
 var builder = WebApplication.CreateBuilder(args);
@@ -313,7 +321,7 @@ var startup = new Startup(builder.Configuration);
 startup.ConfigureServices(builder.Services);
 ```
 
-Again, builder contains a Services property that we can use to pass in to the ConfigureServices() method. Now we can remove all the dependency injection code from Program.cs and move it to the ConfigureServices method in Startup.cs.
+Again, `builder` contains a `Services` property that we can use to pass in to the `ConfigureServices()` method. Now we can remove all the dependency injection code from `Program.cs` and move it to the `ConfigureServices` method in `Startup.cs`.
 
 ```C#
 // Startup.cs file
@@ -324,7 +332,8 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Next, let's try to supply the Configure() method with the WebApplication class.
+Next, let's try to supply the `Configure()` method with the `WebApplication` class.
+
 ```C#
 //  Program.cs file
 var builder = WebApplication.CreateBuilder(args);
@@ -335,9 +344,11 @@ var app = builder.Build();
 
 startup.Configure(app, builder.HostingEnvironment);
 ```
-Interestingly, although we are passing `app` which is of type `WebApplication` if you inspect it, although the Configure() method is expecting an `IApplicationBuilder`, it seems ok with it. If you drill into the WebApplication object, you will see that it impelements the IApplicationBuilder interface.
 
-If we copy our middleware pipeline out of `Program.cs` and paste it into the `Configure()` method in `Startup.cs`, we should be able to move that code.
+Interestingly, although we are passing `app` which is of type `WebApplication` if you inspect it, the `Configure()` method is expecting an `IApplicationBuilder`, but it seems ok with it. Why? If you drill into the `WebApplication` object, you will see that it implements the `IApplicationBuilder` interface.
+
+Let's cut our middleware pipeline code out of `Program.cs` and paste it into the `Configure()` method in `Startup.cs`.
+
 ```C#
 // Startup.cs file
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -354,7 +365,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-So this won't actually work because the interface `IApplicationBuilder` doesn't have a `MapGet()` method or a `Run()` method. Those live in the `WebApplication` class. If we change the `Configure()` method to accept an `WebApplication` object, it should work.
+Unfortunately, this won't actually work because the interface `IApplicationBuilder` doesn't have a `MapGet()` method or a `Run()` method. Those live in the `WebApplication` class. If we change the `Configure()` method to accept an `WebApplication` object, it should work.
 
 ```C#
 // Startup.cs file
@@ -371,7 +382,9 @@ public void Configure(WebApplication app, IWebHostEnvironment env)
   app.Run();
 }
 ```
-Let's look at both complete files and see how they look now.
+
+Let's look at both complete files, 'Program.cs' and 'Startup.cs', to see how they look now.
+
 ```C#
 // Program.cs file
 var builder = WebApplication.CreateBuilder(args);
@@ -419,15 +432,15 @@ public class Startup
     }
 }
 ```
-If we run it, we get our 401 Unauthorized which means it is working.  We haven't cahnged too much, other than to move our configuration stuff into the older style `Startup.cs`.
+If we run it, we get the `401 Unauthorized` status which means it is working. We haven't changed too much, other than to move our configuration stuff into the `Startup.cs`, which makes it look more like the old .Net Core style.
 
 ## Can we do better?
 Using `Startup.cs` does help improve organization, however I think we can do better. I've always hated in the `Startup.cs` file that the words `ConfigureServices()` and `Configure()` are so close to each other plus you're passing in an `IConfiguration` object. It can be confusing about what goes where.
 
-Why don't we try to improve this. I don't like the name `ConfigureServices()`.  What if we renamed it to `RegisterDependentServices()` instead and placed it in its own file? This would make it easier to understand what is going on.
+Why don't we try to improve this. I don't like the name `ConfigureServices()`. What if we renamed it to `RegisterDependentServices()` instead and placed it in its own file? This would make it easier to understand what is going on.
 
 ```C#
-// RegisterDepenedentServices.cs file
+// RegisterDependentServices.cs file
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 public static class RegisterDependentServices
@@ -469,7 +482,7 @@ Now, how does this change our `Program.cs` file?
 ```C#
 // Program.cs file
 WebApplication app = WebApplication.CreateBuilder(args)
-    .RegisterServices()
+    .RegisterDependentServices()
     .Build();
 
 app.SetupMiddleware()
@@ -481,7 +494,7 @@ This makes for a very clean `Program.cs` file. In fact, you could make it all on
 ```C#
 // Program.cs file
 WebApplication.CreateBuilder(args)
-    .RegisterServices()
+    .RegisterDependentServices()
     .Build()
     .SetupMiddleware()
     .Run();
@@ -490,10 +503,10 @@ WebApplication.CreateBuilder(args)
 I don't hate it. In fact, I think I like it.
 
 ## What about IConfiguration?
-Before, the `Startup()` constructor expected IConfiguration to be injected into it. However, because `WebApplication` and `WebApplicationBuilder` both have a `.Configuration` property, we no longer need to explicitly inject it.
+Before, the `Startup()` constructor expected `IConfiguration` to be injected into it. However, because `WebApplication` and `WebApplicationBuilder` both have a `.Configuration` property, we no longer need to explicitly inject it.
 
 ```C#
-// RegisterDepenedentServices.cs file
+// RegisterDependentServices.cs file
 public static class RegisterDependentServices
 {
   public static WebApplicationBuilder RegisterServices(this WebApplicationBuilder builder)
@@ -530,9 +543,10 @@ public static class SetupMiddlewarePipeline
   }
 }
 ```
-I think Configuration is covered here and we are in good shape.
+
+If we need to access the app's configuration at all, it is available and we are in good shape.
 
 ## Summary
-We have examined some different ways to organize Minimal API projects, or any new ASP.NET 6.0 project. I like the opportunities to structure our projects in ways that may be easier to read an maintain.
+We have examined some different ways to organize Minimal API projects or any new ASP.NET 6.0 project. I like that we are given opportunities to structure our projects in ways that may be easier to read and maintain.
 
 I think we found our cheese and and maybe even better options. if you found this post helpful, let me know in the comments below and share it with someone else too!

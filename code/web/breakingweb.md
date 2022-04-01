@@ -34,15 +34,15 @@ If you are a Computer Science major, you may have learned about the OSI network 
 </figure>
 
 
-I don't want to go into great detail about this topic, but there are several layers to a network. For instance, the physical layer could use a network cable, fiber optic line, or a wireless signal. 
+We don't need to go into great detail about this topic, but there are several layers to a network. For instance, the physical layer could use a network cable, fiber optic line, or a wireless signal. 
 
 The "transport" layer sits a bit higher on the network stack and is in charge of deciding how to "package" things up to be sent to another computer. Today, TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are two of the most common transport protocols used on the internet.
 
 One of the duties of TCP is to "slice" the data into chunks or packets for transport then reassemble them on the other end. This is commonly referred to as segmentation/desegmentation. To demonstrate this principle, let's use twitter as an example.
 
-If you are on twitter, you know that the size of a message is limited to a certain number of characters. It was 140 characters until in 2017 when twitter increased the limit to 280 characters.
+If you use twitter, you know that the size of a message is limited to a certain number of characters. It was 140 characters until in 2017 when twitter increased the limit to 280 characters.
 
-If you have a long message to post on twitter, you must divide your message into 280 character or smaller chunks. However, these message chunks may arrive out of order and be confusing to the reader. To handle this issue, you can still see people today put a series of numbers seperated by a slash (2/6) to denote how many total chunks there are and which chunk they are currently viewing.
+If you have a long message to post on twitter, you must divide your message into 280 character or smaller chunks. However, these message chunks may arrive out of order and be confusing to the reader. To handle this issue, you will see people add a series of numbers seperated by a slash (2/6) to denote how many total chunks there are and which chunk they are currently viewing.
 
 Below is an example of a block of text from Wikipedia converted into 6 smaller blocks of text for twitter.
 
@@ -67,6 +67,7 @@ Below is an example of a block of text from Wikipedia converted into 6 smaller b
 TCP performs similar functions on your data and breaks it into packets for transport. Additionally, it marks those packets with a 'sender' and 'recipient' address and a timestamp, much like you would address a letter with a 'to' and 'from' address. 
 
 Addresses in the internet world are IP addresses and represent a machine or a virtual machine. IPv4 addresses are 4 segments of numbers ranging from 0-255 and look like this:  192.168.121.4 
+
 IPv6 is much longer an uses a combintation of letters and numbers, specifically, IPv6 is represented as eight groups, separated by colons, of four hexadecimal digits (in case you were wondering).
 
 ## TCP sample app
