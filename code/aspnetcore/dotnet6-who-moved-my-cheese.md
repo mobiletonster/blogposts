@@ -482,7 +482,7 @@ Now, how does this change our `Program.cs` file?
 ```C#
 // Program.cs file
 WebApplication app = WebApplication.CreateBuilder(args)
-    .RegisterDependentServices()
+    .RegisterServices()
     .Build();
 
 app.SetupMiddleware()
@@ -494,7 +494,7 @@ This makes for a very clean `Program.cs` file. In fact, you could make it all on
 ```C#
 // Program.cs file
 WebApplication.CreateBuilder(args)
-    .RegisterDependentServices()
+    .RegisterServices()
     .Build()
     .SetupMiddleware()
     .Run();
