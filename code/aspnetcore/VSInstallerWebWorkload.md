@@ -11,7 +11,7 @@ When the installer loads, ensure that the `ASP.NET and web development` workload
 
 ![Image 2](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/VS2022CommunityWebWorkload.png#screenshot "web workload screen in installer")
 
-If you didn't check this during the inital install, you can launch the Visual Studio Installer and click the `Modify` button next to the edition you have installed. (screen shot depicts Enterprise edition, but Community edition follows the same flow.)
+If you didn't check this during the initial install, you can launch the Visual Studio Installer and click the `Modify` button next to the edition you have installed. (screen shot depicts Enterprise edition, but Community edition follows the same flow.)
 
 ![Image 3](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/VS2022InstallerModify.png#screenshot "vs installer modify button")
 
@@ -26,7 +26,7 @@ When the installer loads, ensure that the `ASP.NET and web development` workload
 
 ![Image 2](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/VS2019CommunityWebWorkload.png#screenshot "web workload screen in installer")
 
-If you didn't check this during the inital install, you can launch the Visual Studio Installer and click the `Modify` button next to the edition you have installed. (screen shot depicts Enterprise edition, but Community edition follows the same flow.)
+If you didn't check this during the initial install, you can launch the Visual Studio Installer and click the `Modify` button next to the edition you have installed. (screen shot depicts Enterprise edition, but Community edition follows the same flow.)
 
 ![Image 3](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/VSInstallerModify.png#screenshot "vs installer modify button")
 
