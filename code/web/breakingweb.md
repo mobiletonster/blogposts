@@ -8,7 +8,7 @@ The Internet is a network of computers and systems that connect everyone togethe
 
 <figure>
 
-![Neon_#2 BBS running opensource Tornado BBS software](images/neon2.png)
+![Neon_#2 BBS running opensource Tornado BBS software](images/neon-2.png)
 <caption>BBS screen , src: wikimedia https://commons.wikimedia.org/wiki/File:Neon2.png#screenshot</caption>
 </figure>
 
