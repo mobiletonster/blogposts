@@ -299,7 +299,7 @@ public CustomConfigurationProvider()
 }
 ```
 
-Since Configuration Providers are singletons, the constructor should only be called once when the application bootstraps. The MemoryCache should live within the singletong and live as long as the application lives.
+Since Configuration Providers are singletons, the constructor should only be called once when the application bootstraps. The MemoryCache should live within the singleton and live as long as the application lives.
 
 Let's modify the TryGet method to add the code to cache the secret:
 
