@@ -38,7 +38,9 @@ app.Run();
 ```
 
 ### Custom Configuration Provider
-The Custom Configuration Provider is a class that implements the Microsoft.Extensions.Configuration.IConfigurationProvider interface. This interface is used to retrieve configuration values from a configuration source. In our code, we will inherit from the ConfigurationProvider class:
+The Custom Configuration Provider is a class that implements the Microsoft.Extensions.Configuration.IConfigurationProvider interface.  (See [Microsoft Docs - Custom Configuration Provider](https://docs.microsoft.com/en-us/dotnet/core/extensions/custom-configuration-provider) documentation for more information.)
+
+This interface is used to retrieve configuration values from a configuration source. In our code, we will inherit from the ConfigurationProvider class:
 
 ```csharp
 public class CustomConfigurationProvider: ConfigurationProvider
