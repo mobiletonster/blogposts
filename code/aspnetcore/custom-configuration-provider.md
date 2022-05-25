@@ -207,7 +207,7 @@ app.Run();
 
 If we run the application and put a break point in the `CustomConfigurationProvider` class at the `TryGet` method, we can see the key and value that is being requested:
 
-![debug TryGet method in custom configuration provider](images/custom-config-provider/debug-custom-config-tryget.png)
+![debug TryGet method in custom configuration provider](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/aspnetcore/images/custom-config-provider/debug-custom-config-tryget.png)
 
 Each time a dependent service asks the configuration engine for a key, it will call the `TryGet` method of every provider, including the custom provider. The `TryGet` method will return true if the key is found, and will set the value parameter to the value of the key. It is during this method that we can change the value of the key, and use some code to get the value from another location.
 
