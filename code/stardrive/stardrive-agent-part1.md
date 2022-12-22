@@ -17,4 +17,14 @@ Let's begin by building the client agent for the remote machine. As of this writ
 
 ![configure project name dialog](images/part1/3-name-console-app.png)
 
-6. 
+6. Choose a version of .NET to target. We will want to target the latest as of this writing, version 7. We will leave the checkbox unchecked for "Do not use top level statements". The click CREATE.
+
+![.net version selector](images/part1/4-net-version.png)
+
+
+7. This will generate our project from the base template and place the project inside of a solution. In this screenshot, notice that the project opened the Program.cs file, which is the starting point for our application.
+
+![initial console project created with defaults](images/part1/5-we-have-liftoff.png)
+
+
+
