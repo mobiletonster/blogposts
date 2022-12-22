@@ -1,6 +1,8 @@
 ## StarDrive - Building the Client Agent
 Let's begin by building the client agent for the remote machine. As of this writing, the current version of .Net Core is .NET 7 and Visual Studio 2022 is the latest IDE version.
 
+### Create the Project
+
 1. Open Visual Studio (2022).
 
 2. Select **"Create a new project"**
@@ -26,5 +28,16 @@ Let's begin by building the client agent for the remote machine. As of this writ
 
 ![initial console project created with defaults](images/part1/5-we-have-liftoff.png)
 
+We now have a project created!
 
+### First Run
+Let's run the project and make sure everything happens as expected.  To (build) and run the project, simply press the Play button on the toolbar:
+
+![play button in VS2022](images/part1/6-click-run-button.png)
+
+This will build the app, and run it once it has compiled.
+
+![console running hello world](images/part1/7-console-running.png)
+
+Not too exciting here, but notice that it output the text "Hello, World!" That's good, it means it worked.
 
