@@ -75,7 +75,9 @@ C:\StarDriveData\Videos
 C:\StarDriveData\SampleText.txt
 ```
 
-The trouble with relying on these two methods is that they don't offer me more details such as FileSize, LastModifiedDate, etc. To get the information we will need, we can use another `class` called `DirectoryInfo`. This class provices similar data, except it also includes FileSize, LastModifiedMethod and more. Let's rewrite the above code to use DirectoryInfo:
+In the above code block, the first four entries are folders or directorys. The last entry is a file `SampleText.txt`.
+
+The trouble with relying on these two methods is that they don't offer more details such as FileSize, LastModifiedDate, etc. To get the information we will need, we can use another class called `DirectoryInfo`. This class provices similar data, except it also includes FileSize, LastModifiedMethod and more. Let's rewrite the above code to use DirectoryInfo:
 
 ```C#
 string path = @"C:\StarDriveFiles\";
@@ -83,13 +85,13 @@ string path = @"C:\StarDriveFiles\";
 DirectoryInfo di = new DirectoryInfo(path);
 if (di.Exists)
 {
-    var files = di.GetFiles();
+    FileInfo[] files = di.GetFiles();
     foreach(var f in files)
     {
         Console.WriteLine(f.Name);
     }
 
-    var folders = di.GetDirectories();
+    DirectoryInfo[] folders = di.GetDirectories();
     foreach(var f in folders)
     {
         Console.WriteLine(f.Name);
@@ -97,7 +99,7 @@ if (di.Exists)
 }
 ```
 
-
+The return types of `FileInfo[]` and `DirectoryInfo[]` give us more than just a string of the path, but rather several useful file/directory attributes.
 
 
 
