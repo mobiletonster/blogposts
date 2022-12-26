@@ -45,7 +45,7 @@ Not too exciting here, but notice that it output the text "Hello, World!" That's
 ### Directory Browsing Code:
 One of the key responsiblities for our StarDrive app will be to browse the directories of the remote machine. Specifically, it will be the responsiblity of the `Agent` console application.
 
-There are a couple of ways to browse directories with C# and .Net Core. Using the `System.IO` namespace, we can employ some static methods to do our work. Perhaps you have seen code like this before?
+There are a couple of ways to browse directories with C# and .Net Core. Using the `System.IO` namespace, we can employ some static methods to do our work. See  Perhaps you have seen code like this before?
 
 ```C#
 string path = @"C:\StarDriveData\";
@@ -63,7 +63,7 @@ foreach (var file in files)
     Console.WriteLine(file);
 }
 ```
-The `GetDirectories()` and `GetFiles()` methods return an array of strings with the full path of the directories or files located immediately at the designated path.
+The `GetDirectories()` and `GetFiles()` methods return an array of strings ( string[] ) with the full path of the directories or files located immediately at the designated path.
 
 If you were to run the code above, you might see output that look like this:
 
@@ -75,7 +75,7 @@ C:\StarDriveData\Videos
 C:\StarDriveData\SampleText.txt
 ```
 
-In the above code block, the first four entries are folders or directorys. The last entry is a file `SampleText.txt`.
+In the above code block, the first four entries are folders or directories. The last entry is a file `SampleText.txt`.
 
 The trouble with relying on these two methods is that they don't offer more details such as FileSize, LastModifiedDate, etc. To get the information we will need, we can use another class called `DirectoryInfo`. This class provices similar data, except it also includes FileSize, LastModifiedMethod and more. Let's rewrite the above code to use DirectoryInfo:
 
@@ -108,7 +108,9 @@ if (di.Exists) {
 ```
 We will do more with this code later on, but for now if we run this it should work and provide us access to attributes for directories and files in our target path.
 
-### Create a simple DTO (Data Transfer Object)
+>To learn more read [how to get information about files, folder and drives in C#](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/file-system/how-to-get-information-about-files-folders-and-drives) on the Microsoft Learn website.
+
+### Create a Simple DTO (Data Transfer Object)
 The goal of our remote app is to send data back to the web server so we can browse the file system. We could try to send the `FileInfo` class over the network to the web server, but it is not an insignificant class.
 
 If we examine the `FileInfo` class in our locals window while debugging, we can see we have a pretty big object on our hands.
@@ -155,9 +157,9 @@ if (di.Exists)
     }
 }
 ```
-Notice the primary difference between `FileInfo[]` and `DirectoryInfo[]` is that files have a `length` or size to them (in bytes) and the `IsDirectory` property is set accordingly.
+Notice the primary difference between `FileInfo[]` and `DirectoryInfo[]` is that files have a `length` or size to them (in bytes) and we mark the `IsDirectory` property in our DTO accordingly.
 
-If you want to see the effect, you can add this code below the above code and run it:
+If you want to see the effect, you can add this code below to the end of the above code and run it:
 
 ```C#
 foreach (var d in directoryItems)
@@ -185,20 +187,28 @@ The singular DirectoryItem (our DTO object) serializes nicely to this:
 {
     "IsDirectory":false,
     "Name":"SampleText.txt",
-    "Path":"C:\\StarDriveData\\SampleText.txt","LastModified":"2022-12-23T23:55:38.8980915-07:00",
+    "Path":"C:\\StarDriveData\\SampleText.txt",
+    "LastModified":"2022-12-23T23:55:38.8980915-07:00",
     "Size":64
 }
 ```
 
-However, we get an error trying to serialize the `FileInfo` class.
+However, we get an error when trying to serialize the `FileInfo` class.
 
 ![serializer chokes on the FileInfo class](images/part1/9-serialize-error.png)
 
-We could attempt to try some of the suggestions given in the exception message, but I think we can be satisfied that our DTO is going to be an improvement over the `FileInfo` class.
+We could try some of the suggestions given in the exception message, but I'm satisfied that our DTO is an improvement over the `FileInfo` class as a transfer structure.
+
+>For more details on serialization/deserialization read [JSON serialization and deserialization (marshalling and unmarshalling) in .NET - overview](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview) on the Microsoft Learn website.
 
 
 
 
-1) Make the console app a Windows Service friendly app
-2) Add SignalR code to connect to a server, however, we don't have a server and we would have build that now....which is a lot
+
+
+
+1. Compile to executable/single file
+2. Move our DTO to a Shared Library
+3. Make the console app a Windows Service friendly app
+4. Add SignalR code to connect to a server, however, we don't have a server and we would have build that now....which is a lot
 
