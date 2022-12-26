@@ -355,7 +355,7 @@ Copy the `.exe` file to the sandbox and try running it again. This time, it shou
 
 >Note: if it doesn't work, it is likely because you are missing the target directory from your local machine. Simply copy the target directory from your devbox to the Windows Sandbox instance and try it again.
 
-Note the file size of your `.exe` file. Mine is approximately 60mb in size. I also tried it with the other two options checked and it shrunk my file to 14mb in size. If you use the trim option, it is a good idea to check it in the Sandbox to make sure it still works.
+Note the file size of your `.exe` file. Mine is approximately 60mb in size. I also tried it with the other two options checked and it shrunk my file to about 15mb in size. If you use the trim option, it is a good idea to check it in the Sandbox to make sure it still works.
 
 
 

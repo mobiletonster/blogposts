@@ -37,6 +37,10 @@ Additionally, if you prefer Rider from Jet Brains, the steps may not align perfe
 
 We will also need to have .Net 7 installed, but this should get installed with Visual Studio 2022. In particular, make sure you install the `Web Workloads` when installing VS2022.
 
+### Sample Folder
+To follow along, it may be helpful to have the same sample folder I will be using. You can download and extract the  [StarDriveData.zip folder](sample-folder/StarDriveData.zip)
+ and extract it to your "C:\\" drive. This folder contains some sample text, images, music and video files.
+ 
 ## Let's Begin
 [-> To Building StarDrive Agent Part 1][def2]
 
