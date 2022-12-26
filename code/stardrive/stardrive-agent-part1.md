@@ -99,10 +99,25 @@ if (di.Exists)
 }
 ```
 
-The return types of `FileInfo[]` and `DirectoryInfo[]` give us more than just a string of the path, but rather several useful file/directory attributes.
+The return types of `FileInfo[]` and `DirectoryInfo[]` give us more than just a string of the path, but rather several useful file/directory attributes. It is a good idea to wrap the functions `GetFiles` and `GetDirectories` in a check to ensure that the path exists first as noted by this line from the code block above:
 
+```C#
+if (di.Exists) { 
+    ...
+}
+```
+We will do more with this code later on, but for now if we run this it should work and provide us access to attributes for directories and files in our target path.
 
+### Create a simple DTO (Data Transfer Object)
+The goal of our remote app is to send data back to the web server so we can browse the file system. We could try to send the `FileInfo` class over the network to the web server, but it is not an insignificant class.
 
+If we examine the `FileInfo` class in our locals window while debugging, we can see we have a pretty big object on our hands.
+
+![FileInfo class](images/part1/8-file-info-class.png)
+
+So rather than send such a heavy object to the server, let's create a simpler version. 
+
+Add a class called `DirectoryItem.cs` to the solution explorer (in the root should be sufficient for now). The class will be a simple `POCO` class, or Plain Old C# Object.
 
 ```C#
 internal class DirectoryItem
@@ -115,20 +130,24 @@ internal class DirectoryItem
 }
 ```
 
+This will provide us with a nice simple structure that can be serialized to Json or another serializer to send across the wire more efficiently. This is known as a DTO, or Data Transfer Object. It is optimized for serializing and transport.
+
+Next, let's modify the directory browsing code to not just write to the console, but populate a list of `DirectoryItems` for transport:
+
 ```C#
 List<DirectoryItem> directoryItems= new();
 
 DirectoryInfo di = new DirectoryInfo(path);
 if (di.Exists)
 {
-    var files = di.GetFiles();
+    FileInfo[] files = di.GetFiles();
     foreach(var f in files)
     {
         var directoryItem = new DirectoryItem() { Name = f.Name, IsDirectory = false, Path = f.FullName, LastModified = f.LastWriteTime, Size=f.Length };
         directoryItems.Add(directoryItem);
     }
 
-    var folders = di.GetDirectories();
+    DirectoryInfo[] folders = di.GetDirectories();
     foreach(var f in folders)
     {
         var directoryItem = new DirectoryItem() { Name = f.Name, IsDirectory=true, Path=f.FullName, LastModified=f.LastWriteTime };
@@ -136,6 +155,49 @@ if (di.Exists)
     }
 }
 ```
+Notice the primary difference between `FileInfo[]` and `DirectoryInfo[]` is that files have a `length` or size to them (in bytes) and the `IsDirectory` property is set accordingly.
+
+If you want to see the effect, you can add this code below the above code and run it:
+
+```C#
+foreach (var d in directoryItems)
+{
+    Console.WriteLine($"{d.Name} - {d.IsDirectory}");
+}
+```
+
+### Compare Serialized Objects
+To demonstrate the value of the DTO, we can quickly add a little code to examine how an object may look when it is serialized to JSON. Leveraging the `System.Text.Json` serializer, let's serialize both a `FileInfo` object and our simpler `DirectoryInfo` object and compare.
+
+
+```C#
+var jsonDirectoryItem = JsonSerializer.Serialize(directoryItems[0]);
+Console.WriteLine(jsonDirectoryItem);
+
+var oneFile = di.GetFiles()[0];
+var jsonFileInfo = JsonSerializer.Serialize(oneFile);
+Console.WriteLine(jsonFileInfo);
+```
+
+The singular DirectoryItem (our DTO object) serializes nicely to this:
+
+```json
+{
+    "IsDirectory":false,
+    "Name":"SampleText.txt",
+    "Path":"C:\\StarDriveData\\SampleText.txt","LastModified":"2022-12-23T23:55:38.8980915-07:00",
+    "Size":64
+}
+```
+
+However, we get an error trying to serialize the `FileInfo` class.
+
+![serializer chokes on the FileInfo class](images/part1/9-serialize-error.png)
+
+We could attempt to try some of the suggestions given in the exception message, but I think we can be satisfied that our DTO is going to be an improvement over the `FileInfo` class.
+
+
+
 
 1) Make the console app a Windows Service friendly app
 2) Add SignalR code to connect to a server, however, we don't have a server and we would have build that now....which is a lot
