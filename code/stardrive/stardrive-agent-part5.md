@@ -1,7 +1,9 @@
 ## StarDrive Building the Client Agent - Part 5
 
 ### Creating a Shared Library
-Before we create our web server, we should create a shared library and move our DTO definition to the shared library as both the client agent and the web server will need to serialize/deserialize the class as the data gets transmitted. Let's begin by add a project to our solution.
+Before we create our web server, we should create a shared library and move our DTO definition to the shared library as both the client agent and the web server will need to serialize/deserialize the class as the data gets transmitted. 
+
+Let's begin by adding a new project to our solution.
 
 ![add new project to solution](images/part5/1-add-new-project-to-solution.png)
 
