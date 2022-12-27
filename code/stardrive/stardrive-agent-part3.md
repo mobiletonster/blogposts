@@ -133,3 +133,6 @@ Console.WriteLine("press enter to end");
 Console.ReadLine();
 ```
 Ok. That is good for now. **Please run it again to check that it compiles and so we have the build artifacts we need for the next section.**
+
+[-> To Building StarDrive Agent Part 4](stardrive-agent-part4.md
+)

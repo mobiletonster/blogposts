@@ -113,3 +113,6 @@ Copy the `.exe` file to the sandbox and try running it again. This time, it shou
 Note the file size of your `.exe` file. Mine is approximately 60mb in size. I also tried it with the other two options checked and it shrunk my file to about 15mb in size. If you use the trim option, it is a good idea to check it in the Sandbox to make sure it still works.
 
 >Learn more about deployment models with [.NET application publishing overview](https://learn.microsoft.com/en-us/dotnet/core/deploying/) on Microsoft Learn.
+
+[-> To Building StarDrive Agent Part 5](stardrive-agent-part5.md
+)

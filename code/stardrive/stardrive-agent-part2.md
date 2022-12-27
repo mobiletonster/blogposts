@@ -67,3 +67,6 @@ if (di.Exists) {
 We will do more with this code later on, but for now if we run this it should work and provide us access to attributes for directories and files in our target path.
 
 >To learn more read [how to get information about files, folder and drives in C#](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/file-system/how-to-get-information-about-files-folders-and-drives) on the Microsoft Learn website.
+
+[-> To Building StarDrive Agent Part 3](stardrive-agent-part3.md
+)
