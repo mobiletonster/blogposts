@@ -47,12 +47,3 @@ In the next section, we will begin to build out our client agent so it can scan 
 [-> To Building StarDrive Agent Part 2](stardrive-agent-part2.md
 )
 
-
-
-
-
-
-2. Move our DTO to a Shared Library
-3. Make the console app a Windows Service friendly app
-4. Add SignalR code to connect to a server, however, we don't have a server and we would have build that now....which is a lot
-
