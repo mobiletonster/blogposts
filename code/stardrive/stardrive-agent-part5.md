@@ -8,13 +8,13 @@ Let's begin by adding a new project to our solution.
 ![add new project to solution](images/part5/1-add-new-project-to-solution.png)
 
 1. Right-click the solution node in the solution explorer window.
-2. select Add -> New Project...
+2. Select Add -> New Project...
 3. Search for `Class Library` as the project type for C#
 
 ![add new project dialog](images/part5/2-add-new-project-dialog.png)
 
-4. Select Class Library for .NET or .NET Standard, then click `Next`.
-5. Choose `StarDrive.Shared` for the name of the new project, then click `Next`.
+4. Select `Class Library` for .NET or .NET Standard, then click `Next`.
+5. Type `StarDrive.Shared` for the name of the new project, then click `Next`.
 
 ![name the new project stardrive.shared](images/part5/3-new-class-library.png)
 
@@ -27,7 +27,7 @@ A new project will appear below the `StarDrive.Agent` project and will be named 
 
 ![drag and drop DirectoryItem.cs to shared project](images/part5/4-drag-DirectoryItem.cs-to-shared.png)
 
-As depicted in the image above, the Solution Explorer should show the `DirectoryItem.cs` file in Shared and now deleted from the Agent project.
+As depicted in the image above, the Solution Explorer should show the `DirectoryItem.cs` file in Shared and deleted from the Agent project.
 
 Let's fix the namespace in `DirectoryItem.cs` to read:
 
