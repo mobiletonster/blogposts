@@ -112,6 +112,8 @@ public Task StartAsync(CancellationToken cancellationToken)
     return Task.CompletedTask;
 }
 ```
+
+#### Configure the Startup to Run Hosted Service
 We need to bootstrap our host code in the `Program.cs` file. Add the following code by replacing the entire contents of the file with this:
 
 ```C#
@@ -136,6 +138,7 @@ Let's run the project and see what happens.
 
 Notice in the console ouput, the first line reports a "Start Async fired" message, followed by some `info` logging statements from the Hosting Lifetime. This is good. We see that our application is now a Worker project, upgraded from a simple Console application.
 
+#### Connect the Windows Service Hooks
 As currently constructed, this project is compatible with Windows, Linux and Mac and should run in any environment once compiled and targeted for those environments. However, we want this to be specifically constructed to be run as a Windows Service. We already imported the nuget package `Microsoft.Extensions.Hosting.WindowsServices` so all we need to do is modify our `Program.cs` file with an additional extension method (`.UseWindowsService()`) on the builder like this:
 
 ```C#
@@ -155,7 +158,8 @@ The `config.ServiceName = "StarDrive Service";` code sets the Service Name. You 
 
 We can still run the project as we would a console application and the Hosting environment will run exactly the same. The difference is that we can now register it with Windows Services and it will get all the benefits of running as a service.
 
-To do this, we can run the following command in powershell or a command prompt (as Administrator):
+#### Register the App as a Windows Service
+To register the app as a Windows Service, we can run the following command in powershell or a command prompt (as Administrator):
 
 ```powershell
 > sc create "StarDrive Agent" binPath= "C:\Repos\StarDrive\StarDrive.Agent\bin\Release\net7.0\publish\win-x86\StarDrive.Agent.exe" start=auto
@@ -190,6 +194,13 @@ sc delete "StarDrive Agent Service"
 
 Be sure that the service is stopped before attempting to delete it.
 
+#### Summary
+In this section, we learned how to convert an ordinary Console app to a Windows Service Hosted application. We also learned how to register the service with Windows command line tools.
+
+In the next section, we will setup the Web Server with SignalR before returning to our Agent code.
+
+[-> To Building StarDrive Web Server Part 1](stardrive-server-part1.md
+)
 
 #### Additional information
 For more information about SC command options, please see 
@@ -198,10 +209,3 @@ For more information about SC command options, please see
 
 To learn more about Worker Service, IHostedInterface please visit Microsoft Learn:
 [Worker Service - IHostedInterface - Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/core/extensions/timer-service)
-
-
-
-
-
-
-4. Add SignalR code to connect to a server, however, we don't have a server and we would have build that now....which is a lot

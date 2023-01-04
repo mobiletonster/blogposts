@@ -1,0 +1,1 @@
+sc create "StarDrive Agent Service" binPath="C:\Users\mobil\Source\demos\StarDrive\StarDrive.Agent\bin\Release\net7.0\publish\win-x86\StarDrive.Agent.exe" start=auto
