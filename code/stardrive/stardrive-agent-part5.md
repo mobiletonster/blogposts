@@ -61,39 +61,5 @@ We should be able to compile and run our application and still have everything w
 
 >Note: Normally when adding another class library, a new `.dll` build artifact would get generated, however, since we are creating a single executable file, we shouldn't notice much of a difference except a slightly larger `.exe` file.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### to do
-
-2. Move our DTO to a Shared Library
-3. Make the console app a Windows Service friendly app
-4. Add SignalR code to connect to a server, however, we don't have a server and we would have build that now....which is a lot
+[-> To Building StarDrive Agent Part 6](stardrive-agent-part6.md
+)
