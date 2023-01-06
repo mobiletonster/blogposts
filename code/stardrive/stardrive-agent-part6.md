@@ -202,10 +202,13 @@ In the next section, we will setup the Web Server with SignalR before returning 
 [-> To Building StarDrive Web Server Part 1](stardrive-server-part1.md
 )
 
+<hr />
+
 #### Additional information
-For more information about SC command options, please see 
+>For more information about SC command options, please see 
 [SC Command reference - Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-create)
 
 
-To learn more about Worker Service, IHostedInterface please visit Microsoft Learn:
+
+>To learn more about Worker Service, IHostedInterface please visit Microsoft Learn:
 [Worker Service - IHostedInterface - Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/core/extensions/timer-service)
