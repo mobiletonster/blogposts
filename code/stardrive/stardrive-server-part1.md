@@ -18,3 +18,14 @@ After the dialog appears, search for and find the  `ASP.NET Core Web App (Model-
 
 ![Add a new project dialog; select ASP.NET Core Web App (Model-View-Controller) project](images/server1/2-add-new-project-dialog.png)
 
+We could select other templates, but for this demo application, we will use the MVC template as it will support our project quite well.
+
+![](images/server1/3-add-new-project-name.png)
+
+Enter the name of the project `StarDrive.Server` and then click next.
+
+![additional information dialog for create new project wizard](images/server1/4-add-new-project-additional-info.png)
+
+Finally, in the additional information panel, you should be able to leave the defaults, currently `NET 7.0` and `Configure for HTTPS`. If there is a newer version of .NET, you should be able to use it just fine. Click the Create button to continue.
+
+

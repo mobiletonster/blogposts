@@ -26,7 +26,7 @@ This is great. Currently, if we wanted to run this on another machine, we would 
 Let's test our assumption and simulate copying the files to a new machine next!
 
 #### Use Windows Sandbox
-Windows 11 and certain versions of Windows 10 have a nice feature known as Windows Sandbox (not supported on Home edition). This is a  ightweight desktop, self-cleaning VM (virtual machine) where we can test our application. You must enable it to use it.
+Windows 11 and certain versions of Windows 10 have a nice feature known as Windows Sandbox (not supported on Home edition). This is a lightweight desktop, self-cleaning VM (virtual machine) where we can test our application. You must enable it to use it.
 
 >Learn more about [Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview) on Microsoft Learn, including how to enable it.
 
