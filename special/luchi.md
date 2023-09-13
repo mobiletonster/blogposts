@@ -1,9 +1,16 @@
-# Solar Power Fundraiser for Luchi
+<!-- # Solar Power Fundraiser for Luchi -->
 ## Lifting another in need
 ### My Request
-My goal is to raise enough funds to help Luchi and her family obtain consistent electrical energy through a solar power system. I am asking for $20 from 40 of my friends, which should be enough to cover the cost of materials and installation of a medium sized solar system which will help her to obtain remote work as a software developer.
+My goal is to raise enough funds to help Luchi and her family obtain consistent electrical energy through a solar power system. I am seeking about $20 from 40 of my friends, which should be enough to cover the cost of materials and installation of a medium sized solar system which will help her to obtain remote work as a software developer.
 
-If you can, please send $20 via venmo to `@TonySpencer-14` and mark it as `Luchi's solar power donation` or contact me for other options.
+If you can, please send $20 via venmo to `@TonySpencer-14` and mark it as `Luchi's solar system donation` or contact me for other options.
+
+> Tony Spencer
+> 801 781 0886
+> mobiletonster@gmail.com
+
+THANK YOU FOR YOUR GENEROSITY!
+
 
 ![Solar System](https://raw.githubusercontent.com/mobiletonster/blogposts/main/special/images/solar-system.jpg#screenshot)
 Solar system
@@ -34,5 +41,6 @@ He works doing hard, manual labor boring holes in the ground, and cannot work or
 ### Attack on Christians
 The situation in Nigeria for Christians has gotten quite severe. You need only do a web search and you'll see an alarming number of reports of violence against the Christian population:  [https://www.bing.com/news/search?q=attack+on+christians+in+nigeria&FORM=HDRSC8](https://www.bing.com/news/search?q=attack+on+christians+in+nigeria&FORM=HDRSC8)
 
-When Luchi and I met back in April of 2022,
+Luchi is a Christian, but it is often unsafe to worship publically. She has been joining my church as often as possible via our streaming option and she has pretty much become a member of our congregation!
 
+We have enjoyed having her be a virtual member of the Ben Lomond 10th Ward!
