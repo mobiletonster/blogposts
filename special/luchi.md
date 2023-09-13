@@ -44,3 +44,8 @@ The situation in Nigeria for Christians has gotten quite severe. You need only d
 Luchi is a Christian, but it is often unsafe to worship publically. She has been joining my church as often as possible via our streaming option and she has pretty much become a member of our congregation!
 
 We have enjoyed having her be a virtual member of the Ben Lomond 10th Ward!
+
+### Backstory of Luchi and Tony
+As time permits, I will update this blog post and share more of the back story of how and why we met and how she has become part of our family.
+
+For now, I'd like to say THANK YOU!
