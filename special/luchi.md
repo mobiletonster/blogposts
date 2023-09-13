@@ -2,7 +2,7 @@
 ## Lifting another in need - my request
 My goal is to raise enough funds to help Luchi and her family obtain consistent electrical energy through a solar power system. I am seeking about $20 from 40 of my friends, which should be enough to cover the cost of materials and installation of a medium sized solar system which will help her to obtain remote work as a software developer.
 
-If you can, please send $20 via venmo to `@TonySpencer-14` and mark it as `Luchi's solar system donation` or contact me for other options.
+If you can, please send $20 via venmo to `@Tony-Spencer-14` and mark it as `Luchi's solar system donation` or contact me for other options.
 
 ``` contact info
 
