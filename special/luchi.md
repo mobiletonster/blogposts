@@ -5,12 +5,13 @@ My goal is to raise enough funds to help Luchi and her family obtain consistent 
 
 If you can, please send $20 via venmo to `@TonySpencer-14` and mark it as `Luchi's solar system donation` or contact me for other options.
 
-> Tony Spencer
-> 801 781 0886
-> mobiletonster@gmail.com
-
+```
+Venmo: @TonySpencer-14
+Tony Spencer
+801 781 0886
+mobiletonster@gmail.com
+```
 THANK YOU FOR YOUR GENEROSITY!
-
 
 ![Solar System](https://raw.githubusercontent.com/mobiletonster/blogposts/main/special/images/solar-system.jpg#screenshot)
 Solar system
