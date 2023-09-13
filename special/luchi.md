@@ -6,7 +6,7 @@ If you can, please send $20 via venmo to `@Tony-Spencer-14` and mark it as `Luch
 
 ``` contact info
 
-Venmo: @TonySpencer-14
+Venmo: @Tony-Spencer-14
 Tony Spencer
 801 781 0886
 mobiletonster@gmail.com
