@@ -20,6 +20,7 @@ WOW! You guys have really responded so quickly! Thanks so much! I want to give a
 * Brooke Richards
 * Carly Nield
 * Chandra Miller
+* Deuane & Shigeko Spencer
 * Ellen Johnson
 * Jill Kirkham
 * Jon Worthington
@@ -31,12 +32,14 @@ WOW! You guys have really responded so quickly! Thanks so much! I want to give a
 * Mel Torrie
 * Michael Banta
 * Mike Lichfield
+* Russell Nelson, Jr.
+* Scott & Shauna Hillyard
 * Sydney Hacking
 * Tina Van Riper
 * Todd Moynier
 * Wayne and Amy Willis
 
-PS: After I posted this, I was worried and thought 'Wait, do I have 40 friends?' lol 😊😊😊
+PS: After I posted this, I was worried and thought 'Wait, do I even have 40 friends?' lol 😊😊😊
 
 PSS: Some of you have given more than $20 which may put me over my target. If so, I will put that towards a fund to help Luchi pay for a passport & student visa to come and study at a local universtity, as that is her eventual, long term goal.
 
