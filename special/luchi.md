@@ -44,6 +44,7 @@ PS: After I posted this, I was worried and thought 'Wait, do I even have 40 frie
 PSS: Some of you have given more than $20 which may put me over my target. If so, I will put that towards a fund to help Luchi pay for a passport & student visa to come and study at a local universtity, as that is her eventual, long term goal.
 
 ![Solar System](https://raw.githubusercontent.com/mobiletonster/blogposts/main/special/images/solar-system_sm.jpg#screenshot)
+
 Solar system
 
 ### The problem
