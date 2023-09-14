@@ -38,6 +38,8 @@ WOW! You guys have really responded so quickly! Thanks so much! I want to give a
 
 PS: After I posted this, I was worried and thought 'Wait, do I have 40 friends?' lol 😊😊😊
 
+PSS: Some of you have given more than $20 which may put me over my target. If so, I will put that towards a fund to help Luchi pay for a passport & student visa to come and study at a local universtity, as that is her eventual, long term goal.
+
 ![Solar System](https://raw.githubusercontent.com/mobiletonster/blogposts/main/special/images/solar-system_sm.jpg#screenshot)
 Solar system
 
@@ -54,7 +56,7 @@ Since the elections in her country, things have gone very badly. Inflation has s
 
 ![wild foreign exchange devaluation of the Naira](https://raw.githubusercontent.com/mobiletonster/blogposts/main/special/images/wild-fx_sm.png#screenshot)
 
-This has dramatically impacted her ability to learn and obtain the employment she needs. Her eventual goal is to come to the United States and get an official degree in software development. She will need to raise enough funds through work and other means to apply to the University. Currently, she is looking at Universities here in Utah where we and others can help her by providing lodging and other support.
+This has dramatically impacted her ability to learn and obtain the employment she needs. Her eventual goal is to come to the United States and get an official degree in software development. She will need to raise enough funds through work and other means to apply to the university. Currently, she is looking at universities here in Utah where we and others can help her by providing lodging and other support.
 
 Adding to the trials that every Nigerian faces during these tough times, Luchi's family is especially struggling as her father, who is the primary bread winner, was recently in an accident that shattered his lower leg and will require several months to heal. 
 
