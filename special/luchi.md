@@ -36,6 +36,7 @@ WOW! You guys have really responded so quickly! Thanks so much! I want to give a
 * Todd Moynier
 * Wayne and Amy Willis
 
+PS: After I posted this, I was worried and thought 'Wait, do I have 40 friends?' lol 😊😊😊
 
 ![Solar System](https://raw.githubusercontent.com/mobiletonster/blogposts/main/special/images/solar-system_sm.jpg#screenshot)
 Solar system
