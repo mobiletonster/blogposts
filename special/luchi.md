@@ -23,6 +23,7 @@ WOW! You guys have really responded so quickly! Thanks so much! I want to give a
 * Deuane & Shigeko Spencer
 * Ellen Johnson
 * Jill Kirkham
+* Jim Byer
 * Jon Worthington
 * Justin Henriksen
 * Kiara Spencer
@@ -38,6 +39,11 @@ WOW! You guys have really responded so quickly! Thanks so much! I want to give a
 * Tina Van Riper
 * Todd Moynier
 * Wayne and Amy Willis
+* Tom Maravilla
+* Alicia Sanders
+* Rich Haddock
+* Erin Miles
+* Robb Parkinson
 
 PS: After I posted this, I was worried and thought 'Wait, do I even have 40 friends?' lol 😊😊😊
 
