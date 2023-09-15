@@ -16,12 +16,14 @@ THANK YOU FOR YOUR GENEROSITY!
 ## UPDATE:
 WOW! You guys have really responded so quickly! Thanks so much! I want to give a big thanks to the following people for their generous donations so far:
 
+* Alicia Sanders
 * Bree Gnehm
 * Brooke Richards
 * Carly Nield
 * Chandra Miller
 * Deuane & Shigeko Spencer
 * Ellen Johnson
+* Erin Miles
 * Jill Kirkham
 * Jim Byer
 * Jon Worthington
@@ -33,17 +35,16 @@ WOW! You guys have really responded so quickly! Thanks so much! I want to give a
 * Mel Torrie
 * Michael Banta
 * Mike Lichfield
+* Rich Haddock
+* Robb Parkinson
 * Russell Nelson, Jr.
 * Scott & Shauna Hillyard
 * Sydney Hacking
 * Tina Van Riper
 * Todd Moynier
-* Wayne and Amy Willis
 * Tom Maravilla
-* Alicia Sanders
-* Rich Haddock
-* Erin Miles
-* Robb Parkinson
+* Wayne and Amy Willis
+
 
 PS: After I posted this, I was worried and thought 'Wait, do I even have 40 friends?' lol 😊😊😊
 
