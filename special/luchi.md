@@ -18,6 +18,7 @@ WOW! You guys have really responded so quickly! Thanks so much! I want to give a
 
 * Alicia Sanders
 * Bree Gnehm
+* Brent & Joan Heap
 * Brooke Richards
 * Carly Nield
 * Chandra Miller
