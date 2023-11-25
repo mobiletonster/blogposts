@@ -162,7 +162,7 @@ We can still run the project as we would a console application and the Hosting e
 To register the app as a Windows Service, we can run the following command in powershell or a command prompt (as Administrator):
 
 ```powershell
-> sc create "StarDrive Agent" binPath= "C:\Repos\StarDrive\StarDrive.Agent\bin\Release\net7.0\publish\win-x86\StarDrive.Agent.exe" start=auto
+> sc create StarDriveAgent displayname= "StarDrive Agent Service" binPath= "C:\Repos\StarDrive\StarDrive.Agent\bin\Release\net7.0\publish\win-x86\StarDrive.Agent.exe" start=auto
 ```
 
 The `binPath` should point to the location of your "released" version of the application. Remember from earlier when we used the publish option to create a single, self-contained executable. We can run the publish command again from the menu by right-clicking the project and selecting the `Publish` menu option.
@@ -189,7 +189,7 @@ Although we used the command line to set the startup type to Automatic, which me
 To remove the Windows Service use the following command:
 
 ```powershell
-sc delete "StarDrive Agent Service"
+sc delete StarDriveAgent
 ```
 
 Be sure that the service is stopped before attempting to delete it.
