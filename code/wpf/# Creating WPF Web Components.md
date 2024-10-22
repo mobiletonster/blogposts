@@ -19,11 +19,11 @@ https://learn.microsoft.com/en-us/microsoft-edge/webview2/get-started/wpf
 1. Using the nuget package manager, let's add the WebView2 dependency. Search for `WebView2` and you should find `Microsoft.Web.WebView2`. Install the latest stable version (currently 1.0.2849.39).
 
 2. Open `MainWindow.xaml` and add an xmlns (xml namespace)
-```
+```xaml
 xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
 ```
 3. Add a WebView2 control to the main Grid:
-```
+```xaml
 <Grid>
     <wv:WebView2 Source="https://revoltjs.org/home/gravitypoints"></wv:WebView2>
 </Grid>
@@ -36,7 +36,7 @@ We have now added a WebView control to our application, pointed its source to a 
 ## WPF Web Component User Control
 Let's create a cutsom user control that wraps the WebView2 control. For our first example, let's create a really simple button.
 0. Before we get started, let's remove the WebView control from the main Grid.
-```
+```xaml
 <Grid></Grid>
 ```
 We can also remove the xmlns: `xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"` from the MainWindow.
@@ -45,11 +45,11 @@ We can also remove the xmlns: `xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wp
 3. Name the control SimpleButton.xaml.
 4. Drag the control into the SimpleButton folder. **We don't want to change the namespace to include the folder SimpleButton because it would be redundant and would clutter things later.**
 5. Add the WebView2 xmlns to the UserControl
-```
+```xaml
 xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
 ```
 6. Add a WebView2 control the main grid:
-```
+```xaml
 <Grid>
     <wv:WebView2 x:Name="WebView" DefaultBackgroundColor="Transparent"></wv:WebView2>
 </Grid>
@@ -58,7 +58,7 @@ We added a value of `Transparent` for the `DefaultBackgroundColor` property whic
 
 7. Open the code behind SimpleButton.xaml.cs file.
 8. Add the following code to the code behind file:
-```
+```csharp
 private async void InitializeAsync()
 {
     WebView.WebMessageReceived += WebView_WebMessageReceived;
@@ -77,8 +77,8 @@ private void WebView_WebMessageReceived(object? sender, CoreWebView2WebMessageRe
 }
 ```
 8. Add the `InitializeAsync();` method call to the constructor like this:
-```
-public BasicButton()
+```csharp
+public SimpleButton()
 {
     InitializeComponent();
     InitializeAsync();
@@ -125,7 +125,7 @@ string html = LoadHtmlString();
 WebView.NavigateToString(html);
 ```
 It should look like this:
-```
+```csharp
 private async void InitializeAsync()
 {
     WebView.WebMessageReceived += WebView_WebMessageReceived;
@@ -139,7 +139,7 @@ private async void InitializeAsync()
 >To test our code, we need to add the SimpleButton control to our main window.
 
 3. Open `MainWindow.xaml` and add `local:SimpleButton` to the main grid:
-```
+```xaml
 <Grid>
     <local:SimpleButton></local:SimpleButton>
 </Grid>
@@ -149,7 +149,7 @@ private async void InitializeAsync()
 You should see a button appear in the UI. This button will be small and won't fill the UI, although the WebView2 control does stretch to fill the entire UI. We made the WebView2 in our SimpleButton.xaml have a transparent background. Time to see what that does.
 
 1. In the MainWindow.xaml file, add `Background="LightGreen"` to the main Grid like this:
-```
+```xaml
 <Grid Background="LightGreen">
     <local:SimpleButton></local:SimpleButton>
 </Grid>
@@ -172,7 +172,7 @@ We basically have the same thing (although much richer with the template) that o
 Now we need to figure out how to get the HTML read in from disk and into memory.
 
 1. Add the following method to the code behind:
-```
+```js
 private string LoadHtmlFromFile()
 {
     string html = string.Empty;
@@ -198,19 +198,19 @@ Although we read the file from disk, and loaded the HTML into memory, we didn't 
 To use the actual navigate to file method, let's change things up a bit.
 
 1. In our InitializeAsync() method of the SimpleButton.xaml.cs file, remove the last two lines and replace them with the below:
-```
+```csharp
 // REMOVE
 string html = LoadHtmlFromFile();
 WebView.NavigateToString(html);
 ```
-```
+```csharp
 // ADD THESE LINES
 WebView.CoreWebView2.SetVirtualHostNameToFolderMapping("SimpleButton", "/SimpleButton/", CoreWebView2HostResourceAccessKind.Allow);
 WebView.CoreWebView2.Navigate("http://SimpleButton/index.html");
 ```
 
 Our method should now look like this:
-```
+```csharp
 private async void InitializeAsync()
 {
     WebView.WebMessageReceived += WebView_WebMessageReceived;
@@ -233,7 +233,7 @@ We want to control the size of the Button from the XAML width/height properties.
 
 1. In the index.html page, add a `<style>` tag block in the `<head>` section of our html page. with the following code:
 
-```
+```html
     <style>
         body {
             max-width: 100%;
@@ -250,12 +250,12 @@ We want to control the size of the Button from the XAML width/height properties.
     </style>
 ```
  2. Add an `id` attribute to the `<button>` tag like this:
- ```
+ ```html
 <button id="button">Click Me File!</button>
 ```
 
 3. Set the Width and Height properties on the SimpleButton usercontrol in the MainWindow.xaml:
-```
+```xaml
 <Grid Background="LightGreen">
     <local:SimpleButton Width="200" Height="100"></local:SimpleButton>
 </Grid>
@@ -271,7 +271,7 @@ We will add a dependency property that allows us to set the desired text value o
 
 1. Add the following code to code behind:
 
-```
+```csharp
 public static readonly DependencyProperty ButtonTextProperty = DependencyProperty.Register(
     nameof(ButtonText),
     typeof(string),
@@ -304,7 +304,7 @@ private async void SetButtonText(string buttonText)
 Next, we need to add a function in Javascript for our SetButtonText() to actually apply our dependency property value. 
 
 2. In the index.html file, add the follow code just below the button:
-```
+```html
 <script type="text/javascript">
     function setButtonText(text) {
         document.getElementById("button").innerHTML = text;
@@ -313,7 +313,7 @@ Next, we need to add a function in Javascript for our SetButtonText() to actuall
 ```
 
 3. Now add a ButtonText property to the SimpleButton instance on the main window so it looks like this:
-```
+```xaml
     <Grid Background="LightGreen">
         <local:SimpleButton Width="200" Height="100" ButtonText="My Button"></local:SimpleButton>
     </Grid>
@@ -327,7 +327,7 @@ We have a small race condition. The Dependency Property gets set very early and 
 
 1. Find the CoreWebView2_DomContentLoaded method handler and make it async by adding the async keyword before the void.
 2. Add the following code inside the method so it looks like this:
-```
+```csharp
 private async void CoreWebView2_DOMContentLoaded(object? sender, CoreWebView2DOMContentLoadedEventArgs e)
 {
     await WebView.CoreWebView2.ExecuteScriptAsync($"setButtonText('{ButtonText}')");
@@ -342,7 +342,7 @@ This time, immediately after the DOM (document object model) or page is loaded i
 We want to hook up the click event in Javascript to the C# side so we can react and do useful things.
 
 1. In our `index.html` page, find the `<script>` tag section and add another function below the first function:
-```
+```js
 function clicked(elm) {
     if (window.chrome.webview) {
         window.chrome.webview.postMessage('clicked');
@@ -350,13 +350,13 @@ function clicked(elm) {
 }
 ```
 2. Add an onclick="clicked(this)" event to our HTML button:
-```
+```html
 <button id="button" class="glow-on-hover" role="button" onclick="clicked(this)">Button</button>
 ```
 
 It should look like this when we are completed:
 
-```
+```html
 <body>
     <button id="button" class="glow-on-hover" role="button" onclick="clicked(this)">Button</button>
     <script type="text/javascript">
@@ -374,12 +374,12 @@ It should look like this when we are completed:
 ```
 
 3. In the code behind of our SimpleButton.xaml.cs file, at the top of the class, and an event like this:
-```
+```csharp
 public event EventHandler? Clicked;
 ```
 
 4. Also in the code behind of our SimpleButton.xaml.cs file, find the WebView_WebMessageReceived event handler and change it to look like this:
-```
+```csharp
 private void WebView_WebMessageReceived(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2WebMessageReceivedEventArgs e)
 {
     var clicked = e.TryGetWebMessageAsString();
@@ -391,12 +391,12 @@ private void WebView_WebMessageReceived(object? sender, Microsoft.Web.WebView2.C
 ```
 
 5. To see it work, head back to the MainWindow.xaml page and add a "Clicked" event handler to the button so it looks like this:
-```
+```xaml
 <local:SimpleButton Width="200" Height="100" ButtonText="My Button" Clicked="SimpleButton_Clicked"></local:SimpleButton>
 ```
 
 6. In the code behind, add the following method:
-```
+```csharp
 private void SimpleButton_Clicked(object sender, EventArgs e)
 {
     if(sender is SimpleButton button)
