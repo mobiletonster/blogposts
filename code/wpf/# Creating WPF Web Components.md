@@ -100,6 +100,7 @@ These approaches are described below.
 ### Selecting an approach
 The various ways of loading local content into a WebView2 control support the following scenarios:
 
+<!--
 | Scenario | By navigating to a file URL | By navigating to an HTML string | By using virtual host name mapping | By using `WebResourceRequested` |
 | --- |:---:|:---:|:---:|:---:|
 | Origin-based DOM APIs | ✔️ | ❌ | ✔️ | ✔️ |
@@ -107,6 +108,7 @@ The various ways of loading local content into a WebView2 control support the fo
 | Dynamic content | ❌ | ✔️ | ❌ | ✔️ |
 | Additional web resources | ✔️ | ❌ | ✔️  | ✔️ |
 | Additional web resources resolved in WebView2 process | ✔️ | ❌ | ✔️ | ❌ |
+-->
 
 ![Image 1](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/wpf/images/ScreenShot-table1.png#screenshot "WebView2 local content support table")
 
