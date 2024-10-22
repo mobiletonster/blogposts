@@ -1,11 +1,13 @@
 # Creating WPF Web Components
 ## Why?
-Web technology is getting the majority of the attention and improvements these days. While WPF is a solid, mature choice for a desktop application it has stalled in receiving relevant improvements and updates in recent years. Additionally, many developers have little or no experience using WPF, MVVM, XAML and other similar technologies found in UPW, WPF, Silverlight, WinUI 3, etc. Conversely, there are many developers who have exposure to web development, HTML, CSS and Javascript because of the low barrier to entry and the ubiquity of the web.
+These days, web technology is getting the majority of the attention and improvements. While WPF is a solid, mature choice for a desktop application it has stalled in receiving relevant improvements and updates in recent years. Additionally, many developers have little or no experience using WPF, MVVM, XAML and other similar technologies found in UPW, WPF, Silverlight, WinUI 3, etc. Conversely, there are many developers who have exposure to web development, HTML, CSS and Javascript because of the low barrier to entry and the ubiquity of the web.
 
-Specifically, there may be times that we can enhance or improve our WPF application by relying on embedded web technology in our app. If we examine the source code for Microsoft Map Control available in WPF we find that it is a UserControl that wraps a WebView Control. The heavy lifting is done in web technologies (specifically WebGL). The performance of the Map Control is impressive and has help breathe new life into WPF applications.
+Specifically, there may be times we can enhance or improve our WPF application by leveraging embedded web technology in our app. If we examine the source code for Microsoft Map Control available in WPF we find that it is a UserControl that wraps a WebView Control. The heavy lifting is done in web technologies (specifically WebGL). The performance of the Map Control is impressive and has help breathe new life into WPF applications.
+
+See [microsoft-ui-xaml/controls/dev/MapControl/MapControl.xaml on GitHub](https://github.com/microsoft/microsoft-ui-xaml/blob/winui3/release/1.5-stable/controls/dev/MapControl/MapControl.xaml)
 
 ## How?
-Microsoft updated the Edge Browser to retire the Trident rendering engine and the Chakra JS engine and adopt the Chromium and V8 engines instead. When they made this change, they also created a new WebView control aptly named WebView2 that developers could embed in their windows applications written in UWP, WinUI 3, WinForms, MAUI (win) and WPF. Each mobile platform has their own implementation of a WebView control for use in native applications. This means code developed in HTML, CSS and JS could be shared with mobile applications if engineered well enough.
+Microsoft updated the Edge Browser by retiring the Trident rendering engine and the Chakra JS engine and adopted the Chromium and V8 engines instead. When they made this change, they also created a new WebView control aptly named WebView2 that developers could embed in their windows applications written in UWP, WinUI 3, WinForms, MAUI (win) and WPF. Each mobile platform has their own implementation of a WebView control for use in native apps. This means code developed in HTML, CSS and JS could be shared with mobile applications if engineered properly.
 
 ## Let's get our hands dirty
 1. Open Visual Studio (or another IDE, like Rider) and create a new WPF project.
@@ -15,7 +17,7 @@ Microsoft updated the Edge Browser to retire the Trident rendering engine and th
 5. click Run to make sure our app launches correctly. We should get an application with a blank window.
 
 ## Let's add a WebView
-[WebView 2 Getting Started in WPF](https://learn.microsoft.com/en-us/microsoft-edge/webview2/get-started/wpf)
+See [WebView 2 Getting Started in WPF](https://learn.microsoft.com/en-us/microsoft-edge/webview2/get-started/wpf)
 1. Using the nuget package manager, let's add the WebView2 dependency. Search for `WebView2` and you should find `Microsoft.Web.WebView2`. Install the latest stable version (currently 1.0.2849.39).
 
 2. Open `MainWindow.xaml` and add an xmlns (xml namespace)
@@ -35,6 +37,7 @@ We have now added a WebView control to our application, pointed its source to a 
 
 ## WPF Web Component User Control
 Let's create a cutsom user control that wraps the WebView2 control. For our first example, let's create a really simple button.
+
 0. Before we get started, let's remove the WebView control from the main Grid.
 ```xml
 <Grid></Grid>
@@ -86,7 +89,7 @@ public SimpleButton()
 ```
 
 ## How to host local content - a primer:
-[WebView2 Working with local content](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/working-with-local-content?tabs=dotnetcsharp)
+See [WebView2, Working with local content](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/working-with-local-content?tabs=dotnetcsharp)
 
 In addition to loading remote content, content can also be loaded locally into WebView2. There are several approaches that can be used to load local content into a WebView2 control, including:
 
@@ -414,3 +417,11 @@ When you click the button, now the C# code behind in the XAMl will get the invoc
 
 ## Summary
 In this example, we built a very simple button usercontrol that uses HTML,CSS and Javascript to render the actual UI inside a WebView control, but the user can simply use the XAML based user control as they would any other control in WPF.
+
+### Future considerations
+This example is quite simple. More complex controls will require many more dependency properties, many more Javascript methods and a more structured way to control the crossing of the barrier between Javascript and C#.
+
+Typescript may bridge this divide better and help keep the code more robust.
+
+Additionaly, consideration will need to be given for how testing can be implemented for these controls. There are many tools for testing the Web, but understanding how to bridge them in WPF may require some cleverness.
+
