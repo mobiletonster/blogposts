@@ -24,7 +24,7 @@ See [WebView 2 Getting Started in WPF](https://learn.microsoft.com/en-us/microso
 ```xml
 xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
 ```
-3. Add a WebView2 control to the main Grid:
+3. Add a WebView2 control to the main grid:
 ```xml
 <Grid>
     <wv:WebView2 Source="https://revoltjs.org/home/gravitypoints"></wv:WebView2>
@@ -424,4 +424,7 @@ This example is quite simple. More complex controls will require many more depen
 Typescript may bridge this divide better and help keep the code more robust.
 
 Additionaly, consideration will need to be given for how testing can be implemented for these controls. There are many tools for testing the Web, but understanding how to bridge them in WPF may require some cleverness.
+
+## Sample Project
+[https://github.com/mobiletonster/WpfWebComponents](https://github.com/mobiletonster/WpfWebComponents)
 
