@@ -1,6 +1,6 @@
 # Creating WPF Web Components
 ## Why?
-Web technology is getting the majority of the attention and improvements these days. While WPF is a solid, mature choice for a desktop application for many reasons it has stalled in receiving relevant improvements and updates in recent years. Additionally, many developers have little or experience using WPF, MVVM, XAML and other similar technologies found in UPW, WPF, Silverlight, WinUI 3, etc. Conversely, there are many developers who have exposure to web development, HTML, CSS and Javascript because of the low barrier to entry and the ubiquity of the web.
+Web technology is getting the majority of the attention and improvements these days. While WPF is a solid, mature choice for a desktop application it has stalled in receiving relevant improvements and updates in recent years. Additionally, many developers have little or no experience using WPF, MVVM, XAML and other similar technologies found in UPW, WPF, Silverlight, WinUI 3, etc. Conversely, there are many developers who have exposure to web development, HTML, CSS and Javascript because of the low barrier to entry and the ubiquity of the web.
 
 Specifically, there may be times that we can enhance or improve our WPF application by relying on embedded web technology in our app. If we examine the source code for Microsoft Map Control available in WPF we find that it is a UserControl that wraps a WebView Control. The heavy lifting is done in web technologies (specifically WebGL). The performance of the Map Control is impressive and has help breathe new life into WPF applications.
 
@@ -15,7 +15,7 @@ Microsoft updated the Edge Browser to retire the Trident rendering engine and th
 5. click Run to make sure our app launches correctly. We should get an application with a blank window.
 
 ## Let's add a WebView
-https://learn.microsoft.com/en-us/microsoft-edge/webview2/get-started/wpf
+[WebView 2 Getting Started in WPF](https://learn.microsoft.com/en-us/microsoft-edge/webview2/get-started/wpf)
 1. Using the nuget package manager, let's add the WebView2 dependency. Search for `WebView2` and you should find `Microsoft.Web.WebView2`. Install the latest stable version (currently 1.0.2849.39).
 
 2. Open `MainWindow.xaml` and add an xmlns (xml namespace)
@@ -86,7 +86,7 @@ public SimpleButton()
 ```
 
 ## How to host local content - a primer:
-https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/working-with-local-content?tabs=dotnetcsharp
+[WebView2 Working with local content](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/working-with-local-content?tabs=dotnetcsharp)
 
 In addition to loading remote content, content can also be loaded locally into WebView2. There are several approaches that can be used to load local content into a WebView2 control, including:
 
@@ -107,6 +107,8 @@ The various ways of loading local content into a WebView2 control support the fo
 | Dynamic content | ❌ | ✔️ | ❌ | ✔️ |
 | Additional web resources | ✔️ | ❌ | ✔️  | ✔️ |
 | Additional web resources resolved in WebView2 process | ✔️ | ❌ | ✔️ | ❌ |
+
+![Image 1](https://raw.githubusercontent.com/mobiletonster/blogposts/main/code/wpf/images/ScreenShot-table1.png#screenshot "WebView2 local content support table")
 
 ## Navigating to an HTML string
 Before deep diving into any of these approaches, we should start simple with navigation to an HTML string.
