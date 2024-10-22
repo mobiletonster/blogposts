@@ -12,7 +12,7 @@ Microsoft updated the Edge Browser by retiring the Trident rendering engine and 
 ## Let's get our hands dirty
 1. Open Visual Studio (or another IDE, like Rider) and create a new WPF project.
 2. Click `Create a new project` and open the dialog window. Filter for WPF and C# as the language, then choose the `WPF Application` template option. 
-3. Name the project WpfWebComponents. 
+3. Name the project `WpfWebComponents` . 
 4. Choose the current Long Term Support option for the framework, which is currently .NET 8.0.
 5. click Run to make sure our app launches correctly. We should get an application with a blank window.
 
