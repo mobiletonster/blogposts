@@ -19,11 +19,11 @@ https://learn.microsoft.com/en-us/microsoft-edge/webview2/get-started/wpf
 1. Using the nuget package manager, let's add the WebView2 dependency. Search for `WebView2` and you should find `Microsoft.Web.WebView2`. Install the latest stable version (currently 1.0.2849.39).
 
 2. Open `MainWindow.xaml` and add an xmlns (xml namespace)
-```xaml
+```xml
 xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
 ```
 3. Add a WebView2 control to the main Grid:
-```xaml
+```xml
 <Grid>
     <wv:WebView2 Source="https://revoltjs.org/home/gravitypoints"></wv:WebView2>
 </Grid>
@@ -36,7 +36,7 @@ We have now added a WebView control to our application, pointed its source to a 
 ## WPF Web Component User Control
 Let's create a cutsom user control that wraps the WebView2 control. For our first example, let's create a really simple button.
 0. Before we get started, let's remove the WebView control from the main Grid.
-```xaml
+```xml
 <Grid></Grid>
 ```
 We can also remove the xmlns: `xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"` from the MainWindow.
@@ -45,11 +45,11 @@ We can also remove the xmlns: `xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wp
 3. Name the control SimpleButton.xaml.
 4. Drag the control into the SimpleButton folder. **We don't want to change the namespace to include the folder SimpleButton because it would be redundant and would clutter things later.**
 5. Add the WebView2 xmlns to the UserControl
-```xaml
+```xml
 xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
 ```
 6. Add a WebView2 control the main grid:
-```xaml
+```xml
 <Grid>
     <wv:WebView2 x:Name="WebView" DefaultBackgroundColor="Transparent"></wv:WebView2>
 </Grid>
@@ -111,7 +111,7 @@ The various ways of loading local content into a WebView2 control support the fo
 ## Navigating to an HTML string
 Before deep diving into any of these approaches, we should start simple with navigation to an HTML string.
 1. Add a method to our code behind file:
-```
+```csharp
 private string LoadHtmlString()
 {
     string html = @"<html><body><button>Click Me!</button></body></html>";
@@ -120,7 +120,7 @@ private string LoadHtmlString()
 ```
 
 2. Inside our `InitializeAsync()` method, add the following lines to the bottom of the method. 
-```
+```csharp
 string html = LoadHtmlString();
 WebView.NavigateToString(html);
 ```
@@ -139,7 +139,7 @@ private async void InitializeAsync()
 >To test our code, we need to add the SimpleButton control to our main window.
 
 3. Open `MainWindow.xaml` and add `local:SimpleButton` to the main grid:
-```xaml
+```xml
 <Grid>
     <local:SimpleButton></local:SimpleButton>
 </Grid>
@@ -149,7 +149,7 @@ private async void InitializeAsync()
 You should see a button appear in the UI. This button will be small and won't fill the UI, although the WebView2 control does stretch to fill the entire UI. We made the WebView2 in our SimpleButton.xaml have a transparent background. Time to see what that does.
 
 1. In the MainWindow.xaml file, add `Background="LightGreen"` to the main Grid like this:
-```xaml
+```xml
 <Grid Background="LightGreen">
     <local:SimpleButton></local:SimpleButton>
 </Grid>
@@ -255,7 +255,7 @@ We want to control the size of the Button from the XAML width/height properties.
 ```
 
 3. Set the Width and Height properties on the SimpleButton usercontrol in the MainWindow.xaml:
-```xaml
+```xml
 <Grid Background="LightGreen">
     <local:SimpleButton Width="200" Height="100"></local:SimpleButton>
 </Grid>
@@ -313,7 +313,7 @@ Next, we need to add a function in Javascript for our SetButtonText() to actuall
 ```
 
 3. Now add a ButtonText property to the SimpleButton instance on the main window so it looks like this:
-```xaml
+```xml
     <Grid Background="LightGreen">
         <local:SimpleButton Width="200" Height="100" ButtonText="My Button"></local:SimpleButton>
     </Grid>
@@ -391,7 +391,7 @@ private void WebView_WebMessageReceived(object? sender, Microsoft.Web.WebView2.C
 ```
 
 5. To see it work, head back to the MainWindow.xaml page and add a "Clicked" event handler to the button so it looks like this:
-```xaml
+```xml
 <local:SimpleButton Width="200" Height="100" ButtonText="My Button" Clicked="SimpleButton_Clicked"></local:SimpleButton>
 ```
 
