@@ -1,6 +1,6 @@
 # Creating WPF Web Components
 ## Why?
-These days, web technology is getting the majority of the attention and improvements. While WPF is a solid, mature choice for a desktop application it has stalled in receiving relevant improvements and updates in recent years. Additionally, many developers have little or no experience using WPF, MVVM, XAML and other similar technologies found in UPW, WPF, Silverlight, WinUI 3, etc. Conversely, there are many developers who have exposure to web development, HTML, CSS and Javascript because of the low barrier to entry and the ubiquity of the web.
+These days, web technology is getting the majority of the attention and improvements. While WPF is a solid, mature choice for a desktop application it has stalled in receiving relevant improvements and updates in recent years. Additionally, many developers have little or no experience using WPF, MVVM, XAML and other similar technologies found in UWP, WPF, Silverlight, WinUI 3, etc. Conversely, there are many developers who have exposure to web development, HTML, CSS and Javascript because of the low barrier to entry and the ubiquity of the web.
 
 Specifically, there may be times we can enhance or improve our WPF application by leveraging embedded web technology in our app. If we examine the source code for Microsoft Map Control available in WPF we find that it is a UserControl that wraps a WebView Control. The heavy lifting is done in web technologies (specifically WebGL). The performance of the Map Control is impressive and has help breathe new life into WPF applications.
 
