@@ -6,7 +6,7 @@ Missed the live session? This tutorial covers the same material, in the same ord
 **You need:** VS Code, plus Chrome or Edge (any recent version).
 **Background:** if you know C#, you know enough. Wherever it helps, the tutorial compares CSS to things you already use.
 
-[Training Items (zipped)](CSS-Training.zip)
+[CSS-Training.zip](https://github.com/mobiletonster/blogposts/raw/refs/heads/main/code/web/CSS-Training.zip)
 ---
 
 ## Contents
