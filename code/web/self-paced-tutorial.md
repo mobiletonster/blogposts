@@ -102,8 +102,8 @@ Here's the important part: **CSS selectors and JavaScript's `document.querySelec
 Paste this into the Console. It outlines everything a selector matches in hot pink, and returns the count:
 
 ```js
-const hl  = s => { clr(); $$(s).forEach(e => e.style.outline = '3px solid hotpink'); return $$(s).length; };
-const clr = () => $$('*').forEach(e => e.style.outline = '');
+const hl  = s => { clr(); document.querySelectorAll(s).forEach(e => e.style.outline = '3px solid hotpink'); return $$(s).length; };
+const clr = () => document.querySelectorAll('*').forEach(e => e.style.outline = '');
 ```
 
 > `$$()` is a DevTools shortcut for `document.querySelectorAll()` that returns a normal array. In real code you'd write `document.querySelectorAll('.card')`.
